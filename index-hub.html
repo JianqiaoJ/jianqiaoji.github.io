@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Jianqiao Ji | Portfolio</title>
+<style>
+    :root {
+        --bg: #000000;
+        --text: #ffffff;
+        --item-w: 380px;
+        --item-h: 214px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 2000px;
+        touch-action: none;
+        font-family: 'Helvetica Neue', 'PingFang SC', -apple-system, sans-serif;
+    }
+
+    .world {
+        position: relative;
+        transform-style: preserve-3d;
+        cursor: grab;
+    }
+    .world:active { cursor: grabbing; }
+
+    .model-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-style: preserve-3d;
+    }
+
+    .item {
+        position: absolute;
+        top: calc(var(--item-h) / -2);
+        left: 0;
+        width: var(--item-w);
+        height: var(--item-h);
+        transform-origin: left center;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        background: #111;
+        transition: box-shadow 0.3s, filter 0.3s, transform 3s cubic-bezier(0.25, 1, 0.5, 1);
+        cursor: pointer;
+    }
+
+    .item:hover {
+        filter: brightness(1.2);
+        box-shadow: 0 10px 40px rgba(255,255,255,0.15);
+    }
+
+    .item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+    }
+
+    .ui-panel {
+        position: fixed;
+        top: 40px;
+        left: 40px;
+        z-index: 1000;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        mix-blend-mode: difference;
+        color: #ffffff;
+    }
+
+    .ui-panel h1 {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+
+    .ui-panel .subtitle {
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        opacity: 0.5;
+        margin-bottom: 28px;
+    }
+
+    .ui-panel .info-block {
+        margin-bottom: 14px;
+    }
+
+    .ui-panel .info-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0.35;
+        margin-bottom: 2px;
+    }
+
+    .ui-panel .info-value {
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        opacity: 0.8;
+    }
+
+    .ui-hint {
+        position: fixed;
+        bottom: 32px;
+        right: 40px;
+        z-index: 1000;
+        pointer-events: none;
+        mix-blend-mode: difference;
+        color: #ffffff;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.3;
+        text-align: right;
+        line-height: 1.8;
+    }
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: rgba(0,0,0,0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+        cursor: zoom-out;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .overlay img {
+        max-width: 88vw;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 4px;
+        transform: scale(0.92);
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .overlay.active img {
+        transform: scale(1);
+    }
+
+    .overlay-label {
+        margin-top: 20px;
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: rgba(255,255,255,0.4);
+        text-transform: uppercase;
+        transform: translateY(10px);
+        opacity: 0;
+        transition: opacity 0.4s 0.2s, transform 0.4s 0.2s;
+    }
+
+    .overlay.active .overlay-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .overlay-close {
+        position: absolute;
+        top: 28px;
+        right: 32px;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: none;
+        color: rgba(255,255,255,0.4);
+        font-size: 28px;
+        cursor: pointer;
+        transition: color 0.3s;
+        font-family: inherit;
+    }
+
+    .overlay-close:hover {
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        :root {
+            --item-w: 240px;
+            --item-h: 135px;
+        }
+        .ui-panel {
+            left: 20px;
+            top: 24px;
+        }
+        .ui-panel h1 {
+            font-size: 22px;
+        }
+        .ui-panel .subtitle {
+            font-size: 9px;
+            margin-bottom: 20px;
+        }
+        .ui-panel .info-label { font-size: 9px; }
+        .ui-panel .info-value { font-size: 12px; }
+        .ui-hint {
+            bottom: 20px;
+            right: 20px;
+            font-size: 8px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="ui-panel">
+    <h1>Jianqiao Ji</h1>
+    <div class="subtitle">Product Manager &middot; Shanghai</div>
+
+    <div class="info-block">
+        <div class="info-label">Email</div>
+        <div class="info-value">jianqiaoji@icloud.com</div>
+    </div>
+    <div class="info-block">
+        <div class="info-label">Tel</div>
+        <div class="info-value">150 2653 7385</div>
+    </div>
+    <div class="info-block">
+        <div class="info-label">Education</div>
+        <div class="info-value">UIUC &middot; MS Financial Engineering</div>
+    </div>
+    <div class="info-block">
+        <div class="info-label">Skills</div>
+        <div class="info-value">SQL &middot; Python &middot; Tableau &middot; Figma &middot; Axure</div>
+    </div>
+</div>
+
+<div class="ui-hint">
+    Drag to rotate<br>
+    Scroll to zoom<br>
+    Click to view
+</div>
+
+<div class="world" id="world">
+    <div class="model-center" id="model">
+        <div class="item" data-label="Cover &mdash; Portfolio 2019-2022"><img src="images/page_01.png" alt="Portfolio Cover"></div>
+        <div class="item" data-label="01 智能营销画像平台 &mdash; Cover"><img src="images/page_04.png" alt="Project 01 Cover"></div>
+        <div class="item" data-label="01 背景分析 &mdash; 即时消费市场"><img src="images/page_05.png" alt="Project 01 Background"></div>
+        <div class="item" data-label="01 需求分析 &mdash; 用户声音与产品定义"><img src="images/page_06.png" alt="Project 01 Requirements"></div>
+        <div class="item" data-label="01 用户旅程图 &mdash; 营销前/中/后"><img src="images/page_07.png" alt="Project 01 User Journey"></div>
+        <div class="item" data-label="01 架构设计 &mdash; 工作流与标签体系"><img src="images/page_08.png" alt="Project 01 Architecture"></div>
+        <div class="item" data-label="01 交互界面 &mdash; 人群管理"><img src="images/page_09.png" alt="Project 01 UI"></div>
+        <div class="item" data-label="02 外汇量化交易终端 &mdash; Cover"><img src="images/page_10.png" alt="Project 02 Cover"></div>
+        <div class="item" data-label="02 背景 &mdash; 量化交易演进"><img src="images/page_11.png" alt="Project 02 Background"></div>
+        <div class="item" data-label="02 用户画像 &mdash; 交易员的一天"><img src="images/page_12.png" alt="Project 02 User Persona"></div>
+        <div class="item" data-label="02 用户旅程 &mdash; 发现/下单/统计/复盘"><img src="images/page_13.png" alt="Project 02 Journey"></div>
+        <div class="item" data-label="02 功能模块 &amp; 系统架构"><img src="images/page_14.png" alt="Project 02 Architecture"></div>
+        <div class="item" data-label="02 界面设计 &mdash; 页面模板"><img src="images/page_15.png" alt="Project 02 UI Templates"></div>
+        <div class="item" data-label="02 界面设计 &mdash; 交易终端"><img src="images/page_16.png" alt="Project 02 Trading Terminal"></div>
+        <div class="item" data-label="03 商家经营分析看板 &mdash; Cover"><img src="images/page_17.png" alt="Project 03 Cover"></div>
+        <div class="item" data-label="03 背景 &amp; 用户画像 &amp; 产品定义"><img src="images/page_18.png" alt="Project 03 Background"></div>
+        <div class="item" data-label="03 数据分析 &amp; 服务蓝图 &amp; 功能"><img src="images/page_19.png" alt="Project 03 Analysis"></div>
+        <div class="item" data-label="03 界面设计 &mdash; 智能关联分析"><img src="images/page_20.png" alt="Project 03 UI"></div>
+    </div>
+</div>
+
+<div class="overlay" id="overlay">
+    <button class="overlay-close" id="overlayClose">&times;</button>
+    <img src="" alt="" id="overlayImg">
+    <div class="overlay-label" id="overlayLabel"></div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    var items = document.querySelectorAll('.item');
+    var itemCount = items.length;
+    var theta = 360 / itemCount;
+    var world = document.getElementById('world');
+
+    var config = { radius: 10, tilt: 0 };
+
+    function updateMorphology() {
+        items.forEach(function(item, index) {
+            var zOffset = index * 1;
+            item.style.transform =
+                'rotateY(' + (theta * index) + 'deg) ' +
+                'translateX(' + config.radius + 'px) ' +
+                'translateZ(' + zOffset + 'px) ' +
+                'rotateX(' + config.tilt + 'deg)';
+        });
+    }
+
+    updateMorphology();
+
+    setInterval(function() {
+        config.radius = Math.floor(Math.random() * 220);
+        config.tilt = Math.floor(Math.random() * 120) - 60;
+        updateMorphology();
+    }, 7000);
+
+    var isDragging = false;
+    var startX, startY;
+    var currentRotX = -15;
+    var currentRotY = 30;
+    var currentScale = 1;
+    var autoRotateSpeed = 0.12;
+
+    function animate() {
+        if (!isDragging) {
+            currentRotY += autoRotateSpeed;
+        }
+        world.style.transform = 'scale(' + currentScale + ') rotateX(' + currentRotX + 'deg) rotateY(' + currentRotY + 'deg)';
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    document.addEventListener('pointerdown', function(e) {
+        if (e.target.tagName.toLowerCase() === 'img') return;
+        if (e.pointerType === 'touch' && !e.isPrimary) return;
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+    });
+
+    document.addEventListener('pointermove', function(e) {
+        if (!isDragging || (e.pointerType === 'touch' && !e.isPrimary)) return;
+        var deltaX = e.clientX - startX;
+        var deltaY = e.clientY - startY;
+        currentRotY += deltaX * 0.4;
+        currentRotX -= deltaY * 0.4;
+        if (currentRotX > 85) currentRotX = 85;
+        if (currentRotX < -85) currentRotX = -85;
+        startX = e.clientX;
+        startY = e.clientY;
+    });
+
+    var endDrag = function() { isDragging = false; };
+    document.addEventListener('pointerup', endDrag);
+    document.addEventListener('pointercancel', endDrag);
+
+    document.addEventListener('wheel', function(e) {
+        currentScale -= e.deltaY * 0.002;
+        currentScale = Math.max(0.3, Math.min(3.5, currentScale));
+    }, { passive: true });
+
+    var initialPinchDistance = 0;
+    var pinchStartScale = 1;
+
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+            isDragging = false;
+            initialPinchDistance = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+            pinchStartScale = currentScale;
+        }
+    }, { passive: false });
+
+    document.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            var dist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+            currentScale = pinchStartScale * (dist / initialPinchDistance);
+            currentScale = Math.max(0.3, Math.min(3.5, currentScale));
+        }
+    }, { passive: false });
+
+    var overlay = document.getElementById('overlay');
+    var overlayImg = document.getElementById('overlayImg');
+    var overlayLabel = document.getElementById('overlayLabel');
+    var overlayClose = document.getElementById('overlayClose');
+    var savedAutoSpeed = autoRotateSpeed;
+
+    items.forEach(function(item) {
+        item.addEventListener('click', function(e) {
+            var img = this.querySelector('img');
+            if (!img) return;
+            overlayImg.src = img.src;
+            overlayImg.alt = img.alt;
+            overlayLabel.innerHTML = this.getAttribute('data-label') || '';
+            overlay.classList.add('active');
+            savedAutoSpeed = autoRotateSpeed;
+            autoRotateSpeed = 0;
+        });
+    });
+
+    function closeOverlay() {
+        overlay.classList.remove('active');
+        autoRotateSpeed = savedAutoSpeed;
+    }
+    overlayClose.addEventListener('click', function(e) { e.stopPropagation(); closeOverlay(); });
+    overlay.addEventListener('click', closeOverlay);
+    overlayImg.addEventListener('click', function(e) { e.stopPropagation(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeOverlay(); });
+})();
+</script>
+</body>
+</html>

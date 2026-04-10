@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嵇剑桥 Jianqiao Ji &mdash; Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf8;
+  --bg-alt: #f2f1ed;
+  --ink: #1a1a1a;
+  --ink-2: #4a4a4a;
+  --ink-3: #888;
+  --ink-4: #bbb;
+  --border: #e8e6e1;
+  --accent: #3d5a80;
+  --green: #2d6a4f;
+  --green-bg: #f0f7f2;
+  --blue: #1b3a5c;
+  --blue-bg: #0d1f33;
+  --orange: #b45309;
+  --orange-bg: #fdf8ef;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', 'Noto Sans SC', -apple-system, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --max-w: 1100px;
+  --header-h: 56px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 20px); }
+body {
+  font-family: var(--sans); color: var(--ink); background: var(--bg);
+  line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+
+/* SCROLL REVEAL */
+.sr {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.sr.vis { opacity: 1; transform: none; }
+.sr-d1 { transition-delay: .08s; }
+.sr-d2 { transition-delay: .16s; }
+.sr-d3 { transition-delay: .24s; }
+.sr-d4 { transition-delay: .32s; }
+
+/* HEADER */
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h);
+  z-index: 900; transition: background .35s, box-shadow .35s, backdrop-filter .35s;
+}
+.header.pinned {
+  background: rgba(250,250,248,.88); backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 1px 0 var(--border);
+}
+.header .wrap {
+  display: flex; align-items: center; justify-content: space-between; height: 100%;
+}
+.header .logo {
+  font-weight: 700; font-size: .85rem; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.header nav { display: flex; gap: 28px; align-items: center; }
+.header nav a {
+  font-size: .78rem; font-weight: 500; color: var(--ink-3);
+  transition: color .25s; letter-spacing: .3px;
+}
+.header nav a:hover, .header nav a.on { color: var(--ink); }
+
+.mob-btn {
+  display: none; width: 28px; height: 20px; flex-direction: column;
+  justify-content: space-between; cursor: pointer; z-index: 950;
+}
+.mob-btn span { height: 2px; background: var(--ink); border-radius: 1px; transition: .3s; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 0 80px;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.hero-tag {
+  display: inline-block; font-size: .65rem; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent); padding: 4px 14px; border-radius: 100px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700; line-height: 1.15; margin-bottom: 10px; letter-spacing: -.5px;
+}
+.hero h1 em { font-style: italic; font-weight: 400; }
+.hero-sub {
+  font-size: 1.05rem; color: var(--ink-2); margin-bottom: 28px; max-width: 460px;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 20px 32px; font-size: .8rem; color: var(--ink-3);
+}
+.hero-meta a { display: flex; align-items: center; gap: 6px; transition: color .25s; }
+.hero-meta a:hover { color: var(--ink); }
+.hero-card {
+  background: white; border-radius: 16px; padding: 36px; border: 1px solid var(--border);
+  box-shadow: 0 8px 40px rgba(0,0,0,.04);
+}
+.hero-card-label {
+  font-size: .6rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ink-4); margin-bottom: 20px;
+}
+.tl { position: relative; padding-left: 20px; }
+.tl::before {
+  content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+  width: 1.5px; background: var(--border);
+}
+.tl-item { margin-bottom: 22px; position: relative; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-item::before {
+  content: ''; position: absolute; left: -24px; top: 7px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+.tl-co { font-weight: 700; font-size: .92rem; }
+.tl-role { font-size: .82rem; color: var(--ink-2); }
+.tl-date { font-size: .72rem; color: var(--ink-4); }
+.tl-type {
+  display: inline-block; font-size: .56rem; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 1px 7px; border-radius: 3px;
+  vertical-align: middle; margin-left: 8px; position: relative; top: -1px;
+}
+.tl-type-work { background: rgba(61,90,128,.08); color: var(--accent); }
+.tl-type-edu { background: rgba(45,106,79,.08); color: var(--green); }
+.tl-item.tl-edu::before { background: var(--green); box-shadow: 0 0 0 1.5px var(--green); }
+.skill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+.skill {
+  padding: 4px 12px; font-size: .72rem; font-weight: 500; border-radius: 100px;
+  background: var(--bg-alt); color: var(--ink-2); border: 1px solid var(--border);
+}
+
+/* ====== TAB SYSTEM ====== */
+.tab-bar {
+  position: sticky; top: var(--header-h); z-index: 800;
+  background: rgba(250,250,248,.92); backdrop-filter: blur(16px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.tab-bar.has-shadow { box-shadow: 0 4px 20px rgba(0,0,0,.04); }
+.tab-bar .wrap {
+  display: flex; align-items: center; gap: 0; height: 52px;
+}
+.tab-btn {
+  position: relative; background: none; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: .88rem; font-weight: 600;
+  color: var(--ink-3); padding: 14px 28px; transition: color .3s;
+  letter-spacing: .3px;
+}
+.tab-btn:hover { color: var(--ink-2); }
+.tab-btn.active { color: var(--ink); }
+.tab-btn::after {
+  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 0; height: 2.5px; background: var(--accent); border-radius: 2px;
+  transition: width .35s var(--ease);
+}
+.tab-btn.active::after { width: 60%; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* SECTION COMMON */
+.sec { padding: 100px 0; }
+.sec-label {
+  display: inline-block; font-size: .6rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; padding: 4px 14px;
+  border-radius: 100px; margin-bottom: 12px;
+}
+.sec-title {
+  font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700; line-height: 1.2; margin-bottom: 4px;
+}
+.sec-title-en {
+  font-size: .88rem; color: var(--ink-3); margin-bottom: 8px;
+  font-weight: 400; letter-spacing: .3px;
+}
+.sec-meta {
+  display: flex; gap: 20px; flex-wrap: wrap; font-size: .75rem; color: var(--ink-3);
+  margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border);
+}
+.sec-meta span strong { color: var(--ink-2); }
+.case-intro {
+  font-size: .95rem; color: var(--ink-2); line-height: 1.85;
+  max-width: 720px; margin-bottom: 48px;
+}
+.metrics {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px; margin-bottom: 48px;
+}
+.metric {
+  padding: 20px 24px; border-radius: 12px; background: white;
+  border: 1px solid var(--border); text-align: center;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.metric:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+.metric-val { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; line-height: 1.2; }
+.metric-lbl { font-size: .72rem; color: var(--ink-3); margin-top: 4px; }
+.steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 48px;
+}
+.step {
+  padding: 20px; border-radius: 12px; border: 1px solid var(--border); background: white;
+}
+.step-num {
+  font-family: var(--serif); font-size: .7rem; font-weight: 700;
+  color: var(--ink-4); margin-bottom: 8px;
+}
+.step-title { font-size: .88rem; font-weight: 700; margin-bottom: 4px; }
+.step-desc { font-size: .78rem; color: var(--ink-3); line-height: 1.6; }
+.gallery { display: grid; gap: 16px; margin-bottom: 16px; }
+.gallery.g2 { grid-template-columns: 1fr 1fr; }
+.gallery.g3 { grid-template-columns: 1fr 1fr 1fr; }
+.gallery.g1 { grid-template-columns: 1fr; }
+.gallery-img {
+  border-radius: 10px; overflow: hidden; cursor: pointer;
+  border: 1px solid var(--border); background: white;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.gallery-img:hover {
+  transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.08);
+}
+.gallery-img img { width: 100%; display: block; }
+.gallery-cap {
+  font-size: .7rem; color: var(--ink-4); text-align: center; margin-bottom: 48px;
+}
+
+/* ====== PROJECT THEMES ====== */
+.sec-shopee { background: linear-gradient(180deg, #fff5f3 0%, white 100%); }
+.sec-shopee .sec-label { color: #ee4d2d; border: 1px solid #ee4d2d; background: rgba(238,77,45,.06); }
+.sec-shopee .metric-val { color: #ee4d2d; }
+.sec-shopee .sec-title { color: #7c2d12; }
+
+.sec-green { background: var(--green-bg); }
+.sec-green .sec-label { color: var(--green); border: 1px solid var(--green); background: rgba(45,106,79,.06); }
+.sec-green .metric-val { color: var(--green); }
+
+.sec-dark { background: var(--blue-bg); color: #e0e0e0; }
+.sec-dark .sec-label { color: #5b9bd5; border: 1px solid rgba(91,155,213,.4); background: rgba(91,155,213,.08); }
+.sec-dark .sec-title { color: white; }
+.sec-dark .sec-title-en { color: rgba(255,255,255,.4); }
+.sec-dark .sec-meta { color: rgba(255,255,255,.4); border-color: rgba(255,255,255,.1); }
+.sec-dark .sec-meta span strong { color: rgba(255,255,255,.65); }
+.sec-dark .case-intro { color: rgba(255,255,255,.55); }
+.sec-dark .metric { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); }
+.sec-dark .metric-val { color: #5b9bd5; }
+.sec-dark .metric-lbl { color: rgba(255,255,255,.4); }
+.sec-dark .step { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); }
+.sec-dark .step-num { color: #5b9bd5; }
+.sec-dark .step-title { color: white; }
+.sec-dark .step-desc { color: rgba(255,255,255,.4); }
+.sec-dark .gallery-img { border-color: rgba(255,255,255,.08); background: rgba(255,255,255,.03); }
+.sec-dark .gallery-cap { color: rgba(255,255,255,.25); }
+
+.sec-warm { background: var(--orange-bg); }
+.sec-warm .sec-label { color: var(--orange); border: 1px solid var(--orange); background: rgba(180,83,9,.06); }
+.sec-warm .metric-val { color: var(--orange); }
+
+/* School project themes */
+.sec-hri { background: linear-gradient(180deg, #0a0f0a 0%, #111a11 100%); color: #e0e0e0; }
+.sec-hri .sec-label { color: #b5e550; border: 1px solid rgba(181,229,80,.4); background: rgba(181,229,80,.08); }
+.sec-hri .sec-title { color: #b5e550; }
+.sec-hri .sec-title-en { color: rgba(181,229,80,.4); }
+.sec-hri .sec-meta { color: rgba(255,255,255,.35); border-color: rgba(181,229,80,.15); }
+.sec-hri .sec-meta span strong { color: rgba(255,255,255,.6); }
+.sec-hri .case-intro { color: rgba(255,255,255,.5); }
+.sec-hri .metric { background: rgba(181,229,80,.04); border-color: rgba(181,229,80,.12); }
+.sec-hri .metric-val { color: #b5e550; }
+.sec-hri .metric-lbl { color: rgba(255,255,255,.35); }
+.sec-hri .step { background: rgba(181,229,80,.04); border-color: rgba(181,229,80,.12); }
+.sec-hri .step-num { color: #b5e550; }
+.sec-hri .step-title { color: white; }
+.sec-hri .step-desc { color: rgba(255,255,255,.4); }
+.sec-hri .gallery-img { border-color: rgba(181,229,80,.12); background: rgba(0,0,0,.2); }
+.sec-hri .gallery-cap { color: rgba(181,229,80,.3); }
+
+.sec-car { background: linear-gradient(180deg, #1a1028 0%, #0f0a1a 100%); color: #e0e0e0; }
+.sec-car .sec-label { color: #c084fc; border: 1px solid rgba(192,132,252,.4); background: rgba(192,132,252,.08); }
+.sec-car .sec-title { color: white; }
+.sec-car .sec-title-en { color: rgba(192,132,252,.5); }
+.sec-car .sec-meta { color: rgba(255,255,255,.35); border-color: rgba(192,132,252,.15); }
+.sec-car .sec-meta span strong { color: rgba(255,255,255,.6); }
+.sec-car .case-intro { color: rgba(255,255,255,.5); }
+.sec-car .metric { background: rgba(192,132,252,.04); border-color: rgba(192,132,252,.12); }
+.sec-car .metric-val { color: #c084fc; }
+.sec-car .metric-lbl { color: rgba(255,255,255,.35); }
+.sec-car .step { background: rgba(192,132,252,.04); border-color: rgba(192,132,252,.12); }
+.sec-car .step-num { color: #c084fc; }
+.sec-car .step-title { color: white; }
+.sec-car .step-desc { color: rgba(255,255,255,.4); }
+.sec-car .gallery-img { border-color: rgba(192,132,252,.12); background: rgba(0,0,0,.2); }
+.sec-car .gallery-cap { color: rgba(192,132,252,.3); }
+
+.sec-vr { background: linear-gradient(180deg, #f0f4ff 0%, #e8f0fe 50%, white 100%); }
+.sec-vr .sec-label { color: #3b82f6; border: 1px solid #3b82f6; background: rgba(59,130,246,.06); }
+.sec-vr .metric-val { color: #3b82f6; }
+.sec-vr .sec-title { color: #1e3a5f; }
+
+.sec-data { background: linear-gradient(180deg, #f8f0f8 0%, #f3eaf3 50%, white 100%); }
+.sec-data .sec-label { color: #9333ea; border: 1px solid #9333ea; background: rgba(147,51,234,.06); }
+.sec-data .metric-val { color: #9333ea; }
+.sec-data .sec-title { color: #581c87; }
+
+.sec-emo { background: linear-gradient(180deg, #0a0a14 0%, #12101e 100%); color: #e0e0e0; }
+.sec-emo .sec-label { color: #f472b6; border: 1px solid rgba(244,114,182,.4); background: rgba(244,114,182,.08); }
+.sec-emo .sec-title { color: white; }
+.sec-emo .sec-title-en { color: rgba(244,114,182,.5); }
+.sec-emo .sec-meta { color: rgba(255,255,255,.35); border-color: rgba(244,114,182,.15); }
+.sec-emo .sec-meta span strong { color: rgba(255,255,255,.6); }
+.sec-emo .case-intro { color: rgba(255,255,255,.5); }
+.sec-emo .metric { background: rgba(244,114,182,.04); border-color: rgba(244,114,182,.12); }
+.sec-emo .metric-val { color: #f472b6; }
+.sec-emo .metric-lbl { color: rgba(255,255,255,.35); }
+.sec-emo .step { background: rgba(244,114,182,.04); border-color: rgba(244,114,182,.12); }
+.sec-emo .step-num { color: #f472b6; }
+.sec-emo .step-title { color: white; }
+.sec-emo .step-desc { color: rgba(255,255,255,.4); }
+.sec-emo .gallery-img { border-color: rgba(244,114,182,.12); background: rgba(0,0,0,.2); }
+.sec-emo .gallery-cap { color: rgba(244,114,182,.3); }
+
+/* FOOTER */
+.footer {
+  padding: 60px 0 40px; border-top: 1px solid var(--border); text-align: center;
+}
+.footer-title {
+  font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;
+}
+.footer-sub { font-size: .85rem; color: var(--ink-3); margin-bottom: 24px; }
+.footer-links {
+  display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+  font-size: .82rem; color: var(--ink-2); margin-bottom: 40px;
+}
+.footer-links a { transition: color .25s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-copy { font-size: .7rem; color: var(--ink-4); }
+
+/* LIGHTBOX */
+.lb {
+  position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.9);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .4s; cursor: zoom-out;
+}
+.lb.on { opacity: 1; pointer-events: all; }
+.lb img {
+  max-width: 92vw; max-height: 90vh; object-fit: contain; border-radius: 6px;
+  transform: scale(.93); transition: transform .45s var(--ease);
+}
+.lb.on img { transform: scale(1); }
+.lb-x {
+  position: absolute; top: 20px; right: 24px; width: 40px; height: 40px;
+  border: none; background: rgba(255,255,255,.08); border-radius: 50%;
+  color: white; font-size: 1.4rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; transition: background .25s;
+}
+.lb-x:hover { background: rgba(255,255,255,.18); }
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .gallery.g2, .gallery.g3 { grid-template-columns: 1fr; }
+  .header nav {
+    position: fixed; top: 0; right: -100%; width: 260px; height: 100vh;
+    background: white; flex-direction: column; padding: 80px 28px 28px;
+    gap: 20px; box-shadow: -4px 0 20px rgba(0,0,0,.06);
+    transition: right .35s var(--ease);
+  }
+  .header nav.open { right: 0; }
+  .header nav a { font-size: .95rem; color: var(--ink-2); }
+  .mob-btn { display: flex; }
+  .mob-btn.on span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+  .mob-btn.on span:nth-child(2) { opacity: 0; }
+  .mob-btn.on span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  .sec { padding: 72px 0; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .tab-btn { padding: 14px 16px; font-size: .82rem; }
+}
+@media (max-width: 500px) {
+  .hero-meta { flex-direction: column; gap: 8px; }
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="hd">
+  <div class="wrap">
+    <a href="#hero" class="logo">JQ</a>
+    <nav id="nav">
+      <a href="#hero">Home</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="mob-btn" id="mob"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag sr">Product Manager &middot; Interaction Designer</div>
+        <h1 class="sr sr-d1">嵇剑桥<br><em>Jianqiao Ji</em></h1>
+        <p class="hero-sub sr sr-d2">数据产品经理 &amp; 交互设计师，专注于搜索、推荐和广告技术与人机交互领域。擅长将复杂业务问题拆解为数据驱动的产品方案，在数据工程、算法与运营团队之间搭建桥梁。</p>
+        <div class="hero-meta sr sr-d3">
+          <span>联系方式：wechat: xtacii</span>
+        </div>
+      </div>
+      <div class="hero-card sr sr-d2">
+        <div class="hero-card-label">Experience &amp; Education</div>
+        <div class="tl">
+          <div class="tl-item">
+            <div class="tl-co">Shopee <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-role">数据产品经理 · 搜索、推荐与广告</div>
+            <div class="tl-date">2022.5 — Present</div>
+          </div>
+          <div class="tl-item tl-edu">
+            <div class="tl-co">同济大学 设计与创意学院 <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-role">交互设计硕士 (Part-time)</div>
+            <div class="tl-date">2022.9 — Present</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-co">达达集团 · 京东到家 <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-role">数据产品经理 · 大数据与算法应用部</div>
+            <div class="tl-date">2020.09 — 2022</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-co">量锐科技 <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-role">产品经理 · 产品与量化部</div>
+            <div class="tl-date">2018.11 — 2020.09</div>
+          </div>
+          <div class="tl-item tl-edu">
+            <div class="tl-co">伊利诺伊大学厄本那-香槟分校 UIUC <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-role">Master of Science in Financial Engineering</div>
+            <div class="tl-date">2016.8 — 2017.12</div>
+          </div>
+          <div class="tl-item tl-edu">
+            <div class="tl-co">南京大学 <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-role">金融工程 · 经济学学士</div>
+            <div class="tl-date">2012.9 — 2016.6</div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill">Vibe Coding</span>
+          <span class="skill">SQL</span>
+          <span class="skill">Python</span>
+          <span class="skill">Tableau</span>
+          <span class="skill">Figma</span>
+          <span class="skill">Cursor</span>
+          <span class="skill">C++</span>
+          <span class="skill">Unity</span>
+          <span class="skill">CSPO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB BAR -->
+<div class="tab-bar" id="tabBar">
+  <div class="wrap">
+    <button class="tab-btn active" data-tab="work">工作项目 Work</button>
+    <button class="tab-btn" data-tab="school">学校项目 Academic</button>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- WORK PROJECTS TAB             -->
+<!-- ============================= -->
+<div class="tab-content active" id="tab-work">
+
+<!-- WORK 1: Shopee 搜索、推荐和广告数据产品 -->
+<section class="sec sec-shopee" id="w-shopee">
+  <div class="wrap">
+    <div class="sec-label sr">Shopee · Ads</div>
+    <h2 class="sec-title sr sr-d1">Shopee 搜索、推荐和广告数据产品</h2>
+    <p class="sec-title-en sr sr-d1">Search, Recommendation &amp; Ads Data Products</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>公司</strong> Shopee · 搜索、推荐与广告</span>
+      <span><strong>时间</strong> 2022 — Present</span>
+      <span><strong>角色</strong> Data Product Manager</span>
+    </div>
+    <p class="case-intro sr">作为 Shopee 广告部数据产品经理，负责 Paid Ads 和 Live Ads 的数据基建、归因体系、自动赔付系统以及 AI 驱动的广告诊断工具。主导构建了覆盖客户域、投放域、流量域、归因域的全链路广告数据图谱，支撑广告策略优化、出价模型迭代和业务决策。</p>
+
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">广告全域推广</div><div class="step-desc">整合付费与自然流量，按曝光计费，商家设定目标投产比或成交出价后系统智能优化。构建精准业务指标体系与智能分析报表，深入挖掘算法日志数据，打通从广告创意编写到分发全流程数据链路。精准识别过度投放、预算利用率低、广告主采纳率不高、优质广告资源未展示等问题，为推广策略优化与效果评估提供数据支撑</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">全渠道订单归因数仓</div><div class="step-desc">主导设计覆盖全业务场景的多维归因模型，从公司级视角整合搜索、推荐、广告等 10+ 流量端数据源，实现商品、请求层级的精细化贡献评估，覆盖 90%+ 业务场景。设计埋点管理工具支持 1000+ 业务功能埋点，开发多维下钻分析看板（含导流路径树等可视化模块），推动业务决策从部门视角转向全局协同</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Live Ads 直播广告</div><div class="step-desc">负责直播广告数据及排查工具，支持 Max GMV / Target ROI 出价模式，构建实时监控 Dashboard 和全链路排查工具</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">oCPM 归因升级</div><div class="step-desc">设计 imp+no-imp 归因模型和 CPM 扣费方案，已全球推全，实现从 CPC 到 oCPM 的计费模式升级</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">05</div><div class="step-title">Auto Rebate 自动赔付</div><div class="step-desc">v3 策略优化：周维度赔付、差异化客群策略、豁免规则优化，撬动大客户预算 +4%~8%，留存率 +0.5%</div></div>
+      <div class="step"><div class="step-num">06</div><div class="step-title">商品广告暗投直播</div><div class="step-desc">设计直播间 ROI2 商品暗投的埋点/计费/归因全链路数据方案，打通 Product Ads 与 Live Ads 的数据融合</div></div>
+      <div class="step"><div class="step-num">07</div><div class="step-title">Paid Ads 数据基建</div><div class="step-desc">构建广告全域数据图谱：客户域、财务域、投放域、广告链路、流量域、归因域、策略域七大数据分类</div></div>
+      <div class="step"><div class="step-num">08</div><div class="step-title">Ads Data Agent</div><div class="step-desc">主导 AI 驱动的广告异动诊断工具，联合算法团队实现 take_rate/CTR 等核心指标的自动化归因分析</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK 2: 商家经营分析看板 -->
+<section class="sec sec-warm" id="w-merchant">
+  <div class="wrap">
+    <div class="sec-label sr">达达集团 · 大数据</div>
+    <h2 class="sec-title sr sr-d1">商家经营分析看板</h2>
+    <p class="sec-title-en sr sr-d1">Retailer Management Analysis Platform</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>公司</strong> 达达集团 · 大数据</span>
+      <span><strong>时间</strong> 2021.09 — 2022.02</span>
+      <span><strong>角色</strong> Product Design · Interactive Design</span>
+    </div>
+    <p class="case-intro sr">为平台入驻商家（尤其是缺乏数字化能力的传统小商家）打造经营分析工具。采用 OSM (Object-Strategy-Measurement) 模型拆解业务指标体系，通过智能关联分析自动定位经营问题环节，主动推送数据洞察，帮助商家快速做出经营决策。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">35万</div><div class="metric-lbl">京东到家在线商户数</div></div>
+      <div class="metric"><div class="metric-val">60亿</div><div class="metric-lbl">某连锁超市入驻后销售提升</div></div>
+      <div class="metric"><div class="metric-val">OSM</div><div class="metric-lbl">Object-Strategy-Measurement</div></div>
+      <div class="metric"><div class="metric-val">4大功能</div><div class="metric-lbl">洞察 · 指标 · 明细 · 订阅</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">平台经济洞察</div><div class="step-desc">分析平台经济特征，明确赋能传统商家数字化转型的产品使命</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">用户画像</div><div class="step-desc">便利店夫妻店主：想提升销售、盘活库存，但不会使用数据工具</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">OSM 分析模型</div><div class="step-desc">目标(提升销售) → 策略(提升曝光/转化/客单) → 度量(UV/转化率/金额)</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">服务蓝图</div><div class="step-desc">前台数据洞察 → 后台算法模型 → 支撑引擎（大数据 + 元数据表查询）</div></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="images/page_18.png" alt="背景与用户" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="images/page_19.png" alt="分析逻辑" loading="lazy"></div>
+      <div class="gallery-img"><img src="images/page_20.png" alt="界面设计" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">背景分析 → 用户画像 → OSM 模型 → 服务蓝图 → 界面设计</div>
+  </div>
+</section>
+
+<!-- WORK 3: 电商智能营销画像平台 -->
+<section class="sec sec-green" id="w-profile">
+  <div class="wrap">
+    <div class="sec-label sr">达达集团 · 大数据</div>
+    <h2 class="sec-title sr sr-d1">电商智能营销画像平台</h2>
+    <p class="sec-title-en sr sr-d1">Intelligent Promotion User Profile Platform</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>公司</strong> 达达集团 · 大数据</span>
+      <span><strong>时间</strong> 2021.05 — 2022.02</span>
+      <span><strong>角色</strong> Product Design · Interactive Design</span>
+    </div>
+    <p class="case-intro sr">在即时零售行业高速增长的背景下，传统的"单一用户群体 + 单一商品品类"营销策略已无法满足业务需求。我主导设计了用户画像平台，通过建立海量用户特征标签库和灵活的圈选规则，帮助运营团队实现精细化人群运营和精准营销投放，大幅提升营销效率和转化率。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">&gt;300亿</div><div class="metric-lbl">平台 GMV（环比 +67%）</div></div>
+      <div class="metric"><div class="metric-val">2亿</div><div class="metric-lbl">注册用户数（环比 +27%）</div></div>
+      <div class="metric"><div class="metric-val">1.8亿</div><div class="metric-lbl">在售商品数（环比 +90%）</div></div>
+      <div class="metric"><div class="metric-val">+300%</div><div class="metric-lbl">品类销售额 Top5 增长</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">背景洞察</div><div class="step-desc">O2O 市场规模 33.2 亿，用户客群、商品类型、消费行为均趋多样化</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">需求分析</div><div class="step-desc">收集用户声音，利益相关者地图梳理，定义"用户画像平台"产品边界</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">用户旅程</div><div class="step-desc">营销前(圈人/选品) → 营销中(投放/监控) → 营销后(分析/策略) 全链路</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">架构设计</div><div class="step-desc">ETL → 数仓主题建模 → 标签建模(原始/事实/模型/预测) → 画像平台</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="images/page_05.png" alt="背景分析" loading="lazy"></div>
+      <div class="gallery-img"><img src="images/page_06.png" alt="需求分析" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="images/page_07.png" alt="用户旅程" loading="lazy"></div>
+      <div class="gallery-img"><img src="images/page_08.png" alt="架构设计" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="images/page_09.png" alt="交互界面" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">背景分析 → 需求定义 → 用户旅程 → 架构设计 → 交互界面</div>
+  </div>
+</section>
+
+<!-- WORK 4: 外汇量化交易执行终端 -->
+<section class="sec sec-dark" id="w-quant">
+  <div class="wrap">
+    <div class="sec-label sr">量锐科技</div>
+    <h2 class="sec-title sr sr-d1">外汇量化交易执行终端</h2>
+    <p class="sec-title-en sr sr-d1">Quantitative Trading Execution Terminal in Forex Market</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>公司</strong> 量锐科技</span>
+      <span><strong>时间</strong> 2019.05 — 2020.08</span>
+      <span><strong>角色</strong> Product Design · Interactive Design</span>
+    </div>
+    <p class="case-intro sr">面向银行间市场外汇交易员，设计一站式量化交易执行终端。核心解决交易员"多屏盯盘效率低、手动执行易错过行情、策略回测缺乏系统支持"三大痛点。产品集成多资产行情、算法执行、风控管理和交易簿记，实现从发现机会到事后复盘的全流程自动化。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">180亿$</div><div class="metric-lbl">全球量化交易市场规模</div></div>
+      <div class="metric"><div class="metric-val">第5代</div><div class="metric-lbl">交易系统演进 · 智能化</div></div>
+      <div class="metric"><div class="metric-val">低延时</div><div class="metric-lbl">复杂事件处理引擎</div></div>
+      <div class="metric"><div class="metric-val">模块化</div><div class="metric-lbl">可自由组合的组件架构</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">行业研究</div><div class="step-desc">梳理程序化交易 5 代演进，分析国内量化交易机会与政策窗口</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">用户画像</div><div class="step-desc">深度跟踪大行交易员一天工作流：盘前/盘中/盘后全场景</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">旅程 &amp; 痛点</div><div class="step-desc">发现机会 → 下单交易 → 成交统计 → 事后复盘，定位 4 阶段核心痛点</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">系统架构</div><div class="step-desc">市场行情 · 交易执行 · 交易簿记 · 后台管理四大模块 + 数据集群</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="images/page_11.png" alt="背景研究" loading="lazy"></div>
+      <div class="gallery-img"><img src="images/page_12.png" alt="用户画像" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="images/page_13.png" alt="用户旅程" loading="lazy"></div>
+      <div class="gallery-img"><img src="images/page_14.png" alt="系统架构" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="images/page_15.png" alt="界面设计-模板" loading="lazy"></div>
+      <div class="gallery-img"><img src="images/page_16.png" alt="界面设计-终端" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="images/page_16.png" alt="界面设计-终端全览" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">行业研究 → 用户画像 → 旅程分析 → 系统架构 → 界面设计</div>
+  </div>
+</section>
+
+</div><!-- end tab-work -->
+
+<!-- ============================= -->
+<!-- SCHOOL PROJECTS TAB           -->
+<!-- ============================= -->
+<div class="tab-content" id="tab-school">
+
+<!-- SCHOOL 1: 智避"非摄者"无人机 — HRI -->
+<section class="sec sec-hri" id="s-hri">
+  <div class="wrap">
+    <div class="sec-label sr">Human-Robot Interaction</div>
+    <h2 class="sec-title sr sr-d1">Halo: 智能摄影无人机交互设计</h2>
+    <p class="sec-title-en sr sr-d1">Intelligent Photography Drone That Avoids Non-Photographers</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span><strong>课程</strong> 人-机器人交互设计 (HRI)</span>
+      <span><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Li Huan</span>
+    </div>
+    <p class="case-intro sr">户外拍摄时路人闯入画面是摄影爱好者和自媒体博主的核心痛点。Halo 是一款智能摄影无人机概念设计，通过 3D 空间自由飞行实时监测环境、智能识别"非摄者"并灵活调整拍摄技法，同时以投影交互友好引导路人规避取景框，实现"全眼只有你"的拍摄体验。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">3D</div><div class="metric-lbl">空间自由飞行探寻拍摄点</div></div>
+      <div class="metric"><div class="metric-val">AI</div><div class="metric-lbl">智能识别非摄者并调整技法</div></div>
+      <div class="metric"><div class="metric-val">手势</div><div class="metric-lbl">自然手势交互控制无人机</div></div>
+      <div class="metric"><div class="metric-val">投影</div><div class="metric-lbl">友好引导路人规避取景框</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">动机研究</div><div class="step-desc">户外拍摄路人入镜的现状分析，梳理 vlogger 常用的"路人消失术"（慢速快门、背景虚化、特写切换等）</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">用户画像</div><div class="step-desc">定义两类核心用户：旅行摄影爱好者 Mr.Lin 和运动自媒体博主 Ms.Wang，提炼"高质量出片"与"自动取景"需求</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">系统框架</div><div class="step-desc">三大能力支柱：环境监测（拍摄前分析 + 拍摄中人群监控）、高质量出片（多种拍摄模式 + 3D 补光）、智能交互（手势控制 + 投影引导）</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">交互设计</div><div class="step-desc">定义完整交互流程：开机 → 启动仪式 → 定点拍照（指定地点/选模式/招手靠近/确认拍照）→ 飞行结束</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/drone_p2.png" alt="Motivation" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/drone_p3.png" alt="Persona" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/drone_p6.png" alt="Framework" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/drone_p8.png" alt="Scenarios" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="extracted_images/drone_p10.png" alt="Basic Interaction" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">动机研究 → 用户画像 → 系统框架 → 场景设计 → 交互流程</div>
+  </div>
+</section>
+
+<!-- SCHOOL 2: 相信光 Enlighten — 人车交互 -->
+<section class="sec sec-car" id="s-car">
+  <div class="wrap">
+    <div class="sec-label sr">Human-Vehicle Interaction</div>
+    <h2 class="sec-title sr sr-d1">Enlighten: 光语人车交互系统</h2>
+    <p class="sec-title-en sr sr-d1">Refle Elf &mdash; Enlighten the Soul of Your Car</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span><strong>课程</strong> 人车交互设计</span>
+      <span><strong>团队</strong> 嵇剑桥 · Li Huan · Ying Jingpei · Weilisi</span>
+    </div>
+    <p class="case-intro sr">面向 2030 自动驾驶时代的人车情感交互方案。传统车辆在上车前、乘车中、下车后三个阶段缺乏情感连接和反馈。Refle Elf 以"光"作为核心交互媒介（兼具空间感、灵活性、无入侵性、弱提示的特征），设计了一套涵盖信息可视化、照明辅助与氛围陪伴三大功能的车内光语交互系统，将汽车从出行工具升级为 Soul Mate。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">光</div><div class="metric-lbl">核心交互媒介（非声音/文字）</div></div>
+      <div class="metric"><div class="metric-val">3场景</div><div class="metric-lbl">上车前 · 乘车中 · 行程结束</div></div>
+      <div class="metric"><div class="metric-val">8种</div><div class="metric-lbl">光语反馈状态设计</div></div>
+      <div class="metric"><div class="metric-val">3大</div><div class="metric-lbl">功能模块架构</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">未来洞察</div><div class="step-desc">2030 年趋势研判：数据孪生、自动驾驶、人工智能改变人车关系</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">痛点分析</div><div class="step-desc">传统车辆三阶段（上车前/乘车中/下车后）均缺乏情感连接与反馈</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">媒介选择</div><div class="step-desc">对比光、声音、文字/图像三种媒介，选择"光"作为最优交互载体：空间感、灵活、视觉性、无入侵</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">系统架构</div><div class="step-desc">Refle Elf 三大模块：信息可视化（速度/温度/进程）、照明（安全带/私域灯光）、氛围陪伴（迎宾/反馈/告别）</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/enlighten_p4.png" alt="Traditional vehicles" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/enlighten_p5.png" alt="Soul mate in trip" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/enlighten_p11.png" alt="Information architecture" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/enlighten_p13.png" alt="Refle Elf Feedback" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">未来洞察 → 痛点分析 → 媒介选择 → 信息架构 → 光语反馈</div>
+  </div>
+</section>
+
+<!-- SCHOOL 3: VR 空间认知康复游戏 -->
+<section class="sec sec-vr" id="s-vr">
+  <div class="wrap">
+    <div class="sec-label sr">VR Game Design</div>
+    <h2 class="sec-title sr sr-d1">VR 空间认知障碍康复游戏</h2>
+    <p class="sec-title-en sr sr-d1">VR-Cognitive Rehabilitation for Alzheimer's Patients</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span><strong>课程</strong> VR/AR 交互设计</span>
+      <span><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Jiang Liyuan</span>
+    </div>
+    <p class="case-intro sr">面向早期阿尔茨海默症患者设计的 VR 空间认知康复游戏。通过结合认知训练与运动训练，在虚拟自然环境中设置空间导航、方位训练、记忆训练和拉伸运动等游戏任务，帮助患者改善空间认知能力和平衡姿态。游戏支持个性化难度调节，可由疗养师或家属根据患者病情定制康复方案。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">认知+运动</div><div class="metric-lbl">双训练联合康复范式</div></div>
+      <div class="metric"><div class="metric-val">5项</div><div class="metric-lbl">核心游戏任务设计</div></div>
+      <div class="metric"><div class="metric-val">3级</div><div class="metric-lbl">个性化难度调节</div></div>
+      <div class="metric"><div class="metric-val">ADL</div><div class="metric-lbl">日常任务融入游戏</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">设计方向选定</div><div class="step-desc">聚焦阿尔茨海默症患者空间障碍与平衡姿态问题，结合认知训练 + 运动训练方式进行 VR 康复</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">康复范式研究</div><div class="step-desc">文献调研路径学习、目标探寻与上肢拉伸训练范式，结合 VR 环境可定制、数据可记录的优势</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">游戏设计原则</div><div class="step-desc">日常任务（ADL）更利于康复、鸟瞰图辅助空间记忆、坐式运动避免精细控制退化</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">难度设计</div><div class="step-desc">全局调节（场景光线/植被量）+ 关卡自定义（路线难易/辨识地标数/路线记忆量/缩略地图）三级难度</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="vr_game_images/设计方向选定.png" alt="设计方向" loading="lazy"></div>
+      <div class="gallery-img"><img src="vr_game_images/康复范式研究.png" alt="康复范式" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="vr_game_images/设计概念.png" alt="设计概念" loading="lazy"></div>
+      <div class="gallery-img"><img src="vr_game_images/设计整体流程.png" alt="流程图" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="vr_game_images/场景1-任务1-热身.png" alt="场景1-热身" loading="lazy"></div>
+      <div class="gallery-img"><img src="vr_game_images/场景3-任务2-目标探寻.png" alt="场景3-目标探寻" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="vr_game_images/场景5-任务3-画路径.png" alt="场景5-画路径" loading="lazy"></div>
+      <div class="gallery-img"><img src="vr_game_images/场景7-任务5-喂小鱼.png" alt="场景7-喂小鱼" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="vr_game_images/游戏难度参数 JQ.png" alt="难度设计" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">设计方向 → 康复范式 → 设计概念 → 流程设计 → 场景实现 → 难度调节</div>
+  </div>
+</section>
+
+<!-- SCHOOL 4: 设计数据分析 -->
+<section class="sec sec-data" id="s-data">
+  <div class="wrap">
+    <div class="sec-label sr">Data Analysis of Design</div>
+    <h2 class="sec-title sr sr-d1">电商搜索体验的数据驱动设计</h2>
+    <p class="sec-title-en sr sr-d1">Data-Driven Design Optimization for E-commerce Search</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span><strong>课程</strong> 设计数据分析</span>
+      <span><strong>团队</strong> 嵇剑桥 · Zhang Linuo</span>
+    </div>
+    <p class="case-intro sr">以淘宝搜索功能为研究对象，运用数据分析方法论驱动设计优化。从业务诉求（促成交易）和用户诉求出发，确立"搜索订单渗透率"和"CTCVR（曝光-下单转化率）"为核心指标，通过用户旅程图拆解搜索全流程，设计前端交互方案并建立完整指标体系与埋点方案，实现以数据闭环指导设计迭代。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">CTCVR</div><div class="metric-lbl">核心体验指标</div></div>
+      <div class="metric"><div class="metric-val">8模块</div><div class="metric-lbl">从业务诉求到埋点设计</div></div>
+      <div class="metric"><div class="metric-val">前端+后台</div><div class="metric-lbl">设计目标双向拆解</div></div>
+      <div class="metric"><div class="metric-val">全链路</div><div class="metric-lbl">用户旅程数据闭环</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">业务与用户诉求</div><div class="step-desc">电商平台核心目标：促成交易。搜索作为商品触达的关键入口，需帮助用户快速、准确找到想要的商品</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">设计目标拆解</div><div class="step-desc">前端4大目标（引导输入/筛选/品类/清晰展示）+ 后台5大目标（准确性/多样性/排序/速度/个性化）</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">用户旅程与流程</div><div class="step-desc">APP首页 → 搜索发现 → 搜索建议 → 搜索结果 → 商品详情 → 店铺主页 → 店内搜索的全链路流程</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">指标体系与埋点</div><div class="step-desc">构建搜索功能指标体系并设计埋点方案，以数据闭环驱动设计方案的验证和迭代优化</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p3.png" alt="业务诉求" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p5.png" alt="设计目标" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p7.png" alt="用户流程" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p9.png" alt="界面分析" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p11.png" alt="搜索结果页面" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">业务诉求 → 设计目标 → 用户流程 → 界面分析 → 指标体系</div>
+  </div>
+</section>
+
+<!-- SCHOOL 5: EMO-D 品牌营销设计 -->
+<section class="sec sec-emo" id="s-emo">
+  <div class="wrap">
+    <div class="sec-label sr">Brand &amp; Marketing Design</div>
+    <h2 class="sec-title sr sr-d1">EMO-D: 情感钻石品牌创新设计</h2>
+    <p class="sec-title-en sr sr-d1">Emotional Diamond &mdash; A Moment Is Forever</p>
+    <div class="sec-meta sr sr-d2">
+      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span><strong>课程</strong> 品牌营销与创新设计</span>
+      <span><strong>合作</strong> 同济大学设创学院 &times; L Catterton &times; 沃尔德钻石</span>
+    </div>
+    <p class="case-intro sr">EMO-D (Emotional Diamond) 是面向 Z 世代"新奢品先锋者"的培育钻石首饰品牌。融合 AIGC 技术与情感数据，通过 PAD 情感模型提取用户情绪，经由 AI 情感光谱轮和 GPT-4 情感作诗生成个性化的"情感钻石"，将情感数据转化为独一无二的珠宝设计。品牌核心理念"此刻 · 永恒"，让每一颗钻石承载佩戴者的真实情感。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">AIGC</div><div class="metric-lbl">AI 生成内容驱动设计</div></div>
+      <div class="metric"><div class="metric-val">PAD</div><div class="metric-lbl">情感模型数据提取</div></div>
+      <div class="metric"><div class="metric-val">Z世代</div><div class="metric-lbl">目标客群定位</div></div>
+      <div class="metric"><div class="metric-val">跨学科</div><div class="metric-lbl">情感 &times; 数据 &times; 珠宝</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title">品牌生态构建</div><div class="step-desc">跨学科团队（市场/品牌/技术/产品），融合情感数据采集、AIGC 生成与数据驱动珠宝设计</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">目标人群洞察</div><div class="step-desc">Z世代消费特征：无性别潮流、"乐趣"至上、兴趣消费、情感表达、品牌共创</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">产品系统设计</div><div class="step-desc">信息输入 → PAD 情感模型 → AIGC 情感光谱轮 → GPT4 情感作诗 → 情感钻石培育生成 → 加工成品</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">钻石颜色术语</div><div class="step-desc">建立钻石颜色与情感的映射体系：红色(Love 68%)、蓝色(Contentment 35%)、黄色(Surprise 52%)等</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/emo_d2_p3.png" alt="品牌生态" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/emo_d2_p5.png" alt="目标人群" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/emo_d2_p8.png" alt="产品系统" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/emo_d2_p10.png" alt="钻石颜色术语" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="extracted_images/emo_d2_p12.png" alt="产品展示" loading="lazy"></div>
+    </div>
+    <div class="gallery-cap">品牌生态 → 人群洞察 → 产品系统 → 颜色术语 → 产品展示</div>
+  </div>
+</section>
+
+</div><!-- end tab-school -->
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-title sr">Let's Talk</div>
+    <p class="footer-sub sr sr-d1">如果你对我的项目感兴趣，欢迎联系我</p>
+    <div class="footer-links sr sr-d2">
+      <span>联系方式：wechat: xtacii</span>
+    </div>
+    <p class="footer-copy">&copy; 2026 Jianqiao Ji. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-x" id="lbx">&times;</button>
+  <img src="" alt="" id="lbi">
+</div>
+
+<script>
+(function(){
+  var hd=document.getElementById('hd');
+  window.addEventListener('scroll',function(){hd.classList.toggle('pinned',scrollY>60)},{passive:true});
+
+  var mob=document.getElementById('mob'),nav=document.getElementById('nav');
+  mob.addEventListener('click',function(){mob.classList.toggle('on');nav.classList.toggle('open')});
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('on');nav.classList.remove('open')})});
+
+  // Tab switching
+  var tabBtns=document.querySelectorAll('.tab-btn');
+  var tabContents=document.querySelectorAll('.tab-content');
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var target=this.getAttribute('data-tab');
+      tabBtns.forEach(function(b){b.classList.remove('active')});
+      tabContents.forEach(function(c){c.classList.remove('active')});
+      this.classList.add('active');
+      document.getElementById('tab-'+target).classList.add('active');
+      // Re-trigger scroll reveal for newly visible elements
+      document.querySelectorAll('#tab-'+target+' .sr').forEach(function(el){
+        srObserver.observe(el);
+      });
+      window.scrollTo({top:document.getElementById('tabBar').offsetTop - 60, behavior:'smooth'});
+    });
+  });
+
+  // Tab bar shadow
+  var tabBar=document.getElementById('tabBar');
+  window.addEventListener('scroll',function(){
+    tabBar.classList.toggle('has-shadow',scrollY>tabBar.offsetTop-60);
+  },{passive:true});
+
+  // Scroll reveal
+  var srObserver=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')});
+  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+
+  document.querySelectorAll('.sr').forEach(function(el){
+    srObserver.observe(el);
+  });
+
+  // Lightbox
+  var lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),lbx=document.getElementById('lbx');
+  document.querySelectorAll('.gallery-img').forEach(function(g){
+    g.addEventListener('click',function(){
+      var i=this.querySelector('img');
+      if(i){lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('on');document.body.style.overflow='hidden'}
+    });
+  });
+  function cls(){lb.classList.remove('on');document.body.style.overflow=''}
+  lbx.addEventListener('click',function(e){e.stopPropagation();cls()});
+  lb.addEventListener('click',cls);
+  lbi.addEventListener('click',function(e){e.stopPropagation()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')cls()});
+})();
+</script>
+</body>
+</html>
