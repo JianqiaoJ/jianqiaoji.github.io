@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>嵇剑桥 Jianqiao Ji &mdash; Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #fafaf8;
@@ -86,19 +86,45 @@ a { text-decoration: none; color: inherit; }
 .hero-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
 }
+.hero-avatar {
+  width: 148px; height: 148px; border-radius: 50%; overflow: hidden;
+  border: 3px solid white; box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  margin-bottom: 18px; margin-left: 108px;
+}
+.hero-avatar img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 52% 38%;
+}
 .hero-tag {
-  display: inline-block; font-size: .65rem; font-weight: 600;
-  letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
-  border: 1px solid var(--accent); padding: 4px 14px; border-radius: 100px;
-  margin-bottom: 20px;
+  display: inline-block; font-size: .62rem; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent); padding: 4px 10px; border-radius: 100px;
+  margin-bottom: 20px; max-width: 460px; white-space: normal; line-height: 1.45;
+  transform: scaleX(1.15); transform-origin: left center;
 }
 .hero h1 {
   font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.6rem);
   font-weight: 700; line-height: 1.15; margin-bottom: 10px; letter-spacing: -.5px;
 }
 .hero h1 em { font-style: italic; font-weight: 400; }
-.hero-sub {
-  font-size: 1.05rem; color: var(--ink-2); margin-bottom: 28px; max-width: 460px;
+.hero-sub,
+.photo-preface {
+  font-size: 1.05rem;
+  color: var(--ink-2);
+  max-width: 460px;
+  line-height: 1.75;
+}
+.hero-sub { margin-bottom: 28px; }
+.hero-easter {
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: .56rem; color: #9a9a9a; letter-spacing: .2px; line-height: 1.8;
+  margin-top: -14px; margin-bottom: 20px; white-space: nowrap;
+  display: inline-block; transform: scaleY(.88); transform-origin: left center;
+}
+.hero-easter.typing::after {
+  content: '_'; margin-left: 2px; opacity: 1; animation: blink-caret .8s steps(1,end) infinite;
+}
+@keyframes blink-caret {
+  50% { opacity: 0; }
 }
 .hero-meta {
   display: flex; flex-wrap: wrap; gap: 20px 32px; font-size: .8rem; color: var(--ink-3);
@@ -330,6 +356,53 @@ a { text-decoration: none; color: inherit; }
 .sec-emo .gallery-img { border-color: rgba(244,114,182,.12); background: rgba(0,0,0,.2); }
 .sec-emo .gallery-cap { color: rgba(244,114,182,.3); }
 
+.sec-photo {
+  background: var(--bg); padding: 80px 0 60px;
+}
+.sec-photo .sec-label {
+  color: #6b6b6b; border: 1px solid #8c8c8c; background: rgba(140,140,140,.08);
+}
+/* 摄影 Tab 顶部感言：正文与 .hero-sub 共用字号/行高/色值，左对齐 */
+.photo-preface {
+  margin: 0 0 56px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.photo-city {
+  margin-bottom: 72px;
+}
+.photo-city:last-child { margin-bottom: 0; }
+.photo-city-head {
+  display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.photo-city-name {
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 700;
+}
+.photo-city-sub {
+  font-size: .72rem; color: var(--ink-4); letter-spacing: .5px; text-transform: uppercase;
+}
+/* 摄影区：等比例裁切缩略图，末行少图时整行居中对齐，模块底边更整齐 */
+.photo-masonry {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-content: flex-start;
+}
+.photo-masonry .gallery-img {
+  flex: 0 0 auto;
+  width: calc((100% - 24px) / 3);
+  max-width: calc((100% - 24px) / 3);
+  border-radius: 6px; overflow: hidden; border: 1px solid var(--border);
+  background: #e8e6e1; aspect-ratio: 4/3; cursor: pointer; line-height: 0;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.photo-masonry .gallery-img:hover {
+  transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.08);
+}
+.photo-masonry .gallery-img img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 45%;
+  display: block; vertical-align: top;
+}
+
 /* FOOTER */
 .footer {
   padding: 60px 0 40px; border-top: 1px solid var(--border); text-align: center;
@@ -342,6 +415,10 @@ a { text-decoration: none; color: inherit; }
   display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
   font-size: .82rem; color: var(--ink-2); margin-bottom: 40px;
 }
+.footer-links span { display: inline-flex; align-items: center; gap: 8px; }
+.wechat-icon {
+  width: 16px; height: 16px; color: var(--accent); flex: 0 0 auto;
+}
 .footer-links a { transition: color .25s; }
 .footer-links a:hover { color: var(--accent); }
 .footer-copy { font-size: .7rem; color: var(--ink-4); }
@@ -353,11 +430,16 @@ a { text-decoration: none; color: inherit; }
   opacity: 0; pointer-events: none; transition: opacity .4s; cursor: zoom-out;
 }
 .lb.on { opacity: 1; pointer-events: all; }
-.lb img {
-  max-width: 92vw; max-height: 90vh; object-fit: contain; border-radius: 6px;
+.lb .lb-figure {
+  max-width: 92vw; max-height: 90vh; margin: 0; display: flex; align-items: center; justify-content: center;
   transform: scale(.93); transition: transform .45s var(--ease);
+  cursor: default;
 }
-.lb.on img { transform: scale(1); }
+.lb.on .lb-figure { transform: scale(1); }
+.lb img {
+  max-width: 92vw; max-height: 90vh; object-fit: contain; border-radius: 6px; display: block;
+}
+.lb-nav:disabled, .lb-nav[aria-hidden="true"] { opacity: .25; pointer-events: none; }
 .lb-x {
   position: absolute; top: 20px; right: 24px; width: 40px; height: 40px;
   border: none; background: rgba(255,255,255,.08); border-radius: 50%;
@@ -365,10 +447,29 @@ a { text-decoration: none; color: inherit; }
   align-items: center; justify-content: center; transition: background .25s;
 }
 .lb-x:hover { background: rgba(255,255,255,.18); }
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; border: none; border-radius: 50%;
+  background: rgba(255,255,255,.1); color: white; font-size: 1.5rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .25s, opacity .25s; opacity: .7; backdrop-filter: blur(4px);
+}
+.lb-nav:hover { background: rgba(255,255,255,.22); opacity: 1; }
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-counter {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,.5); font-size: .75rem; letter-spacing: 1px;
+}
 
 /* RESPONSIVE */
 @media (max-width: 800px) {
   .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .photo-masonry .gallery-img {
+    width: calc((100% - 12px) / 2);
+    max-width: calc((100% - 12px) / 2);
+  }
+  .hero-avatar { margin-left: 0; width: 124px; height: 124px; }
   .gallery.g2, .gallery.g3 { grid-template-columns: 1fr; }
   .header nav {
     position: fixed; top: 0; right: -100%; width: 260px; height: 100vh;
@@ -401,6 +502,7 @@ a { text-decoration: none; color: inherit; }
     <a href="#hero" class="logo">JQ</a>
     <nav id="nav">
       <a href="#hero">Home</a>
+      <a href="#tabBar" id="nav-portfolio">Portfolio</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="mob-btn" id="mob"><span></span><span></span><span></span></div>
@@ -412,12 +514,11 @@ a { text-decoration: none; color: inherit; }
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="hero-tag sr">Product Manager &middot; Interaction Designer</div>
+        <div class="hero-avatar sr"><img src="images/avatar.png" alt="Jianqiao Ji"></div>
+        <div class="hero-tag sr sr-d1">Product Manager &middot; Interaction Designer &middot; AI Learner</div>
         <h1 class="sr sr-d1">嵇剑桥<br><em>Jianqiao Ji</em></h1>
-        <p class="hero-sub sr sr-d2">数据产品经理 &amp; 交互设计师，专注于搜索、推荐和广告技术与人机交互领域。擅长将复杂业务问题拆解为数据驱动的产品方案，在数据工程、算法与运营团队之间搭建桥梁。</p>
-        <div class="hero-meta sr sr-d3">
-          <span>联系方式：wechat: xtacii</span>
-        </div>
+        <p class="hero-sub sr sr-d2">Hi~ 我是一名产品经理 &amp; 交互设计师 &amp; AI实践者，专注于搜索、推荐和广告与人机交互和金融领域，前量化交易员。擅长将复杂业务问题拆解为数据驱动的产品方案，在数据工程、算法与产运团队之间搭建桥梁。Working proficient in English, comfortable working in full-English environments.</p>
+        <p class="hero-easter sr sr-d3" data-text="#Vibe Coding is fun!"></p>
       </div>
       <div class="hero-card sr sr-d2">
         <div class="hero-card-label">Experience &amp; Education</div>
@@ -474,6 +575,7 @@ a { text-decoration: none; color: inherit; }
   <div class="wrap">
     <button class="tab-btn active" data-tab="work">工作项目 Work</button>
     <button class="tab-btn" data-tab="school">学校项目 Academic</button>
+    <button class="tab-btn" data-tab="photo">摄影 Photography</button>
   </div>
 </div>
 
@@ -836,22 +938,147 @@ a { text-decoration: none; color: inherit; }
 
 </div><!-- end tab-school -->
 
+<!-- ============================= -->
+<!-- PHOTOGRAPHY TAB               -->
+<!-- ============================= -->
+<div class="tab-content" id="tab-photo">
+<section class="sec sec-photo" id="s-photo">
+  <div class="wrap">
+    <p class="photo-preface sr">在生活被取景器定格的同时，摄影也给我的生活创造了第三个空间。它定格我看到的风景，也不完全是我看到的风景；它记录的是我的生活，却不只是我的生活；我在镜头里新生。</p>
+
+    <div class="photo-city sr">
+      <div class="photo-city-head"><div class="photo-city-name">Tokyo</div><div class="photo-city-sub">w/ Fujifilm XS20</div></div>
+      <div class="photo-masonry">
+        <div class="gallery-img"><img src="photo_Tokyo/1.jpg" alt="Tokyo 1" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/2.jpg" alt="Tokyo 2" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/3.jpg" alt="Tokyo 3" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/4.jpg" alt="Tokyo 4" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/5.jpg" alt="Tokyo 5" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/6.jpg" alt="Tokyo 6" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/7.jpg" alt="Tokyo 7" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/8.jpg" alt="Tokyo 8" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/9.jpg" alt="Tokyo 9" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/10.jpg" alt="Tokyo 10" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/11.jpg" alt="Tokyo 11" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tokyo/12.jpg" alt="Tokyo 12" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="photo-city sr">
+      <div class="photo-city-head"><div class="photo-city-name">UK</div><div class="photo-city-sub">w/ Fujifilm XS20</div></div>
+      <div class="photo-masonry">
+        <div class="gallery-img"><img src="photo_UK/1.jpg" alt="United Kingdom 1" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/2.jpg" alt="United Kingdom 2" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/3.jpg" alt="United Kingdom 3" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/4.jpg" alt="United Kingdom 4" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/5.jpg" alt="United Kingdom 5" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/6.jpg" alt="United Kingdom 6" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/7.jpg" alt="United Kingdom 7" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/8.jpg" alt="United Kingdom 8" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/9.jpg" alt="United Kingdom 9" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/10.jpg" alt="United Kingdom 10" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/11.jpg" alt="United Kingdom 11" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/12.jpg" alt="United Kingdom 12" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/13.jpg" alt="United Kingdom 13" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/14.jpg" alt="United Kingdom 14" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/15.jpg" alt="United Kingdom 15" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/16.jpg" alt="United Kingdom 16" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/17.jpg" alt="United Kingdom 17" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/18.jpg" alt="United Kingdom 18" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/19.jpg" alt="United Kingdom 19" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/20.jpg" alt="United Kingdom 20" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_UK/21.jpg" alt="United Kingdom 21" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="photo-city sr">
+      <div class="photo-city-head"><div class="photo-city-name">Singapore</div><div class="photo-city-sub">w/ iPhone 14</div></div>
+      <div class="photo-masonry">
+        <div class="gallery-img"><img src="photo_Singapore/1.jpg" alt="Singapore 1" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/2.jpg" alt="Singapore 2" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/3.jpg" alt="Singapore 3" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/4.jpg" alt="Singapore 4" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/5.jpg" alt="Singapore 5" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/6.jpg" alt="Singapore 6" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/7.jpg" alt="Singapore 7" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/8.jpg" alt="Singapore 8" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Singapore/9.jpg" alt="Singapore 9" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="photo-city sr">
+      <div class="photo-city-head"><div class="photo-city-name">HK</div><div class="photo-city-sub">w/ iPhone 14</div></div>
+      <div class="photo-masonry">
+        <div class="gallery-img"><img src="photo_HK/1.jpg" alt="Hong Kong 1" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/2.jpg" alt="Hong Kong 2" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/3.jpg" alt="Hong Kong 3" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/4.jpg" alt="Hong Kong 4" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/5.jpg" alt="Hong Kong 5" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/6.jpg" alt="Hong Kong 6" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/7.jpg" alt="Hong Kong 7" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/8.jpg" alt="Hong Kong 8" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/9.jpg" alt="Hong Kong 9" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/10.jpg" alt="Hong Kong 10" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/11.jpg" alt="Hong Kong 11" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_HK/12.jpg" alt="Hong Kong 12" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="photo-city sr">
+      <div class="photo-city-head"><div class="photo-city-name">Amsterdam</div><div class="photo-city-sub">w/ Dazz in iPhone 14</div></div>
+      <div class="photo-masonry">
+        <div class="gallery-img"><img src="photo_Amsterdam/1.jpg" alt="Amsterdam 1" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/2.jpg" alt="Amsterdam 2" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/3.jpg" alt="Amsterdam 3" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/4.jpg" alt="Amsterdam 4" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/5.jpg" alt="Amsterdam 5" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/6.jpg" alt="Amsterdam 6" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/7.jpg" alt="Amsterdam 7" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/8.jpg" alt="Amsterdam 8" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Amsterdam/9.jpg" alt="Amsterdam 9" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="photo-city sr">
+      <div class="photo-city-head"><div class="photo-city-name">Tromsø</div><div class="photo-city-sub">w/ Dazz in iPhone 14</div></div>
+      <div class="photo-masonry">
+        <div class="gallery-img"><img src="photo_Tromso/1.jpg" alt="Tromsø 1" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tromso/2.jpg" alt="Tromsø 2" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tromso/3.jpg" alt="Tromsø 3" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tromso/4.jpg" alt="Tromsø 4" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tromso/5.jpg" alt="Tromsø 5" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Tromso/6.jpg" alt="Tromsø 6" loading="lazy"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div><!-- end tab-photo -->
+
 <!-- FOOTER -->
 <footer class="footer" id="contact">
   <div class="wrap">
-    <div class="footer-title sr">Let's Talk</div>
+    <div class="footer-title sr">Let's Connect</div>
     <p class="footer-sub sr sr-d1">如果你对我的项目感兴趣，欢迎联系我</p>
     <div class="footer-links sr sr-d2">
-      <span>联系方式：wechat: xtacii</span>
+      <span>联系方式：
+        <svg class="wechat-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M8.5 3C4.36 3 1 5.85 1 9.35c0 2.02 1.13 3.81 2.88 4.95L3.1 17l2.95-1.48c.8.2 1.63.3 2.45.3 4.14 0 7.5-2.84 7.5-6.35S12.64 3 8.5 3zm-2.6 5.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm5.2 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM17 8.5c-3.31 0-6 2.28-6 5.1 0 1.57.83 2.97 2.13 3.9L12.5 20l2.3-1.13c.7.16 1.4.23 2.2.23 3.31 0 6-2.28 6-5.1s-2.69-5.5-6-5.5zm-2.1 4.1a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5zm4.2 0a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/>
+        </svg>
+        <span>xtacii</span>
+      </span>
     </div>
     <p class="footer-copy">&copy; 2026 Jianqiao Ji. All rights reserved.</p>
   </div>
 </footer>
 
-<!-- LIGHTBOX -->
-<div class="lb" id="lb">
-  <button class="lb-x" id="lbx">&times;</button>
-  <img src="" alt="" id="lbi">
+<!-- LIGHTBOX：摄影 Tab 内仅在同城市分区内前后切换；其它 Tab 为单图查看 -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="图片查看">
+  <button type="button" class="lb-x" id="lbx" aria-label="关闭">&times;</button>
+  <button type="button" class="lb-nav lb-prev" id="lbprev" aria-label="上一张">&#8249;</button>
+  <button type="button" class="lb-nav lb-next" id="lbnext" aria-label="下一张">&#8250;</button>
+  <figure class="lb-figure" id="lbfig"><img src="" alt="" id="lbi"></figure>
+  <div class="lb-counter" id="lbcounter"></div>
 </div>
 
 <script>
@@ -862,6 +1089,15 @@ a { text-decoration: none; color: inherit; }
   var mob=document.getElementById('mob'),nav=document.getElementById('nav');
   mob.addEventListener('click',function(){mob.classList.toggle('on');nav.classList.toggle('open')});
   nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('on');nav.classList.remove('open')})});
+
+  document.getElementById('nav-portfolio').addEventListener('click',function(e){
+    e.preventDefault();
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    document.querySelector('.tab-btn[data-tab="work"]').classList.add('active');
+    document.getElementById('tab-work').classList.add('active');
+    window.scrollTo({top:document.getElementById('tabBar').offsetTop - 60, behavior:'smooth'});
+  });
 
   // Tab switching
   var tabBtns=document.querySelectorAll('.tab-btn');
@@ -896,19 +1132,123 @@ a { text-decoration: none; color: inherit; }
     srObserver.observe(el);
   });
 
-  // Lightbox
-  var lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),lbx=document.getElementById('lbx');
-  document.querySelectorAll('.gallery-img').forEach(function(g){
+  var easter=document.querySelector('.hero-easter');
+  if(easter){
+    var fullText=easter.getAttribute('data-text')||'';
+    var idx=0;
+    var typingForward=true;
+    var holdUntil=0;
+    easter.classList.add('typing');
+    easter.textContent='';
+    setInterval(function(){
+      var now=Date.now();
+      if(now<holdUntil){
+        return;
+      }
+      if(typingForward){
+        idx+=1;
+        if(idx>=fullText.length){
+          typingForward=false;
+          holdUntil=Date.now()+2000;
+        }
+      }else{
+        idx-=1;
+        if(idx<=0){ typingForward=true; }
+      }
+      easter.textContent=fullText.slice(0,Math.max(0,idx));
+    },152);
+  }
+
+  // Lightbox：摄影区在同模块（城市）内前后切换，查看完整原图
+  var lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),
+      lbfig=document.getElementById('lbfig'),
+      lbx=document.getElementById('lbx'),lbprev=document.getElementById('lbprev'),
+      lbnext=document.getElementById('lbnext'),lbcounter=document.getElementById('lbcounter');
+  var photoImgs=[],curIdx=0,lbPhotoMode=false;
+
+  function setNavState(){
+    var on=lbPhotoMode && photoImgs.length>1;
+    lbprev.setAttribute('aria-hidden', on ? 'false' : 'true');
+    lbnext.setAttribute('aria-hidden', on ? 'false' : 'true');
+  }
+
+  function collectPhotosInGroup(clickedImg){
+    photoImgs=[];
+    var m=clickedImg && clickedImg.closest && clickedImg.closest('.photo-masonry');
+    if(m){
+      m.querySelectorAll('.gallery-img img').forEach(function(img){ photoImgs.push(img); });
+    }
+  }
+
+  function showPhoto(idx){
+    if(photoImgs.length===0) return;
+    if(idx<0) idx=photoImgs.length-1;
+    if(idx>=photoImgs.length) idx=0;
+    curIdx=idx;
+    lbi.src=photoImgs[idx].src;
+    lbi.alt=photoImgs[idx].alt;
+    lbcounter.textContent=lbPhotoMode ? ((curIdx+1)+' / '+photoImgs.length) : '';
+    setNavState();
+  }
+
+  function openLb(img){
+    collectPhotosInGroup(img);
+    lbPhotoMode=true;
+    var i=photoImgs.indexOf(img);
+    if(i<0) i=0;
+    lbcounter.style.display='';
+    if(photoImgs.length<=1){
+      lbprev.style.display='none';lbnext.style.display='none';
+    }else{
+      lbprev.style.display='';lbnext.style.display='';
+    }
+    showPhoto(i);
+    lb.classList.add('on');
+    document.body.style.overflow='hidden';
+  }
+
+  document.querySelectorAll('#tab-photo .gallery-img').forEach(function(g){
     g.addEventListener('click',function(){
       var i=this.querySelector('img');
-      if(i){lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('on');document.body.style.overflow='hidden'}
+      if(i) openLb(i);
     });
   });
-  function cls(){lb.classList.remove('on');document.body.style.overflow=''}
+
+  document.querySelectorAll('.tab-content:not(#tab-photo) .gallery-img').forEach(function(g){
+    g.addEventListener('click',function(){
+      var i=this.querySelector('img');
+      if(i){
+        photoImgs=[i];
+        curIdx=0;
+        lbPhotoMode=false;
+        lbi.src=i.src;lbi.alt=i.alt;
+        lbprev.style.display='none';lbnext.style.display='none';
+        lbcounter.style.display='none';
+        setNavState();
+        lb.classList.add('on');document.body.style.overflow='hidden';
+      }
+    });
+  });
+
+  function cls(){
+    lb.classList.remove('on');
+    document.body.style.overflow='';
+    lbPhotoMode=false;
+  }
   lbx.addEventListener('click',function(e){e.stopPropagation();cls()});
+  lbprev.addEventListener('click',function(e){e.stopPropagation();if(lbPhotoMode && photoImgs.length>1) showPhoto(curIdx-1);});
+  lbnext.addEventListener('click',function(e){e.stopPropagation();if(lbPhotoMode && photoImgs.length>1) showPhoto(curIdx+1);});
   lb.addEventListener('click',cls);
-  lbi.addEventListener('click',function(e){e.stopPropagation()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')cls()});
+  if(lbfig) lbfig.addEventListener('click',function(e){e.stopPropagation()});
+  else lbi.addEventListener('click',function(e){e.stopPropagation()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('on')) return;
+    if(e.key==='Escape') cls();
+    if(lbPhotoMode && photoImgs.length>1){
+      if(e.key==='ArrowLeft') showPhoto(curIdx-1);
+      if(e.key==='ArrowRight') showPhoto(curIdx+1);
+    }
+  });
 })();
 </script>
 </body>
