@@ -71,6 +71,18 @@ a { text-decoration: none; color: inherit; }
   transition: color .25s; letter-spacing: .3px;
 }
 .header nav a:hover, .header nav a.on { color: var(--ink); }
+.lang-switch {
+  display: inline-flex; align-items: center; gap: 0;
+  font-size: .78rem; font-weight: 500; letter-spacing: .3px;
+}
+.lang-switch .lang-btn {
+  border: none; background: none; padding: 0; cursor: pointer;
+  font: inherit; color: var(--ink-4); transition: color .25s;
+}
+.lang-switch .lang-btn.active { color: var(--ink); font-weight: 600; }
+.lang-switch .lang-btn:hover { color: var(--ink-2); }
+.lang-switch .lang-btn.active:hover { color: var(--ink); }
+.lang-switch .lang-sep { color: var(--ink-4); margin: 0 2px; user-select: none; }
 
 .mob-btn {
   display: none; width: 28px; height: 20px; flex-direction: column;
@@ -262,12 +274,65 @@ a { text-decoration: none; color: inherit; }
 .gallery-cap {
   font-size: .7rem; color: var(--ink-4); text-align: center; margin-bottom: 48px;
 }
+#tab-work .gallery-cap { display: none !important; }
 
 /* ====== PROJECT THEMES ====== */
 .sec-shopee { background: linear-gradient(180deg, #fff5f3 0%, white 100%); }
 .sec-shopee .sec-label { color: #ee4d2d; border: 1px solid #ee4d2d; background: rgba(238,77,45,.06); }
 .sec-shopee .metric-val { color: #ee4d2d; }
 .sec-shopee .sec-title { color: #7c2d12; }
+
+/* Shopee Ads 模块化布局：主卡 + 系统流程 + 三张中卡 + 证据条 */
+.ads-hero-card {
+  border-radius: 16px; border: 1px solid rgba(238,77,45,.28);
+  background: linear-gradient(135deg, #fff 0%, #fff3ef 100%);
+  padding: 32px 32px 28px; margin-bottom: 20px;
+  box-shadow: 0 4px 24px rgba(238,77,45,.06);
+}
+.ads-hero-badge {
+  display: inline-block; font-size: .58rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: #ee4d2d;
+  background: rgba(238,77,45,.08); border: 1px solid rgba(238,77,45,.35);
+  padding: 3px 12px; border-radius: 100px; margin-bottom: 14px;
+}
+.ads-hero-title {
+  font-family: var(--serif); font-size: 1.45rem; font-weight: 700;
+  color: #7c2d12; margin-bottom: 10px; line-height: 1.3;
+}
+.ads-hero-desc {
+  font-size: .85rem; color: var(--ink-2); line-height: 1.85; max-width: 880px;
+}
+/* 系统流程图：问题 → 路由 → 能力 → 反馈 → 知识更新 */
+.ads-flow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  margin-top: 24px; padding-top: 20px; border-top: 1px dashed rgba(238,77,45,.25);
+}
+.ads-flow-node {
+  font-size: .68rem; font-weight: 600; color: #7c2d12;
+  background: white; border: 1px solid rgba(238,77,45,.3);
+  padding: 7px 12px; border-radius: 8px; line-height: 1.4; white-space: nowrap;
+}
+.ads-flow-node.hl { background: #ee4d2d; color: white; border-color: #ee4d2d; }
+.ads-flow-arrow { color: #ee4d2d; font-size: .8rem; flex: 0 0 auto; }
+.ads-modules {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;
+}
+.ads-module {
+  padding: 24px; border-radius: 12px; border: 1px solid var(--border); background: white;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.ads-module:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+.ads-module-en {
+  font-size: .62rem; font-weight: 700; color: #ee4d2d;
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
+}
+.ads-module-title { font-size: .92rem; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+.ads-module-desc { font-size: .78rem; color: var(--ink-3); line-height: 1.7; }
+@media (max-width: 800px) {
+  .ads-modules { grid-template-columns: 1fr; }
+  .ads-hero-card { padding: 24px 20px; }
+  .ads-flow-node { white-space: normal; }
+}
 
 .sec-green { background: var(--green-bg); }
 .sec-green .sec-label { color: var(--green); border: 1px solid var(--green); background: rgba(45,106,79,.06); }
@@ -295,6 +360,24 @@ a { text-decoration: none; color: inherit; }
 .sec-warm .metric-val { color: var(--orange); }
 
 /* School project themes */
+/* Seren 毕业设计：浅紫主题，呼应答辩 slides 的紫罗兰色系 */
+.sec-seren { background: linear-gradient(180deg, #f4f2fb 0%, white 100%); }
+.sec-seren .sec-label { color: #6d5bd0; border: 1px solid #6d5bd0; background: rgba(109,91,208,.06); }
+.sec-seren .sec-title { color: #3b3170; }
+.sec-seren .metric-val { color: #6d5bd0; }
+.sec-seren .case-demo-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 4px 0 32px; padding: 12px 26px; border-radius: 100px;
+  font-size: .82rem; font-weight: 600; text-decoration: none;
+  color: white; background: #6d5bd0;
+  transition: background .25s, transform .25s var(--ease), box-shadow .25s;
+  box-shadow: 0 4px 16px rgba(109,91,208,.25);
+}
+.sec-seren .case-demo-link:hover {
+  background: #5a4ab8; transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(109,91,208,.3);
+}
+
 .sec-hri { background: linear-gradient(180deg, #0a0f0a 0%, #111a11 100%); color: #e0e0e0; }
 .sec-hri .sec-label { color: #b5e550; border: 1px solid rgba(181,229,80,.4); background: rgba(181,229,80,.08); }
 .sec-hri .sec-title { color: #b5e550; }
@@ -383,24 +466,33 @@ a { text-decoration: none; color: inherit; }
 .photo-city-sub {
   font-size: .72rem; color: var(--ink-4); letter-spacing: .5px; text-transform: uppercase;
 }
-/* 摄影区：等比例裁切缩略图，末行少图时整行居中对齐，模块底边更整齐 */
+/* 摄影区：网格分行展示，同行图片底边对齐，必要时从底部裁切 */
 .photo-masonry {
-  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-items: end;
 }
 .photo-masonry .gallery-img {
-  flex: 0 0 auto;
-  width: calc((100% - 24px) / 3);
-  max-width: calc((100% - 24px) / 3);
-  border-radius: 6px; overflow: hidden; border: 1px solid var(--border);
-  background: #e8e6e1; aspect-ratio: 4/3; cursor: pointer; line-height: 0;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #e8e6e1;
+  cursor: pointer;
+  line-height: 0;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease);
 }
 .photo-masonry .gallery-img:hover {
-  transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.08);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.08);
 }
 .photo-masonry .gallery-img img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center 45%;
-  display: block; vertical-align: top;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 
 /* FOOTER */
@@ -417,6 +509,9 @@ a { text-decoration: none; color: inherit; }
 }
 .footer-links span { display: inline-flex; align-items: center; gap: 8px; }
 .wechat-icon {
+  width: 16px; height: 16px; color: var(--accent); flex: 0 0 auto;
+}
+.linkedin-icon {
   width: 16px; height: 16px; color: var(--accent); flex: 0 0 auto;
 }
 .footer-links a { transition: color .25s; }
@@ -465,10 +560,7 @@ a { text-decoration: none; color: inherit; }
 /* RESPONSIVE */
 @media (max-width: 800px) {
   .hero-grid { grid-template-columns: 1fr; gap: 36px; }
-  .photo-masonry .gallery-img {
-    width: calc((100% - 12px) / 2);
-    max-width: calc((100% - 12px) / 2);
-  }
+  .photo-masonry { grid-template-columns: repeat(2, 1fr); }
   .hero-avatar { margin-left: 0; width: 124px; height: 124px; }
   .gallery.g2, .gallery.g3 { grid-template-columns: 1fr; }
   .header nav {
@@ -494,7 +586,7 @@ a { text-decoration: none; color: inherit; }
 }
 </style>
 </head>
-<body>
+<body class="lang-zh">
 
 <!-- HEADER -->
 <header class="header" id="hd">
@@ -504,6 +596,11 @@ a { text-decoration: none; color: inherit; }
       <a href="#hero">Home</a>
       <a href="#tabBar" id="nav-portfolio">Portfolio</a>
       <a href="#contact">Contact</a>
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn active" data-lang="zh">中文</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
     </nav>
     <div class="mob-btn" id="mob"><span></span><span></span><span></span></div>
   </div>
@@ -515,9 +612,9 @@ a { text-decoration: none; color: inherit; }
     <div class="hero-grid">
       <div>
         <div class="hero-avatar sr"><img src="images/avatar.png" alt="Jianqiao Ji"></div>
-        <div class="hero-tag sr sr-d1">Product Manager &middot; Interaction Designer &middot; AI Learner</div>
-        <h1 class="sr sr-d1">嵇剑桥<br><em>Jianqiao Ji</em></h1>
-        <p class="hero-sub sr sr-d2">Hi~ 我是一名产品经理 &amp; 交互设计师 &amp; AI实践者，专注于搜索、推荐和广告与人机交互和金融领域，前量化交易员。擅长将复杂业务问题拆解为数据驱动的产品方案，在数据工程、算法与产运团队之间搭建桥梁。Working proficient in English, comfortable working in full-English environments.</p>
+        <div class="hero-tag sr sr-d1">Product Manager &middot; Interaction Designer &middot; AI Builder</div>
+        <h1 class="sr sr-d1" data-en="Jianqiao Ji">嵇剑桥<br><em>Jianqiao Ji</em></h1>
+        <p class="hero-sub sr sr-d2" data-en="Hi! I am a Product Manager &amp; AI practitioner focusing on search, recommendation and advertising, human-computer interaction, and finance; formerly a quantitative trader. I specialize in decomposing complex business problems into data-driven product solutions and bridging data engineering, algorithm, and business operations teams. Working proficiency in English, comfortable working in full-English environments.">Hi~ 我是一名产品经理 &amp; AI实践者，专注于搜索、推荐和广告与人机交互和金融领域，前量化交易员。擅长将复杂业务问题拆解为数据驱动的产品方案，在数据工程、算法与产运团队之间搭建桥梁。Working proficiency in English, comfortable working in full-English environments.</p>
         <p class="hero-easter sr sr-d3" data-text="#Vibe Coding is fun!"></p>
       </div>
       <div class="hero-card sr sr-d2">
@@ -525,32 +622,32 @@ a { text-decoration: none; color: inherit; }
         <div class="tl">
           <div class="tl-item">
             <div class="tl-co">Shopee <span class="tl-type tl-type-work">Work</span></div>
-            <div class="tl-role">数据产品经理 · 搜索、推荐与广告</div>
+            <div class="tl-role" data-en="Data Product Manager · Search, Recommendation &amp; Ads">数据产品经理 · 搜索、推荐与广告</div>
             <div class="tl-date">2022.5 — Present</div>
           </div>
           <div class="tl-item tl-edu">
-            <div class="tl-co">同济大学 设计与创意学院 <span class="tl-type tl-type-edu">Edu</span></div>
-            <div class="tl-role">交互设计硕士 (Part-time)</div>
-            <div class="tl-date">2022.9 — Present</div>
+            <div class="tl-co" data-en='Tongji University · College of Design &amp; Innovation <span class="tl-type tl-type-edu">Edu</span>'>同济大学 设计与创意学院 <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-role" data-en="Master in Interaction Design (Part-time)">交互设计硕士 (Part-time)</div>
+            <div class="tl-date">2022.9 — 2026.6</div>
           </div>
           <div class="tl-item">
-            <div class="tl-co">达达集团 · 京东到家 <span class="tl-type tl-type-work">Work</span></div>
-            <div class="tl-role">数据产品经理 · 大数据与算法应用部</div>
+            <div class="tl-co" data-en='JD Daojia <span class="tl-type tl-type-work">Work</span>'>京东到家 <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-role" data-en="Data Product Manager · Big Data &amp; Algorithm Application">数据产品经理 · 大数据与算法应用部</div>
             <div class="tl-date">2020.09 — 2022</div>
           </div>
           <div class="tl-item">
-            <div class="tl-co">量锐科技 <span class="tl-type tl-type-work">Work</span></div>
-            <div class="tl-role">产品经理 · 产品与量化部</div>
-            <div class="tl-date">2018.11 — 2020.09</div>
+            <div class="tl-co" data-en='Quantinfo Technology <span class="tl-type tl-type-work">Work</span>'>量锐科技 <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-role" data-en="Product Manager · Product &amp; Quantitative Strategy">产品经理 · 产品与量化部</div>
+            <div class="tl-date">2018.11 — 2020.9</div>
           </div>
           <div class="tl-item tl-edu">
-            <div class="tl-co">伊利诺伊大学厄本那-香槟分校 UIUC <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-co" data-en='University of Illinois Urbana-Champaign (UIUC) <span class="tl-type tl-type-edu">Edu</span>'>伊利诺伊大学厄本那-香槟分校 UIUC <span class="tl-type tl-type-edu">Edu</span></div>
             <div class="tl-role">Master of Science in Financial Engineering</div>
             <div class="tl-date">2016.8 — 2017.12</div>
           </div>
           <div class="tl-item tl-edu">
-            <div class="tl-co">南京大学 <span class="tl-type tl-type-edu">Edu</span></div>
-            <div class="tl-role">金融工程 · 经济学学士</div>
+            <div class="tl-co" data-en='Nanjing University <span class="tl-type tl-type-edu">Edu</span>'>南京大学 <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-role" data-en="Bachelor in Financial Engineering · Economics">金融工程 · 经济学学士</div>
             <div class="tl-date">2012.9 — 2016.6</div>
           </div>
         </div>
@@ -560,8 +657,8 @@ a { text-decoration: none; color: inherit; }
           <span class="skill">Python</span>
           <span class="skill">Tableau</span>
           <span class="skill">Figma</span>
+          <span class="skill">Codex</span>
           <span class="skill">Cursor</span>
-          <span class="skill">C++</span>
           <span class="skill">Unity</span>
           <span class="skill">CSPO</span>
         </div>
@@ -573,9 +670,9 @@ a { text-decoration: none; color: inherit; }
 <!-- TAB BAR -->
 <div class="tab-bar" id="tabBar">
   <div class="wrap">
-    <button class="tab-btn active" data-tab="work">工作项目 Work</button>
-    <button class="tab-btn" data-tab="school">学校项目 Academic</button>
-    <button class="tab-btn" data-tab="photo">摄影 Photography</button>
+    <button class="tab-btn active" data-tab="work" data-en="Work Projects">工作项目 Work</button>
+    <button class="tab-btn" data-tab="school" data-en="Academic Projects">学校项目 Academic</button>
+    <button class="tab-btn" data-tab="photo" data-en="Photography">摄影 Photography</button>
   </div>
 </div>
 
@@ -588,26 +685,50 @@ a { text-decoration: none; color: inherit; }
 <section class="sec sec-shopee" id="w-shopee">
   <div class="wrap">
     <div class="sec-label sr">Shopee · Ads</div>
-    <h2 class="sec-title sr sr-d1">Shopee 搜索、推荐和广告数据产品</h2>
+    <h2 class="sec-title sr sr-d1" data-en="Shopee Search, Recommendation &amp; Ads Data Products">Shopee 搜索、推荐和广告数据产品</h2>
     <p class="sec-title-en sr sr-d1">Search, Recommendation &amp; Ads Data Products</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>公司</strong> Shopee · 搜索、推荐与广告</span>
-      <span><strong>时间</strong> 2022 — Present</span>
-      <span><strong>角色</strong> Data Product Manager</span>
+      <span data-en="<strong>Company</strong> Shopee · Search, Recommendation &amp; Ads"><strong>公司</strong> Shopee · 搜索、推荐与广告</span>
+      <span data-en="<strong>Period</strong> 2022 — Present"><strong>时间</strong> 2022 — Present</span>
+      <span data-en="<strong>Role</strong> Data Product Manager"><strong>角色</strong> Data Product Manager</span>
     </div>
-    <p class="case-intro sr">作为 Shopee 广告部数据产品经理，负责 Paid Ads 和 Live Ads 的数据基建、归因体系、自动赔付系统以及 AI 驱动的广告诊断工具。主导构建了覆盖客户域、投放域、流量域、归因域的全链路广告数据图谱，支撑广告策略优化、出价模型迭代和业务决策。</p>
+    <p class="case-intro sr" data-en="Lead the development of Shopee Ads data products and AI Agent capabilities across the full advertising lifecycle — delivery, attribution, billing, rebate, diagnosis, and knowledge management. I distill advertising business rules, data warehouse schemas, code paths, and diagnostic SOPs into a retrievable, invocable, and evaluable Ads Data Agent / Skills framework, enabling PM, BI, DE, algorithm, and engineering teams to self-serve on metric definitions, data retrieval, and anomaly diagnosis.">负责 Shopee Ads 数据产品与 AI Agent 能力建设，覆盖广告投放、归因、扣费、赔付、诊断与知识库全链路；将广告业务规则、数仓表字段、代码路径和诊断 SOP 沉淀为可检索、可调用、可评测的 Ads Data Agent / Skills 体系，支撑 PM、BI、DE、算法与工程团队自助解决指标口径、数据取数和异常诊断问题。</p>
 
-    <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">广告全域推广</div><div class="step-desc">整合付费与自然流量，按曝光计费，商家设定目标投产比或成交出价后系统智能优化。构建精准业务指标体系与智能分析报表，深入挖掘算法日志数据，打通从广告创意编写到分发全流程数据链路。精准识别过度投放、预算利用率低、广告主采纳率不高、优质广告资源未展示等问题，为推广策略优化与效果评估提供数据支撑</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">全渠道订单归因数仓</div><div class="step-desc">主导设计覆盖全业务场景的多维归因模型，从公司级视角整合搜索、推荐、广告等 10+ 流量端数据源，实现商品、请求层级的精细化贡献评估，覆盖 90%+ 业务场景。设计埋点管理工具支持 1000+ 业务功能埋点，开发多维下钻分析看板（含导流路径树等可视化模块），推动业务决策从部门视角转向全局协同</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">Live Ads 直播广告</div><div class="step-desc">负责直播广告数据及排查工具，支持 Max GMV / Target ROI 出价模式，构建实时监控 Dashboard 和全链路排查工具</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">oCPM 归因升级</div><div class="step-desc">设计 imp+no-imp 归因模型和 CPM 扣费方案，已全球推全，实现从 CPC 到 oCPM 的计费模式升级</div></div>
+    <!-- 主卡：Ads Data Agent & Skills 体系 -->
+    <div class="ads-hero-card sr">
+      <div class="ads-hero-badge">Ads Data Agent</div>
+      <div class="ads-hero-title" data-en="Ads Data Agent &amp; Skills Framework">Ads Data Agent &amp; Skills 体系</div>
+      <p class="ads-hero-desc" data-en="Distilled Shopee Ads business rules, table-level data lineage, code paths, SQL patterns, anomaly-diagnosis SOPs, and documentation templates into invocable Agent Skills, covering ads performance diagnosis, document generation, data querying, and issue tracing. Built a data flywheel of question collection → knowledge consolidation → regression evaluation → capability iteration around real Ads Data Agent usage: high-frequency questions and bad cases are continuously harvested from support channels and daily business inquiries, consolidated into a structured Ads knowledge base, FAQs, SQL patterns, and evaluation sets, with regression evaluation continuously improving answer quality on metric definitions, data lineage, anomaly diagnosis, and document generation.">将 Shopee Ads 的业务规则、表字段血缘、代码路径、SQL pattern、异常诊断 SOP 和项目文档模板沉淀为可调用的 Agent Skills，覆盖广告效果诊断、文档生成、数据查询、问题追踪定位等场景。围绕 Ads Data Agent 真实使用场景，构建"问题采集 - 知识沉淀 - 评测回归 - 能力迭代"的数据飞轮：从支持群和日常业务咨询中持续收集高频问题与 bad case，沉淀为结构化 Ads 知识库、FAQ、SQL Pattern 和评测集，并通过回归评测持续推动 Agent 在指标口径、表字段血缘、异常诊断和文档生成场景下的回答质量提升。</p>
+      <div class="ads-flow" aria-label="Agent 系统流程">
+        <span class="ads-flow-node">Ads Business Questions</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node hl">Skills Router</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node">KB / Diagnose / Text2SQL / Doc Generate</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node">Feedback / Eval Set</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node">Knowledge Update</span>
+      </div>
     </div>
-    <div class="steps sr">
-      <div class="step"><div class="step-num">05</div><div class="step-title">Auto Rebate 自动赔付</div><div class="step-desc">v3 策略优化：周维度赔付、差异化客群策略、豁免规则优化，撬动大客户预算 +4%~8%，留存率 +0.5%</div></div>
-      <div class="step"><div class="step-num">06</div><div class="step-title">商品广告暗投直播</div><div class="step-desc">设计直播间 ROI2 商品暗投的埋点/计费/归因全链路数据方案，打通 Product Ads 与 Live Ads 的数据融合</div></div>
-      <div class="step"><div class="step-num">07</div><div class="step-title">Paid Ads 数据基建</div><div class="step-desc">构建广告全域数据图谱：客户域、财务域、投放域、广告链路、流量域、归因域、策略域七大数据分类</div></div>
-      <div class="step"><div class="step-num">08</div><div class="step-title">Ads Data Agent</div><div class="step-desc">主导 AI 驱动的广告异动诊断工具，联合算法团队实现 take_rate/CTR 等核心指标的自动化归因分析</div></div>
+
+    <!-- 三张中卡：Data Foundation / Attribution & Billing / Auto Rebate -->
+    <div class="ads-modules sr">
+      <div class="ads-module">
+        <div class="ads-module-en">Ads Data Foundation</div>
+        <div class="ads-module-title" data-en="Full-Funnel Ads Data Assets">广告全链路数据资产</div>
+        <p class="ads-module-desc" data-en="Built a Paid Ads data map spanning customer, finance, delivery, ads pipeline, traffic, attribution, and strategy domains, consolidating core table schemas, metric definitions, data lineage, and multi-dimensional dashboards to give PM, BI, DE, and algorithm teams a unified view of advertising data assets.">构建覆盖客户域、财务域、投放域、广告链路、流量域、归因域、策略域的 Paid Ads 数据图谱，沉淀核心表字段、指标口径、数据血缘和多维分析看板，支撑 PM、BI、DE、算法团队统一理解广告数据资产。</p>
+      </div>
+      <div class="ads-module">
+        <div class="ads-module-en">Attribution &amp; Billing</div>
+        <div class="ads-module-title" data-en="Attribution / Billing / Model Sample Upgrades">归因 / 计费 / 模型样本升级</div>
+        <p class="ads-module-desc" data-en="Connected the pipeline from tracking, deduction, order attribution (OA), and reporting through data warehouse analytics to algorithmic sample modeling, resolving metric-consistency issues across ad conversion, billing models, and performance evaluation.">打通 tracking、deduction、OA、reporting 、数仓分析到算法样本建模链路，解决广告转化、计费模式和效果评估中的口径一致性问题。</p>
+      </div>
+      <div class="ads-module">
+        <div class="ads-module-en">Commercial Strategy</div>
+        <div class="ads-module-title" data-en="Commercialization Strategy">商业化策略</div>
+        <p class="ads-module-desc" data-en="Led data product design for Shopee Ads commercialization strategies, covering Auto Rebate / ROI Protection, Target ROI, rapid ramp-up, oCPM billing upgrades, AI Diagnosis, live-streaming ads monetization, and Ads voucher incentives — establishing metric definitions, monitoring systems, and cross-team alignment mechanisms around ROI/ROAS, budget efficiency, attribution &amp; billing, rebate validation, and strategy adoption.">负责 Shopee Ads 多类商业化策略的数据产品设计，覆盖 自动赔付 / ROI Protection、Target ROI、极速起量、oCPM 计费升级、AI Diagnosis 广告诊断、直播广告商业化和 Ads 发券激励策略，围绕 ROI/ROAS、预算效率、归因计费、赔付校验和策略采纳建立数据口径、监控指标与跨团队对齐机制。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -615,26 +736,26 @@ a { text-decoration: none; color: inherit; }
 <!-- WORK 2: 商家经营分析看板 -->
 <section class="sec sec-warm" id="w-merchant">
   <div class="wrap">
-    <div class="sec-label sr">达达集团 · 大数据</div>
-    <h2 class="sec-title sr sr-d1">商家经营分析看板</h2>
+    <div class="sec-label sr" data-en="Dada Group · Big Data">达达集团 · 大数据</div>
+    <h2 class="sec-title sr sr-d1" data-en="Merchant Business Analytics Dashboard">商家经营分析看板</h2>
     <p class="sec-title-en sr sr-d1">Retailer Management Analysis Platform</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>公司</strong> 达达集团 · 大数据</span>
-      <span><strong>时间</strong> 2021.09 — 2022.02</span>
-      <span><strong>角色</strong> Product Design · Interactive Design</span>
+      <span data-en="<strong>Company</strong> Dada Group · Big Data"><strong>公司</strong> 达达集团 · 大数据</span>
+      <span data-en="<strong>Period</strong> 2021.09 — 2022.02"><strong>时间</strong> 2021.09 — 2022.02</span>
+      <span data-en="<strong>Role</strong> Product Design · Interactive Design"><strong>角色</strong> Product Design · Interactive Design</span>
     </div>
-    <p class="case-intro sr">为平台入驻商家（尤其是缺乏数字化能力的传统小商家）打造经营分析工具。采用 OSM (Object-Strategy-Measurement) 模型拆解业务指标体系，通过智能关联分析自动定位经营问题环节，主动推送数据洞察，帮助商家快速做出经营决策。</p>
+    <p class="case-intro sr" data-en="Designed a business analytics tool for platform merchants, especially traditional small retailers with limited digital literacy. Applied the OSM (Object-Strategy-Measurement) model to decompose the business metric system, used intelligent correlation analysis to automatically locate underperforming stages of operations, and proactively pushed data insights to help merchants make faster business decisions.">为平台入驻商家（尤其是缺乏数字化能力的传统小商家）打造经营分析工具。采用 OSM (Object-Strategy-Measurement) 模型拆解业务指标体系，通过智能关联分析自动定位经营问题环节，主动推送数据洞察，帮助商家快速做出经营决策。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val">35万</div><div class="metric-lbl">京东到家在线商户数</div></div>
-      <div class="metric"><div class="metric-val">60亿</div><div class="metric-lbl">某连锁超市入驻后销售提升</div></div>
+      <div class="metric"><div class="metric-val" data-en="350K">35万</div><div class="metric-lbl" data-en="Online merchants on JD Daojia">京东到家在线商户数</div></div>
+      <div class="metric"><div class="metric-val" data-en="6B RMB">60亿</div><div class="metric-lbl" data-en="Sales uplift of a chain supermarket after onboarding">某连锁超市入驻后销售提升</div></div>
       <div class="metric"><div class="metric-val">OSM</div><div class="metric-lbl">Object-Strategy-Measurement</div></div>
-      <div class="metric"><div class="metric-val">4大功能</div><div class="metric-lbl">洞察 · 指标 · 明细 · 订阅</div></div>
+      <div class="metric"><div class="metric-val" data-en="4 Modules">4大功能</div><div class="metric-lbl" data-en="Insights · Metrics · Details · Subscription">洞察 · 指标 · 明细 · 订阅</div></div>
     </div>
     <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">平台经济洞察</div><div class="step-desc">分析平台经济特征，明确赋能传统商家数字化转型的产品使命</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">用户画像</div><div class="step-desc">便利店夫妻店主：想提升销售、盘活库存，但不会使用数据工具</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">OSM 分析模型</div><div class="step-desc">目标(提升销售) → 策略(提升曝光/转化/客单) → 度量(UV/转化率/金额)</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">服务蓝图</div><div class="step-desc">前台数据洞察 → 后台算法模型 → 支撑引擎（大数据 + 元数据表查询）</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Platform Economy Insight">平台经济洞察</div><div class="step-desc" data-en="Analyzed platform-economy characteristics and defined the product mission of enabling digital transformation for traditional merchants">分析平台经济特征，明确赋能传统商家数字化转型的产品使命</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="User Persona">用户画像</div><div class="step-desc" data-en="Mom-and-pop convenience store owners: eager to grow sales and rotate inventory, but unfamiliar with data tools">便利店夫妻店主：想提升销售、盘活库存，但不会使用数据工具</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="OSM Analysis Model">OSM 分析模型</div><div class="step-desc" data-en="Objective (grow sales) → Strategy (improve exposure / conversion / basket size) → Measurement (UV / conversion rate / GMV)">目标(提升销售) → 策略(提升曝光/转化/客单) → 度量(UV/转化率/金额)</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Service Blueprint">服务蓝图</div><div class="step-desc" data-en="Front-end data insights → back-end algorithm models → supporting engine (big data + metadata table queries)">前台数据洞察 → 后台算法模型 → 支撑引擎（大数据 + 元数据表查询）</div></div>
     </div>
     <div class="gallery g1 sr">
       <div class="gallery-img"><img src="images/page_18.png" alt="背景与用户" loading="lazy"></div>
@@ -643,33 +764,32 @@ a { text-decoration: none; color: inherit; }
       <div class="gallery-img"><img src="images/page_19.png" alt="分析逻辑" loading="lazy"></div>
       <div class="gallery-img"><img src="images/page_20.png" alt="界面设计" loading="lazy"></div>
     </div>
-    <div class="gallery-cap">背景分析 → 用户画像 → OSM 模型 → 服务蓝图 → 界面设计</div>
   </div>
 </section>
 
 <!-- WORK 3: 电商智能营销画像平台 -->
 <section class="sec sec-green" id="w-profile">
   <div class="wrap">
-    <div class="sec-label sr">达达集团 · 大数据</div>
-    <h2 class="sec-title sr sr-d1">电商智能营销画像平台</h2>
+    <div class="sec-label sr" data-en="Dada Group · Big Data">达达集团 · 大数据</div>
+    <h2 class="sec-title sr sr-d1" data-en="Intelligent Marketing User Profile Platform">电商智能营销画像平台</h2>
     <p class="sec-title-en sr sr-d1">Intelligent Promotion User Profile Platform</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>公司</strong> 达达集团 · 大数据</span>
-      <span><strong>时间</strong> 2021.05 — 2022.02</span>
-      <span><strong>角色</strong> Product Design · Interactive Design</span>
+      <span data-en="<strong>Company</strong> Dada Group · Big Data"><strong>公司</strong> 达达集团 · 大数据</span>
+      <span data-en="<strong>Period</strong> 2021.05 — 2022.02"><strong>时间</strong> 2021.05 — 2022.02</span>
+      <span data-en="<strong>Role</strong> Product Design · Interactive Design"><strong>角色</strong> Product Design · Interactive Design</span>
     </div>
-    <p class="case-intro sr">在即时零售行业高速增长的背景下，传统的"单一用户群体 + 单一商品品类"营销策略已无法满足业务需求。我主导设计了用户画像平台，通过建立海量用户特征标签库和灵活的圈选规则，帮助运营团队实现精细化人群运营和精准营销投放，大幅提升营销效率和转化率。</p>
+    <p class="case-intro sr" data-en="Against the backdrop of rapid growth in on-demand retail, the traditional single-audience, single-category marketing approach could no longer meet business needs. I led the design of a user profile platform that builds a large-scale user feature tag library with flexible audience-segmentation rules, enabling operations teams to run fine-grained audience management and precision-targeted campaigns, significantly improving marketing efficiency and conversion.">在即时零售行业高速增长的背景下，传统的"单一用户群体 + 单一商品品类"营销策略已无法满足业务需求。我主导设计了用户画像平台，通过建立海量用户特征标签库和灵活的圈选规则，帮助运营团队实现精细化人群运营和精准营销投放，大幅提升营销效率和转化率。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val">&gt;300亿</div><div class="metric-lbl">平台 GMV（环比 +67%）</div></div>
-      <div class="metric"><div class="metric-val">2亿</div><div class="metric-lbl">注册用户数（环比 +27%）</div></div>
-      <div class="metric"><div class="metric-val">1.8亿</div><div class="metric-lbl">在售商品数（环比 +90%）</div></div>
-      <div class="metric"><div class="metric-val">+300%</div><div class="metric-lbl">品类销售额 Top5 增长</div></div>
+      <div class="metric"><div class="metric-val" data-en="&gt;30B RMB">&gt;300亿</div><div class="metric-lbl" data-en="Platform GMV (+67% QoQ)">平台 GMV（环比 +67%）</div></div>
+      <div class="metric"><div class="metric-val" data-en="200M">2亿</div><div class="metric-lbl" data-en="Registered users (+27% QoQ)">注册用户数（环比 +27%）</div></div>
+      <div class="metric"><div class="metric-val" data-en="180M">1.8亿</div><div class="metric-lbl" data-en="Active SKUs (+90% QoQ)">在售商品数（环比 +90%）</div></div>
+      <div class="metric"><div class="metric-val">+300%</div><div class="metric-lbl" data-en="Top-5 category sales growth">品类销售额 Top5 增长</div></div>
     </div>
     <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">背景洞察</div><div class="step-desc">O2O 市场规模 33.2 亿，用户客群、商品类型、消费行为均趋多样化</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">需求分析</div><div class="step-desc">收集用户声音，利益相关者地图梳理，定义"用户画像平台"产品边界</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">用户旅程</div><div class="step-desc">营销前(圈人/选品) → 营销中(投放/监控) → 营销后(分析/策略) 全链路</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">架构设计</div><div class="step-desc">ETL → 数仓主题建模 → 标签建模(原始/事实/模型/预测) → 画像平台</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Context Insight">背景洞察</div><div class="step-desc" data-en="O2O market size of 3.32B RMB; user segments, product categories, and consumption behaviors growing increasingly diverse">O2O 市场规模 33.2 亿，用户客群、商品类型、消费行为均趋多样化</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="Requirement Analysis">需求分析</div><div class="step-desc" data-en="Collected user voices, mapped stakeholders, and defined the product scope of the user profile platform">收集用户声音，利益相关者地图梳理，定义"用户画像平台"产品边界</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="User Journey">用户旅程</div><div class="step-desc" data-en="Full pipeline: pre-campaign (audience &amp; product selection) → in-campaign (delivery &amp; monitoring) → post-campaign (analysis &amp; strategy)">营销前(圈人/选品) → 营销中(投放/监控) → 营销后(分析/策略) 全链路</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Architecture Design">架构设计</div><div class="step-desc" data-en="ETL → data warehouse subject modeling → tag modeling (raw / fact / model / prediction) → profile platform">ETL → 数仓主题建模 → 标签建模(原始/事实/模型/预测) → 画像平台</div></div>
     </div>
     <div class="gallery g2 sr">
       <div class="gallery-img"><img src="images/page_05.png" alt="背景分析" loading="lazy"></div>
@@ -682,33 +802,32 @@ a { text-decoration: none; color: inherit; }
     <div class="gallery g1 sr">
       <div class="gallery-img"><img src="images/page_09.png" alt="交互界面" loading="lazy"></div>
     </div>
-    <div class="gallery-cap">背景分析 → 需求定义 → 用户旅程 → 架构设计 → 交互界面</div>
   </div>
 </section>
 
 <!-- WORK 4: 外汇量化交易执行终端 -->
 <section class="sec sec-dark" id="w-quant">
   <div class="wrap">
-    <div class="sec-label sr">量锐科技</div>
-    <h2 class="sec-title sr sr-d1">外汇量化交易执行终端</h2>
+    <div class="sec-label sr" data-en="Quantinfo Technology">量锐科技</div>
+    <h2 class="sec-title sr sr-d1" data-en="FX Quantitative Trading Execution Terminal">外汇量化交易执行终端</h2>
     <p class="sec-title-en sr sr-d1">Quantitative Trading Execution Terminal in Forex Market</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>公司</strong> 量锐科技</span>
-      <span><strong>时间</strong> 2019.05 — 2020.08</span>
-      <span><strong>角色</strong> Product Design · Interactive Design</span>
+      <span data-en="<strong>Company</strong> Quantinfo Technology"><strong>公司</strong> 量锐科技</span>
+      <span data-en="<strong>Period</strong> 2019.05 — 2020.08"><strong>时间</strong> 2019.05 — 2020.08</span>
+      <span data-en="<strong>Role</strong> Product Design · Interactive Design"><strong>角色</strong> Product Design · Interactive Design</span>
     </div>
-    <p class="case-intro sr">面向银行间市场外汇交易员，设计一站式量化交易执行终端。核心解决交易员"多屏盯盘效率低、手动执行易错过行情、策略回测缺乏系统支持"三大痛点。产品集成多资产行情、算法执行、风控管理和交易簿记，实现从发现机会到事后复盘的全流程自动化。</p>
+    <p class="case-intro sr" data-en="Designed a one-stop quantitative trading execution terminal for FX traders in the interbank market, addressing three core pain points: inefficient multi-screen monitoring, missed opportunities from manual execution, and lack of systematic backtesting support. The product integrates multi-asset market data, algorithmic execution, risk management, and trade bookkeeping, automating the entire workflow from opportunity discovery to post-trade review.">面向银行间市场外汇交易员，设计一站式量化交易执行终端。核心解决交易员"多屏盯盘效率低、手动执行易错过行情、策略回测缺乏系统支持"三大痛点。产品集成多资产行情、算法执行、风控管理和交易簿记，实现从发现机会到事后复盘的全流程自动化。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val">180亿$</div><div class="metric-lbl">全球量化交易市场规模</div></div>
-      <div class="metric"><div class="metric-val">第5代</div><div class="metric-lbl">交易系统演进 · 智能化</div></div>
-      <div class="metric"><div class="metric-val">低延时</div><div class="metric-lbl">复杂事件处理引擎</div></div>
-      <div class="metric"><div class="metric-val">模块化</div><div class="metric-lbl">可自由组合的组件架构</div></div>
+      <div class="metric"><div class="metric-val" data-en="$18B">180亿$</div><div class="metric-lbl" data-en="Global quantitative trading market size">全球量化交易市场规模</div></div>
+      <div class="metric"><div class="metric-val" data-en="Gen 5">第5代</div><div class="metric-lbl" data-en="Trading system evolution · Intelligent">交易系统演进 · 智能化</div></div>
+      <div class="metric"><div class="metric-val" data-en="Low Latency">低延时</div><div class="metric-lbl" data-en="Complex event processing engine">复杂事件处理引擎</div></div>
+      <div class="metric"><div class="metric-val" data-en="Modular">模块化</div><div class="metric-lbl" data-en="Freely composable component architecture">可自由组合的组件架构</div></div>
     </div>
     <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">行业研究</div><div class="step-desc">梳理程序化交易 5 代演进，分析国内量化交易机会与政策窗口</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">用户画像</div><div class="step-desc">深度跟踪大行交易员一天工作流：盘前/盘中/盘后全场景</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">旅程 &amp; 痛点</div><div class="step-desc">发现机会 → 下单交易 → 成交统计 → 事后复盘，定位 4 阶段核心痛点</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">系统架构</div><div class="step-desc">市场行情 · 交易执行 · 交易簿记 · 后台管理四大模块 + 数据集群</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Industry Research">行业研究</div><div class="step-desc" data-en="Mapped five generations of programmatic trading evolution; analyzed domestic quantitative trading opportunities and policy windows">梳理程序化交易 5 代演进，分析国内量化交易机会与政策窗口</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="User Persona">用户画像</div><div class="step-desc" data-en="Shadowed traders at major banks through a full trading day: pre-market, intraday, and post-market scenarios">深度跟踪大行交易员一天工作流：盘前/盘中/盘后全场景</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="Journey &amp; Pain Points">旅程 &amp; 痛点</div><div class="step-desc" data-en="Opportunity discovery → order placement → execution statistics → post-trade review; identified core pain points across four stages">发现机会 → 下单交易 → 成交统计 → 事后复盘，定位 4 阶段核心痛点</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="System Architecture">系统架构</div><div class="step-desc" data-en="Four modules — market data · trade execution · bookkeeping · back-office management — plus a data cluster">市场行情 · 交易执行 · 交易簿记 · 后台管理四大模块 + 数据集群</div></div>
     </div>
     <div class="gallery g2 sr">
       <div class="gallery-img"><img src="images/page_11.png" alt="背景研究" loading="lazy"></div>
@@ -722,10 +841,6 @@ a { text-decoration: none; color: inherit; }
       <div class="gallery-img"><img src="images/page_15.png" alt="界面设计-模板" loading="lazy"></div>
       <div class="gallery-img"><img src="images/page_16.png" alt="界面设计-终端" loading="lazy"></div>
     </div>
-    <div class="gallery g1 sr">
-      <div class="gallery-img"><img src="images/page_16.png" alt="界面设计-终端全览" loading="lazy"></div>
-    </div>
-    <div class="gallery-cap">行业研究 → 用户画像 → 旅程分析 → 系统架构 → 界面设计</div>
   </div>
 </section>
 
@@ -736,29 +851,65 @@ a { text-decoration: none; color: inherit; }
 <!-- ============================= -->
 <div class="tab-content" id="tab-school">
 
+<!-- SCHOOL 0: Seren 毕业设计 — 可控式人-LLM 交互 -->
+<section class="sec sec-seren" id="s-seren">
+  <div class="wrap">
+    <div class="sec-label sr">Master Thesis · Human-LLM Interaction</div>
+    <h2 class="sec-title sr sr-d1" data-en="Seren: Interaction Design for LLM-Enabled Controllable Recommender Systems">Seren: 融合LLM的可控式推荐系统交互设计研究</h2>
+    <p class="sec-title-en sr sr-d1">Interaction Design for Controllable Human-LLM Systems: A Case Study of Music Recommendation</p>
+    <a href="http://43.143.53.202/" class="case-demo-link sr sr-d2" target="_blank" rel="noopener noreferrer" data-en="Try the Live Prototype →">在线体验原型 Demo →</a>
+    <div class="sec-meta sr sr-d2">
+      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>Type</strong> Master's Thesis Project · 2026"><strong>类型</strong> 硕士毕业设计 · 2026</span>
+      <span data-en="<strong>Advisor</strong> Fulan Wei"><strong>指导教师</strong> 魏佛兰</span>
+    </div>
+    <p class="case-intro sr" data-en="Existing music recommender systems face a dual dilemma: discrete tags cannot capture nuanced musical preferences, while the opacity of complex recommendation algorithms leaves users struggling to express intent and lacking a perceived sense of control. This research positions the LLM as an interaction agent between the user and the recommendation engine, establishing an express–understand–correct feedback loop. I designed and implemented Seren, an LLM-integrated music recommendation prototype, and validated through user experiments that natural-language negotiated recommendation improves perceived control, transparency, and expression efficiency.">现有音乐推荐系统存在双重困境：离散标签难以承载灵活的音乐偏好，复杂推荐算法的黑箱性又使用户面临意图表达障碍与感知控制感缺失。本研究将 LLM 定位为用户与推荐引擎之间的交互代理，构建"表达—理解—修正"反馈闭环，设计并实现了融合 LLM 的音乐推荐原型系统 Seren，通过用户实验验证自然语言协商推荐在控制感、透明度与表达效率维度的提升。</p>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="User Research">用户研究</div><div class="step-desc" data-en="Semi-structured interviews with 3 industry experts + 80 questionnaire responses + web-scraping analysis of 2,208 comments across 40 NetEase Cloud Music tracks; found 67.5% of users struggle to articulate preferences and 92.5% want to understand recommendation rationale">3 位行业专家半结构化访谈 + 80 份问卷调研 + 爬取网易云 40 首歌曲 2208 条评论，发现 67.5% 用户难以清晰表达偏好、92.5% 希望了解推荐理由</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="Perceived Controllability Model">感知可控性模型</div><div class="step-desc" data-en="Decomposed perceived controllability into three dimensions — expression (input), process, and outcome (output) controllability — forming a cyclical express–understand–correct calibration framework">将感知可控性拆解为表达可控性（输入）、过程可控性（过程）、结果可控性（输出）三个维度，形成"表达—理解—修正"的循环校准框架</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="Prototype Implementation">原型系统实现</div><div class="step-desc" data-en="The LLM serves as an interaction agent between the user and the recommendation engine: upstream, it maps natural language to structured tags and parses intent; downstream, it translates algorithm outputs into comprehensible explanations — without participating in recall or ranking decisions">LLM 作为用户与推荐引擎之间的交互代理：上游完成自然语言到结构化标签的映射与意图解析，下游将算法输出转化为可理解的推荐解释，不参与召回与排序决策</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Experiment &amp; Evaluation">实验与评测</div><div class="step-desc" data-en="LLM-as-Judge with manual spot-checking (tag-mapping accuracy 0.84, hallucination-detection pass rate 0.95); A/B controlled experiment with 10 participants triangulating behavioral logs, Likert scales, and interviews">LLM-as-Judge + 人工抽检评测（标签映射准确率 0.84、幻觉检测通过率 0.95），10 名用户 A/B 对照实验：行为日志 + 李克特量表 + 访谈三角验证</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_survey.jpg" alt="问卷调研" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_model.jpg" alt="感知可控性模型" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_strategy.jpg" alt="设计策略推导" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_architecture.jpg" alt="系统架构" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_ui.jpg" alt="界面与交互设计" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_experiment.jpg" alt="实验结果分析" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
 <!-- SCHOOL 1: 智避"非摄者"无人机 — HRI -->
 <section class="sec sec-hri" id="s-hri">
   <div class="wrap">
     <div class="sec-label sr">Human-Robot Interaction</div>
-    <h2 class="sec-title sr sr-d1">Halo: 智能摄影无人机交互设计</h2>
+    <h2 class="sec-title sr sr-d1" data-en="Halo: Interaction Design for an Intelligent Photography Drone">Halo: 智能摄影无人机交互设计</h2>
     <p class="sec-title-en sr sr-d1">Intelligent Photography Drone That Avoids Non-Photographers</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
-      <span><strong>课程</strong> 人-机器人交互设计 (HRI)</span>
-      <span><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Li Huan</span>
+      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>Course</strong> Human-Robot Interaction (HRI)"><strong>课程</strong> 人-机器人交互设计 (HRI)</span>
+      <span data-en="<strong>Team</strong> Jianqiao Ji · Ying Jingpei · Li Huan"><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Li Huan</span>
     </div>
-    <p class="case-intro sr">户外拍摄时路人闯入画面是摄影爱好者和自媒体博主的核心痛点。Halo 是一款智能摄影无人机概念设计，通过 3D 空间自由飞行实时监测环境、智能识别"非摄者"并灵活调整拍摄技法，同时以投影交互友好引导路人规避取景框，实现"全眼只有你"的拍摄体验。</p>
+    <p class="case-intro sr" data-en="Bystanders wandering into the frame is a core pain point for outdoor photographers and content creators. Halo is a conceptual intelligent photography drone that flies freely in 3D space to monitor the environment in real time, intelligently identifies non-subjects and adapts its shooting techniques, and uses projection-based interaction to politely guide bystanders out of the frame — delivering a shooting experience where every eye is on you alone.">户外拍摄时路人闯入画面是摄影爱好者和自媒体博主的核心痛点。Halo 是一款智能摄影无人机概念设计，通过 3D 空间自由飞行实时监测环境、智能识别"非摄者"并灵活调整拍摄技法，同时以投影交互友好引导路人规避取景框，实现"全眼只有你"的拍摄体验。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val">3D</div><div class="metric-lbl">空间自由飞行探寻拍摄点</div></div>
-      <div class="metric"><div class="metric-val">AI</div><div class="metric-lbl">智能识别非摄者并调整技法</div></div>
-      <div class="metric"><div class="metric-val">手势</div><div class="metric-lbl">自然手势交互控制无人机</div></div>
-      <div class="metric"><div class="metric-val">投影</div><div class="metric-lbl">友好引导路人规避取景框</div></div>
+      <div class="metric"><div class="metric-val">3D</div><div class="metric-lbl" data-en="Free spatial flight to scout shooting spots">空间自由飞行探寻拍摄点</div></div>
+      <div class="metric"><div class="metric-val">AI</div><div class="metric-lbl" data-en="Identifies non-subjects and adapts techniques">智能识别非摄者并调整技法</div></div>
+      <div class="metric"><div class="metric-val" data-en="Gesture">手势</div><div class="metric-lbl" data-en="Natural gesture-based drone control">自然手势交互控制无人机</div></div>
+      <div class="metric"><div class="metric-val" data-en="Projection">投影</div><div class="metric-lbl" data-en="Politely guides bystanders out of frame">友好引导路人规避取景框</div></div>
     </div>
     <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">动机研究</div><div class="step-desc">户外拍摄路人入镜的现状分析，梳理 vlogger 常用的"路人消失术"（慢速快门、背景虚化、特写切换等）</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">用户画像</div><div class="step-desc">定义两类核心用户：旅行摄影爱好者 Mr.Lin 和运动自媒体博主 Ms.Wang，提炼"高质量出片"与"自动取景"需求</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">系统框架</div><div class="step-desc">三大能力支柱：环境监测（拍摄前分析 + 拍摄中人群监控）、高质量出片（多种拍摄模式 + 3D 补光）、智能交互（手势控制 + 投影引导）</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">交互设计</div><div class="step-desc">定义完整交互流程：开机 → 启动仪式 → 定点拍照（指定地点/选模式/招手靠近/确认拍照）→ 飞行结束</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Motivation Research">动机研究</div><div class="step-desc" data-en="Analyzed the prevalence of photobombing in outdoor shoots; catalogued vloggers' common workarounds (slow shutter, background blur, close-up switching, etc.)">户外拍摄路人入镜的现状分析，梳理 vlogger 常用的"路人消失术"（慢速快门、背景虚化、特写切换等）</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="User Persona">用户画像</div><div class="step-desc" data-en="Defined two core users — travel photography enthusiast Mr. Lin and sports content creator Ms. Wang — distilling needs for high-quality output and automatic framing">定义两类核心用户：旅行摄影爱好者 Mr.Lin 和运动自媒体博主 Ms.Wang，提炼"高质量出片"与"自动取景"需求</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="System Framework">系统框架</div><div class="step-desc" data-en="Three capability pillars: environment monitoring (pre-shoot analysis + crowd monitoring during shooting), high-quality output (multiple shooting modes + 3D fill lighting), and intelligent interaction (gesture control + projection guidance)">三大能力支柱：环境监测（拍摄前分析 + 拍摄中人群监控）、高质量出片（多种拍摄模式 + 3D 补光）、智能交互（手势控制 + 投影引导）</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Interaction Design">交互设计</div><div class="step-desc" data-en="Defined the complete interaction flow: power-on → activation ritual → stationary shooting (set location / choose mode / beckon closer / confirm shot) → end of flight">定义完整交互流程：开机 → 启动仪式 → 定点拍照（指定地点/选模式/招手靠近/确认拍照）→ 飞行结束</div></div>
     </div>
     <div class="gallery g2 sr">
       <div class="gallery-img"><img src="extracted_images/drone_p2.png" alt="Motivation" loading="lazy"></div>
@@ -771,33 +922,70 @@ a { text-decoration: none; color: inherit; }
     <div class="gallery g1 sr">
       <div class="gallery-img"><img src="extracted_images/drone_p10.png" alt="Basic Interaction" loading="lazy"></div>
     </div>
-    <div class="gallery-cap">动机研究 → 用户画像 → 系统框架 → 场景设计 → 交互流程</div>
   </div>
 </section>
 
-<!-- SCHOOL 2: 相信光 Enlighten — 人车交互 -->
+<!-- SCHOOL 2: 设计数据分析 -->
+<section class="sec sec-data" id="s-data">
+  <div class="wrap">
+    <div class="sec-label sr">Data Analysis of Design</div>
+    <h2 class="sec-title sr sr-d1" data-en="Data-Driven Design for E-commerce Search Experience">电商搜索体验的数据驱动设计</h2>
+    <p class="sec-title-en sr sr-d1">Data-Driven Design Optimization for E-commerce Search</p>
+    <div class="sec-meta sr sr-d2">
+      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>Course</strong> Data Analysis for Design"><strong>课程</strong> 设计数据分析</span>
+      <span data-en="<strong>Team</strong> Jianqiao Ji · Zhang Linuo"><strong>团队</strong> 嵇剑桥 · Zhang Linuo</span>
+    </div>
+    <p class="case-intro sr" data-en="Taking Taobao search as the research subject, this project applies data-analysis methodology to drive design optimization. Starting from business goals (facilitating transactions) and user needs, we established search order penetration and CTCVR (impression-to-order conversion rate) as core metrics, decomposed the end-to-end search flow via user journey mapping, designed front-end interaction solutions, and built a complete metric system with an event-tracking plan — closing the data loop that guides design iteration.">以淘宝搜索功能为研究对象，运用数据分析方法论驱动设计优化。从业务诉求（促成交易）和用户诉求出发，确立"搜索订单渗透率"和"CTCVR（曝光-下单转化率）"为核心指标，通过用户旅程图拆解搜索全流程，设计前端交互方案并建立完整指标体系与埋点方案，实现以数据闭环指导设计迭代。</p>
+    <div class="metrics sr">
+      <div class="metric"><div class="metric-val">CTCVR</div><div class="metric-lbl" data-en="Core experience metric">核心体验指标</div></div>
+      <div class="metric"><div class="metric-val" data-en="8 Modules">8模块</div><div class="metric-lbl" data-en="From business goals to event tracking">从业务诉求到埋点设计</div></div>
+      <div class="metric"><div class="metric-val" data-en="FE + BE">前端+后台</div><div class="metric-lbl" data-en="Two-way decomposition of design goals">设计目标双向拆解</div></div>
+      <div class="metric"><div class="metric-val" data-en="Full-Funnel">全链路</div><div class="metric-lbl" data-en="Closed data loop across the user journey">用户旅程数据闭环</div></div>
+    </div>
+    <div class="steps sr">
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Business &amp; User Needs">业务与用户诉求</div><div class="step-desc" data-en="The platform's core objective is facilitating transactions; search, as the key product-discovery entry point, must help users find desired items quickly and accurately">电商平台核心目标：促成交易。搜索作为商品触达的关键入口，需帮助用户快速、准确找到想要的商品</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="Design Goal Decomposition">设计目标拆解</div><div class="step-desc" data-en="Four front-end goals (input guidance / filtering / category navigation / clear presentation) + five back-end goals (accuracy / diversity / ranking / speed / personalization)">前端4大目标（引导输入/筛选/品类/清晰展示）+ 后台5大目标（准确性/多样性/排序/速度/个性化）</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="User Journey &amp; Flow">用户旅程与流程</div><div class="step-desc" data-en="End-to-end flow: app homepage → search discovery → search suggestions → search results → product detail → store homepage → in-store search">APP首页 → 搜索发现 → 搜索建议 → 搜索结果 → 商品详情 → 店铺主页 → 店内搜索的全链路流程</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Metric System &amp; Tracking">指标体系与埋点</div><div class="step-desc" data-en="Built the search metric system and event-tracking plan, using the closed data loop to validate and iterate on design solutions">构建搜索功能指标体系并设计埋点方案，以数据闭环驱动设计方案的验证和迭代优化</div></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p3.png" alt="业务诉求" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p5.png" alt="设计目标" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p7.png" alt="用户流程" loading="lazy"></div>
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p9.png" alt="界面分析" loading="lazy"></div>
+    </div>
+    <div class="gallery g1 sr">
+      <div class="gallery-img"><img src="extracted_images/data_analysis_p11.png" alt="搜索结果页面" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOOL 3: 相信光 Enlighten — 人车交互 -->
 <section class="sec sec-car" id="s-car">
   <div class="wrap">
     <div class="sec-label sr">Human-Vehicle Interaction</div>
-    <h2 class="sec-title sr sr-d1">Enlighten: 光语人车交互系统</h2>
+    <h2 class="sec-title sr sr-d1" data-en="Enlighten: A Light-Language Human-Vehicle Interaction System">Enlighten: 光语人车交互系统</h2>
     <p class="sec-title-en sr sr-d1">Refle Elf &mdash; Enlighten the Soul of Your Car</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
-      <span><strong>课程</strong> 人车交互设计</span>
-      <span><strong>团队</strong> 嵇剑桥 · Li Huan · Ying Jingpei · Weilisi</span>
+      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>Course</strong> Human-Vehicle Interaction Design"><strong>课程</strong> 人车交互设计</span>
+      <span data-en="<strong>Team</strong> Jianqiao Ji · Li Huan · Ying Jingpei · Weilisi"><strong>团队</strong> 嵇剑桥 · Li Huan · Ying Jingpei · Weilisi</span>
     </div>
-    <p class="case-intro sr">面向 2030 自动驾驶时代的人车情感交互方案。传统车辆在上车前、乘车中、下车后三个阶段缺乏情感连接和反馈。Refle Elf 以"光"作为核心交互媒介（兼具空间感、灵活性、无入侵性、弱提示的特征），设计了一套涵盖信息可视化、照明辅助与氛围陪伴三大功能的车内光语交互系统，将汽车从出行工具升级为 Soul Mate。</p>
+    <p class="case-intro sr" data-en="An emotional human-vehicle interaction concept for the autonomous-driving era of 2030. Conventional vehicles lack emotional connection and feedback across three phases: before boarding, during the ride, and after the trip. Refle Elf adopts light as the core interaction medium — spatial, flexible, non-intrusive, and subtly suggestive — and delivers an in-cabin light-language system spanning information visualization, lighting assistance, and ambient companionship, elevating the car from a means of transport to a soul mate.">面向 2030 自动驾驶时代的人车情感交互方案。传统车辆在上车前、乘车中、下车后三个阶段缺乏情感连接和反馈。Refle Elf 以"光"作为核心交互媒介（兼具空间感、灵活性、无入侵性、弱提示的特征），设计了一套涵盖信息可视化、照明辅助与氛围陪伴三大功能的车内光语交互系统，将汽车从出行工具升级为 Soul Mate。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val">光</div><div class="metric-lbl">核心交互媒介（非声音/文字）</div></div>
-      <div class="metric"><div class="metric-val">3场景</div><div class="metric-lbl">上车前 · 乘车中 · 行程结束</div></div>
-      <div class="metric"><div class="metric-val">8种</div><div class="metric-lbl">光语反馈状态设计</div></div>
-      <div class="metric"><div class="metric-val">3大</div><div class="metric-lbl">功能模块架构</div></div>
+      <div class="metric"><div class="metric-val" data-en="Light">光</div><div class="metric-lbl" data-en="Core interaction medium (vs. sound / text)">核心交互媒介（非声音/文字）</div></div>
+      <div class="metric"><div class="metric-val" data-en="3 Scenarios">3场景</div><div class="metric-lbl" data-en="Before boarding · In ride · End of trip">上车前 · 乘车中 · 行程结束</div></div>
+      <div class="metric"><div class="metric-val" data-en="8 States">8种</div><div class="metric-lbl" data-en="Light-language feedback state designs">光语反馈状态设计</div></div>
+      <div class="metric"><div class="metric-val" data-en="3 Modules">3大</div><div class="metric-lbl" data-en="Functional module architecture">功能模块架构</div></div>
     </div>
     <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">未来洞察</div><div class="step-desc">2030 年趋势研判：数据孪生、自动驾驶、人工智能改变人车关系</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">痛点分析</div><div class="step-desc">传统车辆三阶段（上车前/乘车中/下车后）均缺乏情感连接与反馈</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">媒介选择</div><div class="step-desc">对比光、声音、文字/图像三种媒介，选择"光"作为最优交互载体：空间感、灵活、视觉性、无入侵</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">系统架构</div><div class="step-desc">Refle Elf 三大模块：信息可视化（速度/温度/进程）、照明（安全带/私域灯光）、氛围陪伴（迎宾/反馈/告别）</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Future Insight">未来洞察</div><div class="step-desc" data-en="Trend analysis toward 2030: digital twins, autonomous driving, and AI reshaping the human-vehicle relationship">2030 年趋势研判：数据孪生、自动驾驶、人工智能改变人车关系</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="Pain Point Analysis">痛点分析</div><div class="step-desc" data-en="Conventional vehicles lack emotional connection and feedback across all three phases: before boarding, during the ride, and after the trip">传统车辆三阶段（上车前/乘车中/下车后）均缺乏情感连接与反馈</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="Medium Selection">媒介选择</div><div class="step-desc" data-en="Compared light, sound, and text/image as interaction media; selected light as the optimal carrier: spatial, flexible, visual, and non-intrusive">对比光、声音、文字/图像三种媒介，选择"光"作为最优交互载体：空间感、灵活、视觉性、无入侵</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="System Architecture">系统架构</div><div class="step-desc" data-en="Three Refle Elf modules: information visualization (speed / temperature / progress), lighting (seatbelt / personal-zone lighting), and ambient companionship (welcome / feedback / farewell)">Refle Elf 三大模块：信息可视化（速度/温度/进程）、照明（安全带/私域灯光）、氛围陪伴（迎宾/反馈/告别）</div></div>
     </div>
     <div class="gallery g2 sr">
       <div class="gallery-img"><img src="extracted_images/enlighten_p4.png" alt="Traditional vehicles" loading="lazy"></div>
@@ -807,33 +995,32 @@ a { text-decoration: none; color: inherit; }
       <div class="gallery-img"><img src="extracted_images/enlighten_p11.png" alt="Information architecture" loading="lazy"></div>
       <div class="gallery-img"><img src="extracted_images/enlighten_p13.png" alt="Refle Elf Feedback" loading="lazy"></div>
     </div>
-    <div class="gallery-cap">未来洞察 → 痛点分析 → 媒介选择 → 信息架构 → 光语反馈</div>
   </div>
 </section>
 
-<!-- SCHOOL 3: VR 空间认知康复游戏 -->
+<!-- SCHOOL 4: VR 空间认知康复游戏 -->
 <section class="sec sec-vr" id="s-vr">
   <div class="wrap">
     <div class="sec-label sr">VR Game Design</div>
-    <h2 class="sec-title sr sr-d1">VR 空间认知障碍康复游戏</h2>
+    <h2 class="sec-title sr sr-d1" data-en="VR Rehabilitation Game for Spatial Cognitive Impairment">VR 空间认知障碍康复游戏</h2>
     <p class="sec-title-en sr sr-d1">VR-Cognitive Rehabilitation for Alzheimer's Patients</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
-      <span><strong>课程</strong> VR/AR 交互设计</span>
-      <span><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Jiang Liyuan</span>
+      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>Course</strong> VR/AR Interaction Design"><strong>课程</strong> VR/AR 交互设计</span>
+      <span data-en="<strong>Team</strong> Jianqiao Ji · Ying Jingpei · Jiang Liyuan"><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Jiang Liyuan</span>
     </div>
-    <p class="case-intro sr">面向早期阿尔茨海默症患者设计的 VR 空间认知康复游戏。通过结合认知训练与运动训练，在虚拟自然环境中设置空间导航、方位训练、记忆训练和拉伸运动等游戏任务，帮助患者改善空间认知能力和平衡姿态。游戏支持个性化难度调节，可由疗养师或家属根据患者病情定制康复方案。</p>
+    <p class="case-intro sr" data-en="A VR spatial-cognition rehabilitation game designed for patients with early-stage Alzheimer's disease. Combining cognitive and physical training, it embeds spatial navigation, orientation, memory, and stretching tasks within virtual natural environments to help patients improve spatial cognition and postural balance. The game supports personalized difficulty adjustment, allowing therapists or family members to tailor rehabilitation programs to each patient's condition.">面向早期阿尔茨海默症患者设计的 VR 空间认知康复游戏。通过结合认知训练与运动训练，在虚拟自然环境中设置空间导航、方位训练、记忆训练和拉伸运动等游戏任务，帮助患者改善空间认知能力和平衡姿态。游戏支持个性化难度调节，可由疗养师或家属根据患者病情定制康复方案。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val">认知+运动</div><div class="metric-lbl">双训练联合康复范式</div></div>
-      <div class="metric"><div class="metric-val">5项</div><div class="metric-lbl">核心游戏任务设计</div></div>
-      <div class="metric"><div class="metric-val">3级</div><div class="metric-lbl">个性化难度调节</div></div>
-      <div class="metric"><div class="metric-val">ADL</div><div class="metric-lbl">日常任务融入游戏</div></div>
+      <div class="metric"><div class="metric-val" data-en="Cognitive + Motor">认知+运动</div><div class="metric-lbl" data-en="Dual-training rehabilitation paradigm">双训练联合康复范式</div></div>
+      <div class="metric"><div class="metric-val" data-en="5 Tasks">5项</div><div class="metric-lbl" data-en="Core game task designs">核心游戏任务设计</div></div>
+      <div class="metric"><div class="metric-val" data-en="3 Levels">3级</div><div class="metric-lbl" data-en="Personalized difficulty adjustment">个性化难度调节</div></div>
+      <div class="metric"><div class="metric-val">ADL</div><div class="metric-lbl" data-en="Daily-living tasks embedded in gameplay">日常任务融入游戏</div></div>
     </div>
     <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">设计方向选定</div><div class="step-desc">聚焦阿尔茨海默症患者空间障碍与平衡姿态问题，结合认知训练 + 运动训练方式进行 VR 康复</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">康复范式研究</div><div class="step-desc">文献调研路径学习、目标探寻与上肢拉伸训练范式，结合 VR 环境可定制、数据可记录的优势</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">游戏设计原则</div><div class="step-desc">日常任务（ADL）更利于康复、鸟瞰图辅助空间记忆、坐式运动避免精细控制退化</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">难度设计</div><div class="step-desc">全局调节（场景光线/植被量）+ 关卡自定义（路线难易/辨识地标数/路线记忆量/缩略地图）三级难度</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Design Direction">设计方向选定</div><div class="step-desc" data-en="Focused on spatial impairment and postural balance in Alzheimer's patients; adopted VR rehabilitation combining cognitive and motor training">聚焦阿尔茨海默症患者空间障碍与平衡姿态问题，结合认知训练 + 运动训练方式进行 VR 康复</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="Rehabilitation Paradigm Research">康复范式研究</div><div class="step-desc" data-en="Literature review of route-learning, target-searching, and upper-limb stretching paradigms, leveraging VR's customizable environments and recordable data">文献调研路径学习、目标探寻与上肢拉伸训练范式，结合 VR 环境可定制、数据可记录的优势</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="Game Design Principles">游戏设计原则</div><div class="step-desc" data-en="Activities of daily living (ADL) aid recovery; bird's-eye views support spatial memory; seated exercises avoid fine-motor degradation">日常任务（ADL）更利于康复、鸟瞰图辅助空间记忆、坐式运动避免精细控制退化</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Difficulty Design">难度设计</div><div class="step-desc" data-en="Three-tier difficulty: global adjustment (scene lighting / vegetation density) + per-level customization (route complexity / landmark count / memorization load / mini-map)">全局调节（场景光线/植被量）+ 关卡自定义（路线难易/辨识地标数/路线记忆量/缩略地图）三级难度</div></div>
     </div>
     <div class="gallery g2 sr">
       <div class="gallery-img"><img src="vr_game_images/设计方向选定.png" alt="设计方向" loading="lazy"></div>
@@ -854,46 +1041,6 @@ a { text-decoration: none; color: inherit; }
     <div class="gallery g1 sr">
       <div class="gallery-img"><img src="vr_game_images/游戏难度参数 JQ.png" alt="难度设计" loading="lazy"></div>
     </div>
-    <div class="gallery-cap">设计方向 → 康复范式 → 设计概念 → 流程设计 → 场景实现 → 难度调节</div>
-  </div>
-</section>
-
-<!-- SCHOOL 4: 设计数据分析 -->
-<section class="sec sec-data" id="s-data">
-  <div class="wrap">
-    <div class="sec-label sr">Data Analysis of Design</div>
-    <h2 class="sec-title sr sr-d1">电商搜索体验的数据驱动设计</h2>
-    <p class="sec-title-en sr sr-d1">Data-Driven Design Optimization for E-commerce Search</p>
-    <div class="sec-meta sr sr-d2">
-      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
-      <span><strong>课程</strong> 设计数据分析</span>
-      <span><strong>团队</strong> 嵇剑桥 · Zhang Linuo</span>
-    </div>
-    <p class="case-intro sr">以淘宝搜索功能为研究对象，运用数据分析方法论驱动设计优化。从业务诉求（促成交易）和用户诉求出发，确立"搜索订单渗透率"和"CTCVR（曝光-下单转化率）"为核心指标，通过用户旅程图拆解搜索全流程，设计前端交互方案并建立完整指标体系与埋点方案，实现以数据闭环指导设计迭代。</p>
-    <div class="metrics sr">
-      <div class="metric"><div class="metric-val">CTCVR</div><div class="metric-lbl">核心体验指标</div></div>
-      <div class="metric"><div class="metric-val">8模块</div><div class="metric-lbl">从业务诉求到埋点设计</div></div>
-      <div class="metric"><div class="metric-val">前端+后台</div><div class="metric-lbl">设计目标双向拆解</div></div>
-      <div class="metric"><div class="metric-val">全链路</div><div class="metric-lbl">用户旅程数据闭环</div></div>
-    </div>
-    <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">业务与用户诉求</div><div class="step-desc">电商平台核心目标：促成交易。搜索作为商品触达的关键入口，需帮助用户快速、准确找到想要的商品</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">设计目标拆解</div><div class="step-desc">前端4大目标（引导输入/筛选/品类/清晰展示）+ 后台5大目标（准确性/多样性/排序/速度/个性化）</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">用户旅程与流程</div><div class="step-desc">APP首页 → 搜索发现 → 搜索建议 → 搜索结果 → 商品详情 → 店铺主页 → 店内搜索的全链路流程</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">指标体系与埋点</div><div class="step-desc">构建搜索功能指标体系并设计埋点方案，以数据闭环驱动设计方案的验证和迭代优化</div></div>
-    </div>
-    <div class="gallery g2 sr">
-      <div class="gallery-img"><img src="extracted_images/data_analysis_p3.png" alt="业务诉求" loading="lazy"></div>
-      <div class="gallery-img"><img src="extracted_images/data_analysis_p5.png" alt="设计目标" loading="lazy"></div>
-    </div>
-    <div class="gallery g2 sr">
-      <div class="gallery-img"><img src="extracted_images/data_analysis_p7.png" alt="用户流程" loading="lazy"></div>
-      <div class="gallery-img"><img src="extracted_images/data_analysis_p9.png" alt="界面分析" loading="lazy"></div>
-    </div>
-    <div class="gallery g1 sr">
-      <div class="gallery-img"><img src="extracted_images/data_analysis_p11.png" alt="搜索结果页面" loading="lazy"></div>
-    </div>
-    <div class="gallery-cap">业务诉求 → 设计目标 → 用户流程 → 界面分析 → 指标体系</div>
   </div>
 </section>
 
@@ -901,25 +1048,25 @@ a { text-decoration: none; color: inherit; }
 <section class="sec sec-emo" id="s-emo">
   <div class="wrap">
     <div class="sec-label sr">Brand &amp; Marketing Design</div>
-    <h2 class="sec-title sr sr-d1">EMO-D: 情感钻石品牌创新设计</h2>
+    <h2 class="sec-title sr sr-d1" data-en="EMO-D: Emotional Diamond Brand Innovation Design">EMO-D: 情感钻石品牌创新设计</h2>
     <p class="sec-title-en sr sr-d1">Emotional Diamond &mdash; A Moment Is Forever</p>
     <div class="sec-meta sr sr-d2">
-      <span><strong>学校</strong> 同济大学 · 设计创意学院</span>
-      <span><strong>课程</strong> 品牌营销与创新设计</span>
-      <span><strong>合作</strong> 同济大学设创学院 &times; L Catterton &times; 沃尔德钻石</span>
+      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>Course</strong> Brand Marketing &amp; Innovation Design"><strong>课程</strong> 品牌营销与创新设计</span>
+      <span data-en="<strong>Partners</strong> Tongji D&amp;I &times; L Catterton &times; Worldia Diamond"><strong>合作</strong> 同济大学设创学院 &times; L Catterton &times; 沃尔德钻石</span>
     </div>
-    <p class="case-intro sr">EMO-D (Emotional Diamond) 是面向 Z 世代"新奢品先锋者"的培育钻石首饰品牌。融合 AIGC 技术与情感数据，通过 PAD 情感模型提取用户情绪，经由 AI 情感光谱轮和 GPT-4 情感作诗生成个性化的"情感钻石"，将情感数据转化为独一无二的珠宝设计。品牌核心理念"此刻 · 永恒"，让每一颗钻石承载佩戴者的真实情感。</p>
+    <p class="case-intro sr" data-en="EMO-D (Emotional Diamond) is a lab-grown diamond jewelry brand targeting Gen-Z new-luxury pioneers. Integrating AIGC technology with emotional data, it extracts user emotions through the PAD affect model, then generates personalized emotional diamonds via an AI emotion spectrum wheel and GPT-4 emotional poetry — translating emotional data into one-of-a-kind jewelry designs. The brand philosophy, A Moment Is Forever, lets every diamond carry its wearer's authentic emotions.">EMO-D (Emotional Diamond) 是面向 Z 世代"新奢品先锋者"的培育钻石首饰品牌。融合 AIGC 技术与情感数据，通过 PAD 情感模型提取用户情绪，经由 AI 情感光谱轮和 GPT-4 情感作诗生成个性化的"情感钻石"，将情感数据转化为独一无二的珠宝设计。品牌核心理念"此刻 · 永恒"，让每一颗钻石承载佩戴者的真实情感。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val">AIGC</div><div class="metric-lbl">AI 生成内容驱动设计</div></div>
-      <div class="metric"><div class="metric-val">PAD</div><div class="metric-lbl">情感模型数据提取</div></div>
-      <div class="metric"><div class="metric-val">Z世代</div><div class="metric-lbl">目标客群定位</div></div>
-      <div class="metric"><div class="metric-val">跨学科</div><div class="metric-lbl">情感 &times; 数据 &times; 珠宝</div></div>
+      <div class="metric"><div class="metric-val">AIGC</div><div class="metric-lbl" data-en="AI-generated content driving design">AI 生成内容驱动设计</div></div>
+      <div class="metric"><div class="metric-val">PAD</div><div class="metric-lbl" data-en="Affect model for emotion extraction">情感模型数据提取</div></div>
+      <div class="metric"><div class="metric-val" data-en="Gen Z">Z世代</div><div class="metric-lbl" data-en="Target audience positioning">目标客群定位</div></div>
+      <div class="metric"><div class="metric-val" data-en="Interdisciplinary">跨学科</div><div class="metric-lbl" data-en="Emotion &times; Data &times; Jewelry">情感 &times; 数据 &times; 珠宝</div></div>
     </div>
     <div class="steps sr">
-      <div class="step"><div class="step-num">01</div><div class="step-title">品牌生态构建</div><div class="step-desc">跨学科团队（市场/品牌/技术/产品），融合情感数据采集、AIGC 生成与数据驱动珠宝设计</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-title">目标人群洞察</div><div class="step-desc">Z世代消费特征：无性别潮流、"乐趣"至上、兴趣消费、情感表达、品牌共创</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-title">产品系统设计</div><div class="step-desc">信息输入 → PAD 情感模型 → AIGC 情感光谱轮 → GPT4 情感作诗 → 情感钻石培育生成 → 加工成品</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-title">钻石颜色术语</div><div class="step-desc">建立钻石颜色与情感的映射体系：红色(Love 68%)、蓝色(Contentment 35%)、黄色(Surprise 52%)等</div></div>
+      <div class="step"><div class="step-num">01</div><div class="step-title" data-en="Brand Ecosystem">品牌生态构建</div><div class="step-desc" data-en="Interdisciplinary team (marketing / brand / technology / product) integrating emotional data collection, AIGC generation, and data-driven jewelry design">跨学科团队（市场/品牌/技术/产品），融合情感数据采集、AIGC 生成与数据驱动珠宝设计</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title" data-en="Audience Insight">目标人群洞察</div><div class="step-desc" data-en="Gen-Z consumption traits: genderless fashion, fun-first mindset, interest-driven spending, emotional expression, and brand co-creation">Z世代消费特征：无性别潮流、"乐趣"至上、兴趣消费、情感表达、品牌共创</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title" data-en="Product System Design">产品系统设计</div><div class="step-desc" data-en="Information input → PAD affect model → AIGC emotion spectrum wheel → GPT-4 emotional poetry → emotional diamond cultivation → finished piece">信息输入 → PAD 情感模型 → AIGC 情感光谱轮 → GPT4 情感作诗 → 情感钻石培育生成 → 加工成品</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Diamond Color Vocabulary">钻石颜色术语</div><div class="step-desc" data-en="Established a color-emotion mapping system: red (Love 68%), blue (Contentment 35%), yellow (Surprise 52%), etc.">建立钻石颜色与情感的映射体系：红色(Love 68%)、蓝色(Contentment 35%)、黄色(Surprise 52%)等</div></div>
     </div>
     <div class="gallery g2 sr">
       <div class="gallery-img"><img src="extracted_images/emo_d2_p3.png" alt="品牌生态" loading="lazy"></div>
@@ -932,7 +1079,7 @@ a { text-decoration: none; color: inherit; }
     <div class="gallery g1 sr">
       <div class="gallery-img"><img src="extracted_images/emo_d2_p12.png" alt="产品展示" loading="lazy"></div>
     </div>
-    <div class="gallery-cap">品牌生态 → 人群洞察 → 产品系统 → 颜色术语 → 产品展示</div>
+
   </div>
 </section>
 
@@ -944,7 +1091,7 @@ a { text-decoration: none; color: inherit; }
 <div class="tab-content" id="tab-photo">
 <section class="sec sec-photo" id="s-photo">
   <div class="wrap">
-    <p class="photo-preface sr">在生活被取景器定格的同时，摄影也给我的生活创造了第三个空间。它定格我看到的风景，也不完全是我看到的风景；它记录的是我的生活，却不只是我的生活；我在镜头里新生。</p>
+    <p class="photo-preface sr" data-en="As life is framed in the viewfinder, photography also opens a third space in my life. It captures the scenery I see — yet not exactly as I see it; it records my life — yet more than my life alone; through the lens, I am born anew.">在生活被取景器定格的同时，摄影也给我的生活创造了第三个空间。它定格我看到的风景，也不完全是我看到的风景；它记录的是我的生活，却不只是我的生活；我在镜头里新生。</p>
 
     <div class="photo-city sr">
       <div class="photo-city-head"><div class="photo-city-name">Tokyo</div><div class="photo-city-sub">w/ Fujifilm XS20</div></div>
@@ -955,7 +1102,6 @@ a { text-decoration: none; color: inherit; }
         <div class="gallery-img"><img src="photo_Tokyo/4.jpg" alt="Tokyo 4" loading="lazy"></div>
         <div class="gallery-img"><img src="photo_Tokyo/5.jpg" alt="Tokyo 5" loading="lazy"></div>
         <div class="gallery-img"><img src="photo_Tokyo/6.jpg" alt="Tokyo 6" loading="lazy"></div>
-        <div class="gallery-img"><img src="photo_Tokyo/7.jpg" alt="Tokyo 7" loading="lazy"></div>
         <div class="gallery-img"><img src="photo_Tokyo/8.jpg" alt="Tokyo 8" loading="lazy"></div>
         <div class="gallery-img"><img src="photo_Tokyo/9.jpg" alt="Tokyo 9" loading="lazy"></div>
         <div class="gallery-img"><img src="photo_Tokyo/10.jpg" alt="Tokyo 10" loading="lazy"></div>
@@ -1059,13 +1205,19 @@ a { text-decoration: none; color: inherit; }
 <footer class="footer" id="contact">
   <div class="wrap">
     <div class="footer-title sr">Let's Connect</div>
-    <p class="footer-sub sr sr-d1">如果你对我的项目感兴趣，欢迎联系我</p>
+    <p class="footer-sub sr sr-d1" data-en="If my projects interest you, feel free to get in touch">如果你对我的项目感兴趣，欢迎联系我</p>
     <div class="footer-links sr sr-d2">
-      <span>联系方式：
+      <span><span data-en="WeChat: ">联系方式：</span>
         <svg class="wechat-icon" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor" d="M8.5 3C4.36 3 1 5.85 1 9.35c0 2.02 1.13 3.81 2.88 4.95L3.1 17l2.95-1.48c.8.2 1.63.3 2.45.3 4.14 0 7.5-2.84 7.5-6.35S12.64 3 8.5 3zm-2.6 5.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm5.2 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM17 8.5c-3.31 0-6 2.28-6 5.1 0 1.57.83 2.97 2.13 3.9L12.5 20l2.3-1.13c.7.16 1.4.23 2.2.23 3.31 0 6-2.28 6-5.1s-2.69-5.5-6-5.5zm-2.1 4.1a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5zm4.2 0a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/>
         </svg>
         <span>xtacii</span>
+      </span>
+      <span>
+        <svg class="linkedin-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.555V9h3.559v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        <a href="https://linkedin.com/in/jianqiao-ji-5b7b89116" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </span>
     </div>
     <p class="footer-copy">&copy; 2026 Jianqiao Ji. All rights reserved.</p>
@@ -1089,6 +1241,33 @@ a { text-decoration: none; color: inherit; }
   var mob=document.getElementById('mob'),nav=document.getElementById('nav');
   mob.addEventListener('click',function(){mob.classList.toggle('on');nav.classList.toggle('open')});
   nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('on');nav.classList.remove('open')})});
+
+  // 语言切换：中文默认选中，EN 为灰色未选中态；带 data-en 的元素整页替换内容
+  var langSwitch=document.getElementById('langSwitch');
+  var langBtns=langSwitch.querySelectorAll('.lang-btn');
+  function setLang(lang){
+    document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+    document.body.classList.toggle('lang-zh',lang==='zh');
+    document.body.classList.toggle('lang-en',lang==='en');
+    langBtns.forEach(function(btn){
+      btn.classList.toggle('active',btn.getAttribute('data-lang')===lang);
+    });
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      if(!el.hasAttribute('data-zh')) el.setAttribute('data-zh',el.innerHTML);
+      el.innerHTML = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+    });
+    document.title = lang==='en' ? 'Jianqiao Ji \u2014 Portfolio' : '\u5D47\u5251\u6865 Jianqiao Ji \u2014 Portfolio';
+    try{localStorage.setItem('site-lang',lang)}catch(e){}
+  }
+  var savedLang='zh';
+  try{savedLang=localStorage.getItem('site-lang')||'zh'}catch(e){}
+  setLang(savedLang==='en'?'en':'zh');
+  document.querySelectorAll('#tab-work .gallery-cap').forEach(function(el){ el.remove(); });
+  langBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      setLang(this.getAttribute('data-lang'));
+    });
+  });
 
   document.getElementById('nav-portfolio').addEventListener('click',function(e){
     e.preventDefault();
@@ -1114,8 +1293,57 @@ a { text-decoration: none; color: inherit; }
         srObserver.observe(el);
       });
       window.scrollTo({top:document.getElementById('tabBar').offsetTop - 60, behavior:'smooth'});
+      if(target==='photo') schedulePhotoLayout();
     });
   });
+
+  // 摄影区：按行计算统一高度，同行底边对齐，较矮图片从底部裁切
+  var photoLayoutTimer;
+  function getPhotoCols(){
+    return window.innerWidth>800 ? 3 : 2;
+  }
+  function layoutPhotoMasonry(){
+    var photoTab=document.getElementById('tab-photo');
+    if(!photoTab || !photoTab.classList.contains('active')) return;
+    var cols=getPhotoCols();
+    var gap=12;
+    photoTab.querySelectorAll('.photo-masonry').forEach(function(masonry){
+      var items=Array.prototype.slice.call(masonry.querySelectorAll('.gallery-img'));
+      if(!items.length) return;
+      var width=masonry.clientWidth;
+      if(width<=0) return;
+      var colW=(width-gap*(cols-1))/cols;
+      items.forEach(function(item){ item.style.height=''; });
+      for(var i=0;i<items.length;i+=cols){
+        var row=items.slice(i,i+cols);
+        var maxH=0;
+        row.forEach(function(item){
+          var img=item.querySelector('img');
+          if(img && img.naturalWidth){
+            maxH=Math.max(maxH,colW*(img.naturalHeight/img.naturalWidth));
+          }else{
+            maxH=Math.max(maxH,colW*0.75);
+          }
+        });
+        maxH=Math.round(maxH);
+        row.forEach(function(item){ item.style.height=maxH+'px'; });
+      }
+    });
+  }
+  function schedulePhotoLayout(){
+    clearTimeout(photoLayoutTimer);
+    photoLayoutTimer=setTimeout(layoutPhotoMasonry,80);
+  }
+  window.addEventListener('resize',schedulePhotoLayout,{passive:true});
+  document.querySelectorAll('#tab-photo .photo-masonry img').forEach(function(img){
+    if(img.complete) return;
+    img.addEventListener('load',schedulePhotoLayout);
+  });
+  if(typeof ResizeObserver!=='undefined'){
+    document.querySelectorAll('#tab-photo .photo-masonry').forEach(function(m){
+      new ResizeObserver(schedulePhotoLayout).observe(m);
+    });
+  }
 
   // Tab bar shadow
   var tabBar=document.getElementById('tabBar');
