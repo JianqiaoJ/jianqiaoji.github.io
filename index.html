@@ -63,7 +63,7 @@ a { text-decoration: none; color: inherit; }
   display: flex; align-items: center; justify-content: space-between; height: 100%;
 }
 .header .logo {
-  font-weight: 700; font-size: .85rem; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 700; font-size: .85rem; letter-spacing: .4px; text-transform: none;
 }
 .header nav { display: flex; gap: 28px; align-items: center; }
 .header nav a {
@@ -71,6 +71,71 @@ a { text-decoration: none; color: inherit; }
   transition: color .25s; letter-spacing: .3px;
 }
 .header nav a:hover, .header nav a.on { color: var(--ink); }
+.nav-contact {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-contact::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 12px;
+}
+.nav-contact-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 160px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity .2s var(--ease), transform .2s var(--ease);
+  z-index: 930;
+}
+.nav-contact:hover .nav-contact-pop,
+.nav-contact:focus-within .nav-contact-pop {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-contact-pop-label {
+  font-size: .66rem;
+  color: var(--ink-4);
+  margin-bottom: 2px;
+}
+.nav-contact-pop-line {
+  font-size: .74rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-contact-pop a.nav-contact-pop-line {
+  display: inline-flex;
+  margin-top: 2px;
+  color: var(--accent);
+}
+.nav-contact-pop a.nav-contact-pop-line:hover { color: var(--ink); }
+.nav-contact-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+  flex: 0 0 auto;
+}
 .lang-switch {
   display: inline-flex; align-items: center; gap: 0;
   font-size: .78rem; font-weight: 500; letter-spacing: .3px;
@@ -495,6 +560,127 @@ a { text-decoration: none; color: inherit; }
   display: block;
 }
 
+/* 右侧链式快捷导航（工作/学校项目） */
+.quick-nav {
+  --quick-nav-accent: var(--ink-1);
+  --quick-nav-dot-bg: #f5f2ef;
+  --quick-nav-dot-size: 10px;
+  position: fixed;
+  right: 14px;
+  top: 52%;
+  transform: translateY(-50%);
+  z-index: 420;
+  width: 132px;
+  padding: 4px 6px 4px 8px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.quick-nav.show {
+  opacity: .72;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+.quick-nav.on-dark { opacity: .9; --quick-nav-dot-bg: #0f1420; }
+.quick-nav-head {
+  display: none;
+}
+.quick-nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+}
+.quick-nav-list::before {
+  content: '';
+  position: absolute;
+  left: calc((var(--quick-nav-dot-size) - 1px) / 2);
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(17,24,39,.22), rgba(17,24,39,.12));
+}
+.quick-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  min-height: 38px;
+  padding-left: 0;
+}
+.quick-nav-link {
+  border: none;
+  background: none;
+  font: inherit;
+  color: rgba(17,24,39,.72);
+  font-size: .65rem;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+  max-width: 108px;
+  opacity: .86;
+  display: block;
+  transition: color .22s var(--ease), transform .22s var(--ease);
+}
+.quick-nav-link:hover { color: var(--ink-1); transform: translateX(1px); opacity: 1; }
+.quick-nav-item::before {
+  content: '';
+  position: relative;
+  left: auto;
+  top: 0;
+  transform: none;
+  align-self: center;
+  flex: 0 0 var(--quick-nav-dot-size);
+  width: var(--quick-nav-dot-size);
+  height: var(--quick-nav-dot-size);
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid rgba(17,24,39,.28);
+  background: var(--quick-nav-dot-bg);
+  z-index: 2;
+  transition: all .22s var(--ease);
+}
+.quick-nav-item.active::before {
+  background: var(--quick-nav-dot-bg);
+  border-color: var(--quick-nav-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--quick-nav-accent) 26%, transparent);
+}
+.quick-nav-item.active .quick-nav-link {
+  color: var(--quick-nav-accent);
+  font-weight: 600;
+  opacity: 1;
+}
+.quick-nav.on-dark .quick-nav-list::before {
+  background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.2));
+}
+.quick-nav.on-dark .quick-nav-link {
+  color: rgba(255,255,255,.76);
+  text-shadow: 0 0 8px rgba(0,0,0,.55);
+}
+.quick-nav.on-dark .quick-nav-link:hover {
+  color: rgba(255,255,255,.96);
+}
+.quick-nav.on-dark .quick-nav-item::before {
+  border-color: rgba(255,255,255,.66);
+  background: var(--quick-nav-dot-bg);
+}
+.quick-nav.on-dark .quick-nav-item.active::before {
+  background: var(--quick-nav-dot-bg);
+  border-color: var(--quick-nav-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--quick-nav-accent) 34%, transparent);
+}
+.quick-nav.on-dark .quick-nav-item.active .quick-nav-link {
+  color: var(--quick-nav-accent);
+}
+
 /* FOOTER */
 .footer {
   padding: 60px 0 40px; border-top: 1px solid var(--border); text-align: center;
@@ -561,6 +747,13 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 800px) {
   .hero-grid { grid-template-columns: 1fr; gap: 36px; }
   .photo-masonry { grid-template-columns: repeat(2, 1fr); }
+  .quick-nav {
+    right: 6px;
+    width: 108px;
+    opacity: .66;
+  }
+  .quick-nav-link { max-width: 86px; font-size: .6rem; }
+  .quick-nav-item { min-height: 34px; }
   .hero-avatar { margin-left: 0; width: 124px; height: 124px; }
   .gallery.g2, .gallery.g3 { grid-template-columns: 1fr; }
   .header nav {
@@ -571,6 +764,7 @@ a { text-decoration: none; color: inherit; }
   }
   .header nav.open { right: 0; }
   .header nav a { font-size: .95rem; color: var(--ink-2); }
+  .nav-contact-pop { display: none; }
   .mob-btn { display: flex; }
   .mob-btn.on span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
   .mob-btn.on span:nth-child(2) { opacity: 0; }
@@ -580,9 +774,20 @@ a { text-decoration: none; color: inherit; }
   .tab-btn { padding: 14px 16px; font-size: .82rem; }
 }
 @media (max-width: 500px) {
+  .quick-nav {
+    right: 4px;
+    width: 96px;
+    opacity: .62;
+  }
+  .quick-nav-link { max-width: 76px; font-size: .56rem; }
+  .quick-nav-item { min-height: 32px; }
   .hero-meta { flex-direction: column; gap: 8px; }
   .metrics { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 1200px) {
+  .quick-nav { right: 8px; width: 120px; }
+  .quick-nav-link { max-width: 96px; font-size: .62rem; }
 }
 </style>
 </head>
@@ -591,11 +796,28 @@ a { text-decoration: none; color: inherit; }
 <!-- HEADER -->
 <header class="header" id="hd">
   <div class="wrap">
-    <a href="#hero" class="logo">JQ</a>
+    <div class="logo" aria-label="Jiànqiáo Jī">Jiànqiáo Jī</div>
     <nav id="nav">
-      <a href="#hero">Home</a>
-      <a href="#tabBar" id="nav-portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
+      <a href="#hero" data-en="Home">主页</a>
+      <a href="#tabBar" id="nav-portfolio" data-en="Portfolio">作品集</a>
+      <div class="nav-contact">
+        <a href="#contact-links" data-en="Contact">联系我</a>
+        <div class="nav-contact-pop">
+          <div class="nav-contact-pop-label" data-en="Contact:">联系方式：</div>
+          <div class="nav-contact-pop-line">
+            <svg class="nav-contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M8.5 3C4.36 3 1 5.85 1 9.35c0 2.02 1.13 3.81 2.88 4.95L3.1 17l2.95-1.48c.8.2 1.63.3 2.45.3 4.14 0 7.5-2.84 7.5-6.35S12.64 3 8.5 3zm-2.6 5.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm5.2 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM17 8.5c-3.31 0-6 2.28-6 5.1 0 1.57.83 2.97 2.13 3.9L12.5 20l2.3-1.13c.7.16 1.4.23 2.2.23 3.31 0 6-2.28 6-5.1s-2.69-5.5-6-5.5zm-2.1 4.1a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5zm4.2 0a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/>
+            </svg>
+            <span>xtacii</span>
+          </div>
+          <a class="nav-contact-pop-line" href="https://linkedin.com/in/jianqiao-ji-5b7b89116" target="_blank" rel="noopener noreferrer">
+            <svg class="nav-contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.555V9h3.559v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
       <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
         <button type="button" class="lang-btn active" data-lang="zh">中文</button>
         <span class="lang-sep" aria-hidden="true">/</span>
@@ -626,7 +848,7 @@ a { text-decoration: none; color: inherit; }
             <div class="tl-date">2022.5 — Present</div>
           </div>
           <div class="tl-item tl-edu">
-            <div class="tl-co" data-en='Tongji University · College of Design &amp; Innovation <span class="tl-type tl-type-edu">Edu</span>'>同济大学 设计与创意学院 <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-co" data-en='Tongji University · College of Design &amp; Innovation <span class="tl-type tl-type-edu">Edu</span>'>同济大学 设计创意学院 <span class="tl-type tl-type-edu">Edu</span></div>
             <div class="tl-role" data-en="Master in Interaction Design (Part-time)">交互设计硕士 (Part-time)</div>
             <div class="tl-date">2022.9 — 2026.6</div>
           </div>
@@ -646,7 +868,7 @@ a { text-decoration: none; color: inherit; }
             <div class="tl-date">2016.8 — 2017.12</div>
           </div>
           <div class="tl-item tl-edu">
-            <div class="tl-co" data-en='Nanjing University <span class="tl-type tl-type-edu">Edu</span>'>南京大学 <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-co" data-en='Nanjing University Business School <span class="tl-type tl-type-edu">Edu</span>'>南京大学 商学院 <span class="tl-type tl-type-edu">Edu</span></div>
             <div class="tl-role" data-en="Bachelor in Financial Engineering · Economics">金融工程 · 经济学学士</div>
             <div class="tl-date">2012.9 — 2016.6</div>
           </div>
@@ -675,6 +897,10 @@ a { text-decoration: none; color: inherit; }
     <button class="tab-btn" data-tab="photo" data-en="Photography">摄影 Photography</button>
   </div>
 </div>
+<aside class="quick-nav" id="quickNav" aria-label="Section quick navigation">
+  <div class="quick-nav-head" id="quickNavHead">Work Timeline</div>
+  <ol class="quick-nav-list" id="quickNavList"></ol>
+</aside>
 
 <!-- ============================= -->
 <!-- WORK PROJECTS TAB             -->
@@ -871,18 +1097,31 @@ a { text-decoration: none; color: inherit; }
       <div class="step"><div class="step-num">04</div><div class="step-title" data-en="Experiment &amp; Evaluation">实验与评测</div><div class="step-desc" data-en="LLM-as-Judge with manual spot-checking (tag-mapping accuracy 0.84, hallucination-detection pass rate 0.95); A/B controlled experiment with 10 participants triangulating behavioral logs, Likert scales, and interviews">LLM-as-Judge + 人工抽检评测（标签映射准确率 0.84、幻觉检测通过率 0.95），10 名用户 A/B 对照实验：行为日志 + 李克特量表 + 访谈三角验证</div></div>
     </div>
     <div class="gallery g2 sr">
-      <div class="gallery-img"><img src="thesis_images/seren_survey.jpg" alt="问卷调研" loading="lazy"></div>
-      <div class="gallery-img"><img src="thesis_images/seren_model.jpg" alt="感知可控性模型" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_02.jpg" alt="Seren Slide 02" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_03.jpg" alt="Seren Slide 03" loading="lazy"></div>
     </div>
     <div class="gallery g2 sr">
-      <div class="gallery-img"><img src="thesis_images/seren_strategy.jpg" alt="设计策略推导" loading="lazy"></div>
-      <div class="gallery-img"><img src="thesis_images/seren_architecture.jpg" alt="系统架构" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_04.jpg" alt="Seren Slide 04" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_05.jpg" alt="Seren Slide 05" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_slide_06.jpg" alt="Seren Slide 06" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_07.jpg" alt="Seren Slide 07" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_slide_08.jpg" alt="Seren Slide 08" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_09.jpg" alt="Seren Slide 09" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_slide_10.jpg" alt="Seren Slide 10" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_11.jpg" alt="Seren Slide 11" loading="lazy"></div>
+    </div>
+    <div class="gallery g2 sr">
+      <div class="gallery-img"><img src="thesis_images/seren_slide_12.jpg" alt="Seren Slide 12" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_13.jpg" alt="Seren Slide 13" loading="lazy"></div>
     </div>
     <div class="gallery g1 sr">
-      <div class="gallery-img"><img src="thesis_images/seren_ui.jpg" alt="界面与交互设计" loading="lazy"></div>
-    </div>
-    <div class="gallery g1 sr">
-      <div class="gallery-img"><img src="thesis_images/seren_experiment.jpg" alt="实验结果分析" loading="lazy"></div>
+      <div class="gallery-img"><img src="thesis_images/seren_slide_14.jpg" alt="Seren Slide 14" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -1111,6 +1350,21 @@ a { text-decoration: none; color: inherit; }
     </div>
 
     <div class="photo-city sr">
+      <div class="photo-city-head"><div class="photo-city-name">新疆</div><div class="photo-city-sub">w/ Fujifilm XS20</div></div>
+      <div class="photo-masonry">
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_01.jpg" alt="新疆 1" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_02.jpg" alt="新疆 2" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_03.jpg" alt="新疆 3" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_04.jpg" alt="新疆 4" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_05.jpg" alt="新疆 5" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_06.jpg" alt="新疆 6" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_07.jpg" alt="新疆 7" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_08.jpg" alt="新疆 8" loading="lazy"></div>
+        <div class="gallery-img"><img src="photo_Xinjiang/xj_09.jpg" alt="新疆 9" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="photo-city sr">
       <div class="photo-city-head"><div class="photo-city-name">UK</div><div class="photo-city-sub">w/ Fujifilm XS20</div></div>
       <div class="photo-masonry">
         <div class="gallery-img"><img src="photo_UK/1.jpg" alt="United Kingdom 1" loading="lazy"></div>
@@ -1206,7 +1460,7 @@ a { text-decoration: none; color: inherit; }
   <div class="wrap">
     <div class="footer-title sr">Let's Connect</div>
     <p class="footer-sub sr sr-d1" data-en="If my projects interest you, feel free to get in touch">如果你对我的项目感兴趣，欢迎联系我</p>
-    <div class="footer-links sr sr-d2">
+    <div class="footer-links sr sr-d2" id="contact-links">
       <span><span data-en="WeChat: ">联系方式：</span>
         <svg class="wechat-icon" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor" d="M8.5 3C4.36 3 1 5.85 1 9.35c0 2.02 1.13 3.81 2.88 4.95L3.1 17l2.95-1.48c.8.2 1.63.3 2.45.3 4.14 0 7.5-2.84 7.5-6.35S12.64 3 8.5 3zm-2.6 5.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm5.2 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM17 8.5c-3.31 0-6 2.28-6 5.1 0 1.57.83 2.97 2.13 3.9L12.5 20l2.3-1.13c.7.16 1.4.23 2.2.23 3.31 0 6-2.28 6-5.1s-2.69-5.5-6-5.5zm-2.1 4.1a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5zm4.2 0a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/>
@@ -1245,6 +1499,128 @@ a { text-decoration: none; color: inherit; }
   // 语言切换：中文默认选中，EN 为灰色未选中态；带 data-en 的元素整页替换内容
   var langSwitch=document.getElementById('langSwitch');
   var langBtns=langSwitch.querySelectorAll('.lang-btn');
+  var quickNav=document.getElementById('quickNav');
+  var quickNavHead=document.getElementById('quickNavHead');
+  var quickNavList=document.getElementById('quickNavList');
+  var quickNavSections=[];
+  var quickNavTab='work';
+  var quickNavTicking=false;
+  var quickNavLockedUntil=0;
+  function getSectionAccentColor(sec){
+    if(!sec) return '#111827';
+    if(sec.classList.contains('sec-shopee')) return '#ee4d2d';
+    if(sec.classList.contains('sec-warm')) return '#b45309';
+    if(sec.classList.contains('sec-green')) return '#2d6a4f';
+    if(sec.classList.contains('sec-dark')) return '#5b9bd5';
+    if(sec.classList.contains('sec-seren')) return '#6d5bd0';
+    if(sec.classList.contains('sec-hri')) return '#b5e550';
+    if(sec.classList.contains('sec-data')) return '#9333ea';
+    if(sec.classList.contains('sec-car')) return '#c084fc';
+    if(sec.classList.contains('sec-vr')) return '#3b82f6';
+    if(sec.classList.contains('sec-emo')) return '#f472b6';
+    return '#111827';
+  }
+  function getSectionByProbePoint(){
+    var probeX=Math.max(8,window.innerWidth-84);
+    var probeY=Math.min(window.innerHeight-8,Math.max(8,window.innerHeight*0.52));
+    var node=document.elementFromPoint(probeX,probeY);
+    if(!node) return null;
+    var sec=node.closest ? node.closest('section.sec') : null;
+    if(!sec) return null;
+    if(sec.id && (sec.id.indexOf('w-')===0 || sec.id.indexOf('s-')===0)) return sec;
+    return null;
+  }
+  function getActiveTabKey(){
+    var active=document.querySelector('.tab-btn.active');
+    return active ? active.getAttribute('data-tab') : 'work';
+  }
+  function buildQuickNav(tab){
+    quickNavTab=tab;
+    quickNavSections=[];
+    quickNavList.innerHTML='';
+    if(tab==='photo'){
+      quickNav.classList.remove('show');
+      return;
+    }
+    quickNavHead.textContent=(tab==='work')
+      ? (document.documentElement.lang==='en'?'Work Timeline':'工作项目导航')
+      : (document.documentElement.lang==='en'?'Academic Timeline':'学校项目导航');
+    var root=document.getElementById('tab-'+tab);
+    if(!root){ quickNav.classList.remove('show'); return; }
+    var secs=Array.prototype.slice.call(root.querySelectorAll('section.sec[id^="'+(tab==='work'?'w-':'s-')+'"]'));
+    secs.forEach(function(sec){
+      var titleEl=sec.querySelector('.sec-title');
+      var title=(titleEl?titleEl.textContent:'').replace(/\s+/g,' ').trim();
+      var li=document.createElement('li');
+      li.className='quick-nav-item';
+      var btn=document.createElement('button');
+      btn.type='button';
+      btn.className='quick-nav-link';
+      btn.textContent=title || sec.id;
+      btn.addEventListener('click',function(){
+        quickNavLockedUntil=Date.now()+650;
+        var top=sec.getBoundingClientRect().top+window.scrollY-84;
+        window.scrollTo({top:top,behavior:'smooth'});
+      });
+      li.appendChild(btn);
+      quickNavList.appendChild(li);
+      quickNavSections.push({el:sec,item:li});
+    });
+    var tabBarTop=document.getElementById('tabBar').offsetTop;
+    var shouldShow=quickNavSections.length>0 && window.scrollY>(tabBarTop-90);
+    quickNav.classList.toggle('show',shouldShow);
+    updateQuickNavActive();
+  }
+  function updateQuickNavActive(){
+    if(!quickNavSections.length) return;
+    if(Date.now()<quickNavLockedUntil) return;
+    var marker=window.innerHeight*0.42;
+    var best=0;
+    var found=false;
+    for(var i=0;i<quickNavSections.length;i++){
+      var rect=quickNavSections[i].el.getBoundingClientRect();
+      if(rect.top<=marker && rect.bottom>marker){
+        best=i;
+        found=true;
+        break;
+      }
+    }
+    if(!found){
+      for(var j=quickNavSections.length-1;j>=0;j--){
+        if(quickNavSections[j].el.getBoundingClientRect().top<=marker){
+          best=j;
+          found=true;
+          break;
+        }
+      }
+      if(!found) best=0;
+    }
+    quickNavSections.forEach(function(s,idx){
+      s.item.classList.toggle('active',idx===best);
+    });
+    var activeEl=quickNavSections[best] && quickNavSections[best].el;
+    quickNav.style.setProperty('--quick-nav-accent',getSectionAccentColor(activeEl));
+    var probeSec=getSectionByProbePoint() || activeEl;
+    var onDark=!!(probeSec && (
+      probeSec.classList.contains('sec-dark') ||
+      probeSec.classList.contains('sec-hri') ||
+      probeSec.classList.contains('sec-car') ||
+      probeSec.classList.contains('sec-emo')
+    ));
+    quickNav.classList.toggle('on-dark',onDark);
+  }
+  window.addEventListener('scroll',function(){
+    var tabBarTop=document.getElementById('tabBar').offsetTop;
+    var shouldShow=quickNavSections.length>0 && getActiveTabKey()!=='photo' && window.scrollY>(tabBarTop-90);
+    quickNav.classList.toggle('show',shouldShow);
+    if(!shouldShow) return;
+    if(quickNavTicking) return;
+    quickNavTicking=true;
+    requestAnimationFrame(function(){
+      updateQuickNavActive();
+      quickNavTicking=false;
+    });
+  },{passive:true});
   function setLang(lang){
     document.documentElement.lang=lang==='zh'?'zh-CN':'en';
     document.body.classList.toggle('lang-zh',lang==='zh');
@@ -1257,6 +1633,7 @@ a { text-decoration: none; color: inherit; }
       el.innerHTML = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
     });
     document.title = lang==='en' ? 'Jianqiao Ji \u2014 Portfolio' : '\u5D47\u5251\u6865 Jianqiao Ji \u2014 Portfolio';
+    buildQuickNav(getActiveTabKey());
     try{localStorage.setItem('site-lang',lang)}catch(e){}
   }
   var savedLang='zh';
@@ -1294,13 +1671,66 @@ a { text-decoration: none; color: inherit; }
       });
       window.scrollTo({top:document.getElementById('tabBar').offsetTop - 60, behavior:'smooth'});
       if(target==='photo') schedulePhotoLayout();
+      buildQuickNav(target);
     });
   });
+  buildQuickNav(getActiveTabKey());
 
-  // 摄影区：按行计算统一高度，同行底边对齐，较矮图片从底部裁切
+  // 摄影区：优先将竖图排在同一行，减少裁切；无法避免时优先裁竖图
   var photoLayoutTimer;
   function getPhotoCols(){
     return window.innerWidth>800 ? 3 : 2;
+  }
+  function getPhotoRatio(item){
+    var img=item && item.querySelector ? item.querySelector('img') : null;
+    if(img && img.naturalWidth && img.naturalHeight){
+      return img.naturalHeight/img.naturalWidth;
+    }
+    return 0.75;
+  }
+  function reorderPhotoItemsByOrientation(items, cols){
+    var portraits=[],landscapes=[];
+    items.forEach(function(item,idx){
+      if(!item.dataset.photoOriginIdx) item.dataset.photoOriginIdx=String(idx);
+      var ratio=getPhotoRatio(item);
+      (ratio>1 ? portraits : landscapes).push(item);
+    });
+    function take(arr,n){
+      var out=arr.slice(0,n);
+      arr.splice(0,n);
+      return out;
+    }
+    function takeOnePrefer(a,b){
+      return a.length ? a.shift() : (b.length ? b.shift() : null);
+    }
+    var ordered=[];
+    while(portraits.length || landscapes.length){
+      var row=[];
+      if(cols===2){
+        if(portraits.length>=2) row=take(portraits,2);
+        else if(landscapes.length>=2) row=take(landscapes,2);
+        else{
+          row.push(takeOnePrefer(portraits,landscapes));
+          row.push(takeOnePrefer(portraits,landscapes));
+        }
+      }else{
+        if(portraits.length>=3) row=take(portraits,3);
+        else if(landscapes.length>=3) row=take(landscapes,3);
+        else if(portraits.length>=2 && landscapes.length>=1) row=take(portraits,2).concat(take(landscapes,1));
+        else if(landscapes.length>=2 && portraits.length>=1) row=take(landscapes,2).concat(take(portraits,1));
+        else{
+          row.push(takeOnePrefer(portraits,landscapes));
+          row.push(takeOnePrefer(portraits,landscapes));
+          row.push(takeOnePrefer(portraits,landscapes));
+        }
+      }
+      row=row.filter(Boolean);
+      row.sort(function(a,b){
+        return Number(a.dataset.photoOriginIdx)-Number(b.dataset.photoOriginIdx);
+      });
+      ordered=ordered.concat(row);
+    }
+    return ordered;
   }
   function layoutPhotoMasonry(){
     var photoTab=document.getElementById('tab-photo');
@@ -1310,23 +1740,29 @@ a { text-decoration: none; color: inherit; }
     photoTab.querySelectorAll('.photo-masonry').forEach(function(masonry){
       var items=Array.prototype.slice.call(masonry.querySelectorAll('.gallery-img'));
       if(!items.length) return;
+      items=reorderPhotoItemsByOrientation(items,cols);
+      var frag=document.createDocumentFragment();
+      items.forEach(function(item){ frag.appendChild(item); });
+      masonry.appendChild(frag);
       var width=masonry.clientWidth;
       if(width<=0) return;
       var colW=(width-gap*(cols-1))/cols;
       items.forEach(function(item){ item.style.height=''; });
       for(var i=0;i<items.length;i+=cols){
         var row=items.slice(i,i+cols);
-        var maxH=0;
-        row.forEach(function(item){
-          var img=item.querySelector('img');
-          if(img && img.naturalWidth){
-            maxH=Math.max(maxH,colW*(img.naturalHeight/img.naturalWidth));
-          }else{
-            maxH=Math.max(maxH,colW*0.75);
-          }
-        });
-        maxH=Math.round(maxH);
-        row.forEach(function(item){ item.style.height=maxH+'px'; });
+        var ratios=row.map(getPhotoRatio);
+        var portraitCount=ratios.filter(function(r){ return r>1; }).length;
+        var rowH;
+        if(portraitCount===row.length){
+          rowH=colW*Math.max.apply(null,ratios);
+        }else{
+          var landscapeRatios=ratios.filter(function(r){ return r<=1; });
+          var baseRatio=landscapeRatios.length ? Math.max.apply(null,landscapeRatios) : Math.min.apply(null,ratios);
+          rowH=colW*baseRatio;
+          rowH=Math.max(rowH,colW*0.62);
+        }
+        rowH=Math.round(rowH);
+        row.forEach(function(item){ item.style.height=rowH+'px'; });
       }
     });
   }
