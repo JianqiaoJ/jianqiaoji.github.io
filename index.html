@@ -230,6 +230,17 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 0 0 1.5px var(--accent);
 }
 .tl-co { font-weight: 700; font-size: .92rem; }
+.co-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .25s, border-color .25s;
+}
+.co-link:hover {
+  color: var(--accent);
+  border-bottom-color: currentColor;
+}
+.sec-dark .co-link:hover { color: #5b9bd5; }
 .tl-role { font-size: .82rem; color: var(--ink-2); }
 .tl-date { font-size: .72rem; color: var(--ink-4); }
 .tl-type {
@@ -843,22 +854,22 @@ a { text-decoration: none; color: inherit; }
         <div class="hero-card-label">Experience &amp; Education</div>
         <div class="tl">
           <div class="tl-item">
-            <div class="tl-co">Shopee <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-co" data-en='<a href="https://shopee.com/" class="co-link" target="_blank" rel="noopener noreferrer">Shopee</a> <span class="tl-type tl-type-work">Work</span>'><a href="https://shopee.com/" class="co-link" target="_blank" rel="noopener noreferrer">Shopee</a> <span class="tl-type tl-type-work">Work</span></div>
             <div class="tl-role" data-en="Data Product Manager · Search, Recommendation &amp; Ads">数据产品经理 · 搜索、推荐与广告</div>
             <div class="tl-date">2022.5 — Present</div>
           </div>
           <div class="tl-item tl-edu">
-            <div class="tl-co" data-en='Tongji University · College of Design &amp; Innovation <span class="tl-type tl-type-edu">Edu</span>'>同济大学 设计创意学院 <span class="tl-type tl-type-edu">Edu</span></div>
+            <div class="tl-co" data-en='<a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">Tongji University · College of Design &amp; Innovation</a> <span class="tl-type tl-type-edu">Edu</span>'><a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学 设计创意学院</a> <span class="tl-type tl-type-edu">Edu</span></div>
             <div class="tl-role" data-en="Master in Interaction Design (Part-time)">交互设计硕士 (Part-time)</div>
             <div class="tl-date">2022.9 — 2026.6</div>
           </div>
           <div class="tl-item">
-            <div class="tl-co" data-en='JD Daojia <span class="tl-type tl-type-work">Work</span>'>京东到家 <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-co" data-en='<a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">JD Daojia</a> <span class="tl-type tl-type-work">Work</span>'><a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">京东到家</a> <span class="tl-type tl-type-work">Work</span></div>
             <div class="tl-role" data-en="Data Product Manager · Big Data &amp; Algorithm Application">数据产品经理 · 大数据与算法应用部</div>
             <div class="tl-date">2020.09 — 2022</div>
           </div>
           <div class="tl-item">
-            <div class="tl-co" data-en='Quantinfo Technology <span class="tl-type tl-type-work">Work</span>'>量锐科技 <span class="tl-type tl-type-work">Work</span></div>
+            <div class="tl-co" data-en='<a href="https://www.quantinfotech.com/vip_quantinfotech.html" class="co-link" target="_blank" rel="noopener noreferrer">Quantinfo Technology</a> <span class="tl-type tl-type-work">Work</span>'><a href="https://www.quantinfotech.com/vip_quantinfotech.html" class="co-link" target="_blank" rel="noopener noreferrer">量锐科技</a> <span class="tl-type tl-type-work">Work</span></div>
             <div class="tl-role" data-en="Product Manager · Product &amp; Quantitative Strategy">产品经理 · 产品与量化部</div>
             <div class="tl-date">2018.11 — 2020.9</div>
           </div>
@@ -910,11 +921,11 @@ a { text-decoration: none; color: inherit; }
 <!-- WORK 1: Shopee 搜索、推荐和广告数据产品 -->
 <section class="sec sec-shopee" id="w-shopee">
   <div class="wrap">
-    <div class="sec-label sr">Shopee · Ads</div>
+    <div class="sec-label sr"><a href="https://shopee.com/" class="co-link" target="_blank" rel="noopener noreferrer">Shopee</a> · Ads</div>
     <h2 class="sec-title sr sr-d1" data-en="Shopee Search, Recommendation &amp; Ads Data Products">Shopee 搜索、推荐和广告数据产品</h2>
     <p class="sec-title-en sr sr-d1">Search, Recommendation &amp; Ads Data Products</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>Company</strong> Shopee · Search, Recommendation &amp; Ads"><strong>公司</strong> Shopee · 搜索、推荐与广告</span>
+      <span data-en="<strong>Company</strong> <a href=&quot;https://shopee.com/&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Shopee</a> · Search, Recommendation &amp; Ads"><strong>公司</strong> <a href="https://shopee.com/" class="co-link" target="_blank" rel="noopener noreferrer">Shopee</a> · 搜索、推荐与广告</span>
       <span data-en="<strong>Period</strong> 2022 — Present"><strong>时间</strong> 2022 — Present</span>
       <span data-en="<strong>Role</strong> Data Product Manager"><strong>角色</strong> Data Product Manager</span>
     </div>
@@ -962,17 +973,17 @@ a { text-decoration: none; color: inherit; }
 <!-- WORK 2: 商家经营分析看板 -->
 <section class="sec sec-warm" id="w-merchant">
   <div class="wrap">
-    <div class="sec-label sr" data-en="Dada Group · Big Data">达达集团 · 大数据</div>
+    <div class="sec-label sr" data-en='<a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">Dada Group</a> · Big Data'><a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">达达集团</a> · 大数据</div>
     <h2 class="sec-title sr sr-d1" data-en="Merchant Business Analytics Dashboard">商家经营分析看板</h2>
     <p class="sec-title-en sr sr-d1">Retailer Management Analysis Platform</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>Company</strong> Dada Group · Big Data"><strong>公司</strong> 达达集团 · 大数据</span>
+      <span data-en="<strong>Company</strong> <a href=&quot;https://www.jddj.com/#/&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Dada Group</a> · Big Data"><strong>公司</strong> <a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">达达集团</a> · 大数据</span>
       <span data-en="<strong>Period</strong> 2021.09 — 2022.02"><strong>时间</strong> 2021.09 — 2022.02</span>
       <span data-en="<strong>Role</strong> Product Design · Interactive Design"><strong>角色</strong> Product Design · Interactive Design</span>
     </div>
     <p class="case-intro sr" data-en="Designed a business analytics tool for platform merchants, especially traditional small retailers with limited digital literacy. Applied the OSM (Object-Strategy-Measurement) model to decompose the business metric system, used intelligent correlation analysis to automatically locate underperforming stages of operations, and proactively pushed data insights to help merchants make faster business decisions.">为平台入驻商家（尤其是缺乏数字化能力的传统小商家）打造经营分析工具。采用 OSM (Object-Strategy-Measurement) 模型拆解业务指标体系，通过智能关联分析自动定位经营问题环节，主动推送数据洞察，帮助商家快速做出经营决策。</p>
     <div class="metrics sr">
-      <div class="metric"><div class="metric-val" data-en="350K">35万</div><div class="metric-lbl" data-en="Online merchants on JD Daojia">京东到家在线商户数</div></div>
+      <div class="metric"><div class="metric-val" data-en="350K">35万</div><div class="metric-lbl" data-en="Online merchants on <a href=&quot;https://www.jddj.com/#/&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>JD Daojia</a>"><a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">京东到家</a>在线商户数</div></div>
       <div class="metric"><div class="metric-val" data-en="6B RMB">60亿</div><div class="metric-lbl" data-en="Sales uplift of a chain supermarket after onboarding">某连锁超市入驻后销售提升</div></div>
       <div class="metric"><div class="metric-val">OSM</div><div class="metric-lbl">Object-Strategy-Measurement</div></div>
       <div class="metric"><div class="metric-val" data-en="4 Modules">4大功能</div><div class="metric-lbl" data-en="Insights · Metrics · Details · Subscription">洞察 · 指标 · 明细 · 订阅</div></div>
@@ -996,11 +1007,11 @@ a { text-decoration: none; color: inherit; }
 <!-- WORK 3: 电商智能营销画像平台 -->
 <section class="sec sec-green" id="w-profile">
   <div class="wrap">
-    <div class="sec-label sr" data-en="Dada Group · Big Data">达达集团 · 大数据</div>
+    <div class="sec-label sr" data-en='<a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">Dada Group</a> · Big Data'><a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">达达集团</a> · 大数据</div>
     <h2 class="sec-title sr sr-d1" data-en="Intelligent Marketing User Profile Platform">电商智能营销画像平台</h2>
     <p class="sec-title-en sr sr-d1">Intelligent Promotion User Profile Platform</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>Company</strong> Dada Group · Big Data"><strong>公司</strong> 达达集团 · 大数据</span>
+      <span data-en="<strong>Company</strong> <a href=&quot;https://www.jddj.com/#/&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Dada Group</a> · Big Data"><strong>公司</strong> <a href="https://www.jddj.com/#/" class="co-link" target="_blank" rel="noopener noreferrer">达达集团</a> · 大数据</span>
       <span data-en="<strong>Period</strong> 2021.05 — 2022.02"><strong>时间</strong> 2021.05 — 2022.02</span>
       <span data-en="<strong>Role</strong> Product Design · Interactive Design"><strong>角色</strong> Product Design · Interactive Design</span>
     </div>
@@ -1034,11 +1045,11 @@ a { text-decoration: none; color: inherit; }
 <!-- WORK 4: 外汇量化交易执行终端 -->
 <section class="sec sec-dark" id="w-quant">
   <div class="wrap">
-    <div class="sec-label sr" data-en="Quantinfo Technology">量锐科技</div>
+    <div class="sec-label sr" data-en='<a href="https://www.quantinfotech.com/vip_quantinfotech.html" class="co-link" target="_blank" rel="noopener noreferrer">Quantinfo Technology</a>'><a href="https://www.quantinfotech.com/vip_quantinfotech.html" class="co-link" target="_blank" rel="noopener noreferrer">量锐科技</a></div>
     <h2 class="sec-title sr sr-d1" data-en="FX Quantitative Trading Execution Terminal">外汇量化交易执行终端</h2>
     <p class="sec-title-en sr sr-d1">Quantitative Trading Execution Terminal in Forex Market</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>Company</strong> Quantinfo Technology"><strong>公司</strong> 量锐科技</span>
+      <span data-en="<strong>Company</strong> <a href=&quot;https://www.quantinfotech.com/vip_quantinfotech.html&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Quantinfo Technology</a>"><strong>公司</strong> <a href="https://www.quantinfotech.com/vip_quantinfotech.html" class="co-link" target="_blank" rel="noopener noreferrer">量锐科技</a></span>
       <span data-en="<strong>Period</strong> 2019.05 — 2020.08"><strong>时间</strong> 2019.05 — 2020.08</span>
       <span data-en="<strong>Role</strong> Product Design · Interactive Design"><strong>角色</strong> Product Design · Interactive Design</span>
     </div>
@@ -1085,7 +1096,7 @@ a { text-decoration: none; color: inherit; }
     <p class="sec-title-en sr sr-d1">Interaction Design for Controllable Human-LLM Systems: A Case Study of Music Recommendation</p>
     <a href="http://43.143.53.202/" class="case-demo-link sr sr-d2" target="_blank" rel="noopener noreferrer" data-en="Try the Live Prototype →">在线体验原型 Demo →</a>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>School</strong> <a href=&quot;https://tjdi.tongji.edu.cn&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Tongji University · College of Design &amp; Innovation</a>"><strong>学校</strong> <a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学 · 设计创意学院</a></span>
       <span data-en="<strong>Type</strong> Master's Thesis Project · 2026"><strong>类型</strong> 硕士毕业设计 · 2026</span>
       <span data-en="<strong>Advisor</strong> Fulan Wei"><strong>指导教师</strong> 魏佛兰</span>
     </div>
@@ -1133,7 +1144,7 @@ a { text-decoration: none; color: inherit; }
     <h2 class="sec-title sr sr-d1" data-en="Halo: Interaction Design for an Intelligent Photography Drone">Halo: 智能摄影无人机交互设计</h2>
     <p class="sec-title-en sr sr-d1">Intelligent Photography Drone That Avoids Non-Photographers</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>School</strong> <a href=&quot;https://tjdi.tongji.edu.cn&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Tongji University · College of Design &amp; Innovation</a>"><strong>学校</strong> <a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学 · 设计创意学院</a></span>
       <span data-en="<strong>Course</strong> Human-Robot Interaction (HRI)"><strong>课程</strong> 人-机器人交互设计 (HRI)</span>
       <span data-en="<strong>Team</strong> Jianqiao Ji · Ying Jingpei · Li Huan"><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Li Huan</span>
     </div>
@@ -1171,7 +1182,7 @@ a { text-decoration: none; color: inherit; }
     <h2 class="sec-title sr sr-d1" data-en="Data-Driven Design for E-commerce Search Experience">电商搜索体验的数据驱动设计</h2>
     <p class="sec-title-en sr sr-d1">Data-Driven Design Optimization for E-commerce Search</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>School</strong> <a href=&quot;https://tjdi.tongji.edu.cn&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Tongji University · College of Design &amp; Innovation</a>"><strong>学校</strong> <a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学 · 设计创意学院</a></span>
       <span data-en="<strong>Course</strong> Data Analysis for Design"><strong>课程</strong> 设计数据分析</span>
       <span data-en="<strong>Team</strong> Jianqiao Ji · Zhang Linuo"><strong>团队</strong> 嵇剑桥 · Zhang Linuo</span>
     </div>
@@ -1209,7 +1220,7 @@ a { text-decoration: none; color: inherit; }
     <h2 class="sec-title sr sr-d1" data-en="Enlighten: A Light-Language Human-Vehicle Interaction System">Enlighten: 光语人车交互系统</h2>
     <p class="sec-title-en sr sr-d1">Refle Elf &mdash; Enlighten the Soul of Your Car</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>School</strong> <a href=&quot;https://tjdi.tongji.edu.cn&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Tongji University · College of Design &amp; Innovation</a>"><strong>学校</strong> <a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学 · 设计创意学院</a></span>
       <span data-en="<strong>Course</strong> Human-Vehicle Interaction Design"><strong>课程</strong> 人车交互设计</span>
       <span data-en="<strong>Team</strong> Jianqiao Ji · Li Huan · Ying Jingpei · Weilisi"><strong>团队</strong> 嵇剑桥 · Li Huan · Ying Jingpei · Weilisi</span>
     </div>
@@ -1244,7 +1255,7 @@ a { text-decoration: none; color: inherit; }
     <h2 class="sec-title sr sr-d1" data-en="VR Rehabilitation Game for Spatial Cognitive Impairment">VR 空间认知障碍康复游戏</h2>
     <p class="sec-title-en sr sr-d1">VR-Cognitive Rehabilitation for Alzheimer's Patients</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>School</strong> <a href=&quot;https://tjdi.tongji.edu.cn&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Tongji University · College of Design &amp; Innovation</a>"><strong>学校</strong> <a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学 · 设计创意学院</a></span>
       <span data-en="<strong>Course</strong> VR/AR Interaction Design"><strong>课程</strong> VR/AR 交互设计</span>
       <span data-en="<strong>Team</strong> Jianqiao Ji · Ying Jingpei · Jiang Liyuan"><strong>团队</strong> 嵇剑桥 · Ying Jingpei · Jiang Liyuan</span>
     </div>
@@ -1290,9 +1301,9 @@ a { text-decoration: none; color: inherit; }
     <h2 class="sec-title sr sr-d1" data-en="EMO-D: Emotional Diamond Brand Innovation Design">EMO-D: 情感钻石品牌创新设计</h2>
     <p class="sec-title-en sr sr-d1">Emotional Diamond &mdash; A Moment Is Forever</p>
     <div class="sec-meta sr sr-d2">
-      <span data-en="<strong>School</strong> Tongji University · College of Design &amp; Innovation"><strong>学校</strong> 同济大学 · 设计创意学院</span>
+      <span data-en="<strong>School</strong> <a href=&quot;https://tjdi.tongji.edu.cn&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Tongji University · College of Design &amp; Innovation</a>"><strong>学校</strong> <a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学 · 设计创意学院</a></span>
       <span data-en="<strong>Course</strong> Brand Marketing &amp; Innovation Design"><strong>课程</strong> 品牌营销与创新设计</span>
-      <span data-en="<strong>Partners</strong> Tongji D&amp;I &times; L Catterton &times; Worldia Diamond"><strong>合作</strong> 同济大学设创学院 &times; L Catterton &times; 沃尔德钻石</span>
+      <span data-en="<strong>Partners</strong> <a href=&quot;https://tjdi.tongji.edu.cn&quot; class=&quot;co-link&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;>Tongji D&amp;I</a> &times; L Catterton &times; Worldia Diamond"><strong>合作</strong> <a href="https://tjdi.tongji.edu.cn" class="co-link" target="_blank" rel="noopener noreferrer">同济大学设创学院</a> &times; L Catterton &times; 沃尔德钻石</span>
     </div>
     <p class="case-intro sr" data-en="EMO-D (Emotional Diamond) is a lab-grown diamond jewelry brand targeting Gen-Z new-luxury pioneers. Integrating AIGC technology with emotional data, it extracts user emotions through the PAD affect model, then generates personalized emotional diamonds via an AI emotion spectrum wheel and GPT-4 emotional poetry — translating emotional data into one-of-a-kind jewelry designs. The brand philosophy, A Moment Is Forever, lets every diamond carry its wearer's authentic emotions.">EMO-D (Emotional Diamond) 是面向 Z 世代"新奢品先锋者"的培育钻石首饰品牌。融合 AIGC 技术与情感数据，通过 PAD 情感模型提取用户情绪，经由 AI 情感光谱轮和 GPT-4 情感作诗生成个性化的"情感钻石"，将情感数据转化为独一无二的珠宝设计。品牌核心理念"此刻 · 永恒"，让每一颗钻石承载佩戴者的真实情感。</p>
     <div class="metrics sr">
