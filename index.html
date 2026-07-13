@@ -571,6 +571,294 @@ a { text-decoration: none; color: inherit; }
   display: block;
 }
 
+/* AI 参与的 3D 打印工作流 */
+.sec-print3d {
+  background: var(--bg);
+  padding: 78px 0 88px;
+}
+.print-flow-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: .78fr repeat(3, minmax(0, 1fr));
+  grid-template-rows: 1fr 1fr;
+  gap: 34px 28px;
+  min-height: 650px;
+  padding: 42px 34px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(116,205,255,.34), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(255,205,134,.42), transparent 30%),
+    radial-gradient(circle at 74% 78%, rgba(255,105,180,.26), transparent 36%),
+    linear-gradient(120deg, #dff3ff 0%, #eef0ff 43%, #fff0e8 100%);
+  box-shadow: 0 20px 60px rgba(61,90,128,.1);
+}
+.print-flow-board::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px);
+  background-size: 52px 52px;
+  opacity: .22;
+  pointer-events: none;
+}
+.print-flow-line {
+  position: absolute;
+  inset: 18px 20px 20px;
+  z-index: 1;
+  width: calc(100% - 40px);
+  height: calc(100% - 38px);
+  pointer-events: none;
+  display: none;
+}
+.print-flow-line .path-glow {
+  display: none;
+  fill: none;
+  stroke: rgba(255,255,255,.7);
+  stroke-width: 4.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#print-flow-blur);
+}
+.print-flow-line .path-aura {
+  display: none;
+  fill: none;
+  stroke: rgba(255,255,255,.3);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#print-flow-blur);
+}
+.print-flow-line .path-core {
+  fill: none;
+  stroke: rgba(255,255,255,.9);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.print-flow-line .path-arrow {
+  display: none;
+  fill: none;
+  stroke: rgba(255,255,255,.88);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#print-dot-blur);
+}
+.print-flow-line circle {
+  display: none;
+  fill: rgba(255,255,255,.95);
+  filter: url(#print-dot-blur);
+}
+.print-flow-hero {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  padding-right: 8px;
+}
+.print-flow-title {
+  font-size: clamp(1.75rem, 3.1vw, 3rem);
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: 0;
+  color: #1d2b44;
+  margin-bottom: 24px;
+}
+.print-flow-accent {
+  width: 98px;
+  height: 4px;
+  border-radius: 999px;
+  background: #2f78c8;
+  margin-bottom: 0;
+}
+.print-step-1 { grid-column: 2; grid-row: 1; }
+.print-step-2 { grid-column: 3; grid-row: 1; }
+.print-step-3 { grid-column: 4; grid-row: 1; }
+.print-step-4 { grid-column: 2; grid-row: 2; }
+.print-step-5 { grid-column: 3; grid-row: 2; }
+.print-step-6 { grid-column: 4; grid-row: 2; }
+.print-step-1,
+.print-step-2,
+.print-step-3 { align-self: start; }
+.print-step-4,
+.print-step-5,
+.print-step-6 { align-self: end; }
+.print-step-3,
+.print-step-6 { --step-x: 4px; }
+.print-step-4 { --step-x: -14px; }
+.print-step-5 { --step-x: -4px; }
+.print-flow-board .print-step-card {
+  position: relative;
+  z-index: 2;
+  transform: translateX(var(--step-x, 0));
+  height: 236px;
+}
+.print-flow-board .print-step-card:hover {
+  transform: translateX(var(--step-x, 0)) translateY(-4px);
+}
+.print-step-card {
+  border: 1px solid rgba(255,255,255,.86);
+  background: rgba(255,255,255,.46);
+  backdrop-filter: blur(16px) saturate(135%);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 12px 34px rgba(61,90,128,.12);
+  transition: transform .32s var(--ease), box-shadow .32s var(--ease), border-color .32s;
+}
+.print-step-card:hover {
+  border-color: rgba(255,255,255,1);
+  box-shadow: 0 18px 42px rgba(61,90,128,.16);
+}
+.print-step-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 10px;
+  min-width: 0;
+}
+.print-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  border-radius: 50%;
+  color: white;
+  font-size: .66rem;
+  font-weight: 700;
+  background: #2f78c8;
+  box-shadow: 0 4px 10px rgba(47,120,200,.22), inset 0 1px 0 rgba(255,255,255,.44);
+}
+.print-step-title {
+  min-width: 0;
+  font-size: clamp(.62rem, .78vw, .82rem);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: #1d2b44;
+}
+.print-step-desc {
+  display: none;
+  min-height: 0;
+  font-size: .74rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+.print-step-gallery {
+  display: grid;
+  gap: 8px;
+  height: 168px;
+}
+.print-step-gallery.duo { grid-template-columns: 1fr 1fr; }
+.print-step-gallery.merge {
+  position: relative;
+  display: block;
+}
+.print-step-gallery .gallery-img {
+  border-radius: 6px;
+  background: rgba(255,255,255,.58);
+  cursor: pointer;
+  overflow: hidden;
+  height: 100%;
+  border-color: rgba(255,255,255,.75);
+  box-shadow: 0 5px 16px rgba(38,50,74,.08);
+}
+.print-step-gallery.duo .gallery-img { height: 100%; }
+.print-step-gallery.merge .gallery-img:first-child { height: 100%; }
+.print-step-gallery.merge .gallery-img:nth-child(2) {
+  position: absolute;
+  right: -9px;
+  bottom: -9px;
+  width: 25%;
+  height: 42%;
+  border: 2px solid rgba(255,255,255,.92);
+  box-shadow: 0 8px 22px rgba(38,50,74,.2);
+}
+.print-step-gallery .gallery-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.print-shot-reference img { object-position: center 45%; }
+.print-shot-concept img { object-fit: contain; background: #f7f4f1; padding: 2px; }
+.print-shot-model img { object-position: center 52%; }
+.print-shot-model-detail img { object-position: center 42%; }
+.print-shot-slice img { object-position: center; }
+.print-shot-print img { object-position: center 48%; }
+.print-shot-paint img,
+.print-shot-final img { object-position: center 44%; }
+.print-mini-case {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: center;
+  gap: 24px;
+  margin-top: 22px;
+  padding: 18px 26px;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(116,205,255,.22), transparent 28%),
+    radial-gradient(circle at 90% 70%, rgba(255,105,180,.18), transparent 30%),
+    linear-gradient(110deg, rgba(223,243,255,.72), rgba(255,240,248,.72));
+  box-shadow: 0 12px 34px rgba(61,90,128,.08);
+}
+.print-mini-item {
+  position: relative;
+  min-width: 0;
+}
+.print-mini-item:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(91,143,249,.52);
+  font-size: 1.45rem;
+  line-height: 1;
+}
+.print-mini-case .gallery-img {
+  aspect-ratio: 1.42 / 1;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.78);
+  background: rgba(255,255,255,.62);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(38,50,74,.08);
+}
+.print-mini-case img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.print-mini-case .mini-portrait {
+  aspect-ratio: 1.42 / 1;
+  width: 100%;
+  justify-self: stretch;
+}
+.print-mini-case .mini-finish {
+  aspect-ratio: 1.42 / 1;
+  width: 100%;
+  justify-self: stretch;
+}
+.print-mini-case .mini-portrait img {
+  object-fit: cover;
+  object-position: center 42%;
+}
+.print-mini-case .mini-finish img {
+  object-fit: cover;
+  object-position: center top;
+}
+.print-mini-case .mini-model img,
+.print-mini-case .mini-print img { object-position: center 48%; }
 /* 右侧链式快捷导航（工作/学校项目） */
 .quick-nav {
   --quick-nav-accent: var(--ink-1);
@@ -783,6 +1071,36 @@ a { text-decoration: none; color: inherit; }
   .sec { padding: 72px 0; }
   .steps { grid-template-columns: 1fr 1fr; }
   .tab-btn { padding: 14px 16px; font-size: .82rem; }
+  .print-flow-board {
+    display: block;
+    min-height: 0;
+    padding: 28px 20px;
+  }
+  .print-flow-line { display: none; }
+  .print-flow-hero {
+    padding-right: 0;
+    margin-bottom: 22px;
+  }
+  .print-flow-title { font-size: 2rem; }
+  .print-flow-accent { margin-bottom: 20px; }
+  .print-flow-board .print-step-card {
+    transform: none;
+    height: auto;
+    margin-bottom: 16px;
+  }
+  .print-flow-board .print-step-card:hover {
+    transform: translateY(-3px);
+  }
+  .print-step-desc { display: block; min-height: 0; }
+  .print-mini-case {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 128px;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 14px 18px;
+  }
+  .print-mini-item:not(:last-child)::after { right: -18px; }
 }
 @media (max-width: 500px) {
   .quick-nav {
@@ -795,10 +1113,31 @@ a { text-decoration: none; color: inherit; }
   .hero-meta { flex-direction: column; gap: 8px; }
   .metrics { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; }
+  .print-step-card { padding: 16px; }
+  .print-step-gallery.duo { grid-template-columns: 1fr; }
+  .print-step-gallery.merge .gallery-img:nth-child(2) {
+    width: 32%;
+    right: -6px;
+    bottom: -6px;
+  }
+  .print-mini-case { grid-auto-columns: 112px; }
 }
-@media (max-width: 1200px) {
+@media (min-width: 801px) and (max-width: 1200px) {
   .quick-nav { right: 8px; width: 120px; }
   .quick-nav-link { max-width: 96px; font-size: .62rem; }
+  .print-flow-board {
+    gap: 20px 18px;
+    padding: 36px 24px;
+  }
+  .print-step-head { gap: 7px; }
+  .print-step-num {
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+    font-size: .62rem;
+  }
+  .print-step-title { font-size: .62rem; }
+  .print-flow-title { font-size: clamp(1.55rem, 3vw, 2.45rem); }
 }
 </style>
 </head>
@@ -847,8 +1186,8 @@ a { text-decoration: none; color: inherit; }
         <div class="hero-avatar sr"><img src="images/avatar.png" alt="Jianqiao Ji"></div>
         <div class="hero-tag sr sr-d1">Product Manager &middot; Interaction Designer &middot; AI Builder</div>
         <h1 class="sr sr-d1" data-en="Jianqiao Ji">嵇剑桥<br><em>Jianqiao Ji</em></h1>
-        <p class="hero-sub sr sr-d2" data-en="Hi! I am a Product Manager &amp; AI practitioner focusing on search, recommendation and advertising, human-computer interaction, and finance; formerly a quantitative trader. I specialize in decomposing complex business problems into data-driven product solutions and bridging data engineering, algorithm, and business operations teams. Working proficiency in English, comfortable working in full-English environments.">Hi~ 我是一名产品经理 &amp; AI实践者，专注于搜索、推荐和广告与人机交互和金融领域，前量化交易员。擅长将复杂业务问题拆解为数据驱动的产品方案，在数据工程、算法与产运团队之间搭建桥梁。Working proficiency in English, comfortable working in full-English environments.</p>
-        <p class="hero-easter sr sr-d3" data-text="#Vibe Coding is fun!"></p>
+        <p class="hero-sub sr sr-d2" data-en="Hi! I am a Product Manager &amp; AI practitioner focusing on search, recommendation and advertising, human-computer interaction, and finance; formerly a quantitative trader. I specialize in decomposing complex business problems into data-driven product solutions and bridging data engineering, algorithm, and business operations teams. Working proficiency in English, comfortable working in full-English environments.">Hi~ 我是一名产品经理 &amp; AI实践者，专注于搜索推荐广告、人机交互和金融领域，前量化交易员。擅长将复杂业务问题拆解为数据驱动的产品方案，在数据工程、算法与产运团队之间搭建桥梁。Working proficiency in English, comfortable working in full-English environments.</p>
+        <p class="hero-easter sr sr-d3" data-text="#connecting the dots"></p>
       </div>
       <div class="hero-card sr sr-d2">
         <div class="hero-card-label">Experience &amp; Education</div>
@@ -906,6 +1245,7 @@ a { text-decoration: none; color: inherit; }
     <button class="tab-btn active" data-tab="work" data-en="Work Projects">工作项目 Work</button>
     <button class="tab-btn" data-tab="school" data-en="Academic Projects">学校项目 Academic</button>
     <button class="tab-btn" data-tab="photo" data-en="Photography">摄影 Photography</button>
+    <button class="tab-btn" data-tab="infinity" data-en="∞" aria-label="3D Printing Workflow" title="3D Printing Workflow">∞</button>
   </div>
 </div>
 <aside class="quick-nav" id="quickNav" aria-label="Section quick navigation">
@@ -1465,6 +1805,141 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 </div><!-- end tab-photo -->
+
+<div class="tab-content" id="tab-infinity">
+<section class="sec sec-print3d" id="p-print3d" aria-label="AI 参与的 3D 打印创作流程">
+  <div class="wrap">
+    <div class="print-flow-board sr">
+      <svg class="print-flow-line" viewBox="0 0 1120 620" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <filter id="print-flow-blur" x="-10%" y="-18%" width="120%" height="136%">
+            <feGaussianBlur stdDeviation="4.8" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="print-dot-blur" x="-90%" y="-90%" width="280%" height="280%">
+            <feGaussianBlur stdDeviation="3.4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <marker id="print-flow-arrow" markerWidth="18" markerHeight="18" refX="12" refY="5" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L12,5 L0,10" fill="none" stroke="rgba(255,255,255,.96)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+        </defs>
+        <path class="path-aura" d="M210 146 H1014 Q1080 146 1080 212 V314 Q1080 354 1040 354 H250 Q210 354 210 394 V492 Q210 532 250 532 H1092" />
+        <path class="path-glow" d="M210 146 H1014 Q1080 146 1080 212 V314 Q1080 354 1040 354 H250 Q210 354 210 394 V492 Q210 532 250 532 H1092" />
+        <path class="path-core" marker-end="url(#print-flow-arrow)" d="M210 146 H1014 Q1080 146 1080 212 V314 Q1080 354 1040 354 H250 Q210 354 210 394 V492 Q210 532 250 532 H1092" />
+        <path class="path-arrow" marker-end="url(#print-flow-arrow)" d="M690 354 H540" />
+        <path class="path-arrow" marker-end="url(#print-flow-arrow)" d="M640 532 H790" />
+        <circle cx="452" cy="146" r="4" />
+        <circle cx="680" cy="146" r="4" />
+        <circle cx="918" cy="146" r="4" />
+        <circle cx="452" cy="532" r="4" />
+        <circle cx="680" cy="532" r="4" />
+        <circle cx="918" cy="532" r="4" />
+      </svg>
+
+      <div class="print-flow-hero">
+        <div class="print-flow-title" data-en="AI-assisted<br>3D printing<br>workflow">AI 参与的<br>3D 打印<br>创作流程</div>
+        <div class="print-flow-accent"></div>
+      </div>
+
+      <article class="print-step-card print-step-1">
+        <div class="print-step-head">
+          <span class="print-step-num">1</span>
+          <h3 class="print-step-title" data-en="References &amp; Inspiration">素材与灵感</h3>
+        </div>
+        <p class="print-step-desc" data-en="Start from photos, textures, color references, and posture cues to define the character's warmth, scale, and handmade feeling.">从照片、材质、色彩与姿态线索出发，确定角色的温度、比例和手作感。</p>
+        <div class="print-step-gallery">
+          <div class="gallery-img print-shot-reference"><img src="print3d_images/bread_dog/1.jpg" alt="面包狗 3D 打印流程 1 素材与灵感" loading="lazy"></div>
+        </div>
+      </article>
+
+      <article class="print-step-card print-step-2">
+        <div class="print-step-head">
+          <span class="print-step-num">2</span>
+          <h3 class="print-step-title" data-en="Codex Three-View Concept">Codex 生成手办风格三视图</h3>
+        </div>
+        <p class="print-step-desc" data-en="Translate the reference into a front-side-back toy concept so the later 3D model has clearer proportion and silhouette constraints.">把参考图转译成正、侧、后三视图，让后续建模有更清晰的比例和轮廓约束。</p>
+        <div class="print-step-gallery">
+          <div class="gallery-img print-shot-concept"><img src="print3d_images/bread_dog/2.png" alt="面包狗 3D 打印流程 2 Codex 三视图" loading="lazy"></div>
+        </div>
+      </article>
+
+      <article class="print-step-card print-step-3">
+        <div class="print-step-head">
+          <span class="print-step-num">3</span>
+          <h3 class="print-step-title" data-en="Tripo AI Model Generation">Tripo AI 模型生成</h3>
+        </div>
+        <p class="print-step-desc" data-en="Generate the first 3D model from the concept and compare previews before deciding what needs cleanup and reinforcement.">根据概念图生成初始 3D 模型，并对比预览，判断后续需要清理和强化的部分。</p>
+        <div class="print-step-gallery merge">
+          <div class="gallery-img print-shot-model"><img src="print3d_images/bread_dog/3.1.jpg" alt="面包狗 3D 打印流程 3 模型生成预览" loading="lazy"></div>
+          <div class="gallery-img print-shot-model-detail"><img src="print3d_images/bread_dog/3.2.png" alt="面包狗 3D 打印流程 3 模型细节预览" loading="lazy"></div>
+        </div>
+      </article>
+
+      <article class="print-step-card print-step-4">
+        <div class="print-step-head">
+          <span class="print-step-num">4</span>
+          <h3 class="print-step-title" data-en="Model Adjustment &amp; Slicing">模型调整与切片</h3>
+        </div>
+        <p class="print-step-desc" data-en="Prepare the mesh for fabrication: adjust scale, support, infill, and print parameters before slicing.">进入可制造性检查：调整比例、支撑、填充和打印参数，再完成切片。</p>
+        <div class="print-step-gallery">
+          <div class="gallery-img print-shot-slice"><img src="print3d_images/bread_dog/4.png" alt="面包狗 3D 打印流程 4 模型调整与切片" loading="lazy"></div>
+        </div>
+      </article>
+
+      <article class="print-step-card print-step-5">
+        <div class="print-step-head">
+          <span class="print-step-num">5</span>
+          <h3 class="print-step-title" data-en="Bambu Lab P1S Printing">拓竹 P1S 打印</h3>
+        </div>
+        <p class="print-step-desc" data-en="Move from screen to machine, observing the print surface and figure details during the physical build.">从屏幕进入机器，观察打印表面、支撑稳定性和角色细节的实体成形。</p>
+        <div class="print-step-gallery">
+          <div class="gallery-img print-shot-print"><img src="print3d_images/bread_dog/5.jpg" alt="面包狗 3D 打印流程 5 拓竹 P1S 打印" loading="lazy"></div>
+        </div>
+      </article>
+
+      <article class="print-step-card print-step-6">
+        <div class="print-step-head">
+          <span class="print-step-num">6</span>
+          <h3 class="print-step-title" data-en="Painting &amp; Finished Piece">上色 / 成品</h3>
+        </div>
+        <p class="print-step-desc" data-en="Finish the figure through hand painting, turning the printed shell back into a warm personal object.">通过手工上色完成最终表达，把打印外壳重新变成有温度的个人小物。</p>
+        <div class="print-step-gallery duo">
+          <div class="gallery-img print-shot-paint"><img src="print3d_images/bread_dog/6.1.jpg" alt="面包狗 3D 打印流程 6 手工上色" loading="lazy"></div>
+          <div class="gallery-img print-shot-final"><img src="print3d_images/bread_dog/6.2.jpg" alt="面包狗 3D 打印流程 6 成品展示" loading="lazy"></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="print-mini-case sr" aria-label="海边 3D 打印小案例流程">
+      <div class="print-mini-item">
+        <div class="gallery-img mini-portrait"><img src="print3d_images/seaside/1.jpg" alt="海边 3D 打印流程 1" loading="lazy"></div>
+      </div>
+      <div class="print-mini-item">
+        <div class="gallery-img"><img src="print3d_images/seaside/2.jpg" alt="海边 3D 打印流程 2" loading="lazy"></div>
+      </div>
+      <div class="print-mini-item">
+        <div class="gallery-img mini-model"><img src="print3d_images/seaside/3.png" alt="海边 3D 打印流程 3" loading="lazy"></div>
+      </div>
+      <div class="print-mini-item">
+        <div class="gallery-img"><img src="print3d_images/seaside/4.png" alt="海边 3D 打印流程 4" loading="lazy"></div>
+      </div>
+      <div class="print-mini-item">
+        <div class="gallery-img mini-print"><img src="print3d_images/seaside/5.jpg" alt="海边 3D 打印流程 5" loading="lazy"></div>
+      </div>
+      <div class="print-mini-item">
+        <div class="gallery-img mini-finish"><img src="print3d_images/seaside/6.jpg" alt="海边 3D 打印流程 6" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- end tab-infinity -->
 
 <!-- FOOTER -->
 <footer class="footer" id="contact">
