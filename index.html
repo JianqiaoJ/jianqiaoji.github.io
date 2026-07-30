@@ -404,8 +404,43 @@ a { text-decoration: none; color: inherit; }
 }
 .ads-module-title { font-size: .92rem; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
 .ads-module-desc { font-size: .78rem; color: var(--ink-3); line-height: 1.7; }
+/* AI 增强型日常工作流：四张竖卡 + 能力栈条 */
+.ads-wf-modules {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;
+}
+.ads-wf-modules .ads-module { display: flex; flex-direction: column; }
+.ads-wf-summary { font-size: .74rem; color: var(--ink-3); margin-bottom: 12px; }
+.ads-wf-list { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
+.ads-wf-list li {
+  position: relative; padding-left: 12px;
+  font-size: .72rem; color: var(--ink-3); line-height: 1.6;
+}
+.ads-wf-list li::before {
+  content: ''; position: absolute; left: 0; top: .58em;
+  width: 4px; height: 4px; border-radius: 50%; background: #ee4d2d;
+}
+.ads-wf-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.ads-wf-chip {
+  display: inline-flex; align-items: center;
+  font-size: .6rem; font-weight: 600; color: #b34324;
+  background: rgba(238,77,45,.07); border: 1px solid rgba(238,77,45,.28);
+  border-radius: 100px; padding: 3px 10px; line-height: 1.4; white-space: nowrap;
+}
+.ads-wf-stack {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 14px 18px; border: 1px dashed rgba(238,77,45,.3);
+  border-radius: 12px; background: rgba(255,243,239,.5);
+}
+.ads-wf-stack-label {
+  font-size: .62rem; font-weight: 700; color: #ee4d2d;
+  letter-spacing: 1.5px; text-transform: uppercase; margin-right: 4px;
+}
+@media (max-width: 1100px) {
+  .ads-wf-modules { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 800px) {
   .ads-modules { grid-template-columns: 1fr; }
+  .ads-wf-modules { grid-template-columns: 1fr; }
   .ads-hero-card { padding: 24px 20px; }
   .ads-flow-node { white-space: normal; }
 }
@@ -571,6 +606,17 @@ a { text-decoration: none; color: inherit; }
   display: block;
 }
 
+/* 今日毛选：内嵌可交互作品 */
+.sec-maoxuan { background: var(--bg); padding: 0 0 88px; }
+.maoxuan-frame {
+  display: block; width: 100%; height: 900px; overflow: hidden;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: #f5efe4; box-shadow: 0 20px 60px rgba(61,50,30,.1);
+}
+@media (max-width: 800px) {
+  .maoxuan-frame { height: 760px; border-radius: 8px; }
+}
+
 /* AI 参与的 3D 打印工作流 */
 .sec-print3d {
   background: var(--bg);
@@ -612,32 +658,44 @@ a { text-decoration: none; color: inherit; }
   width: calc(100% - 40px);
   height: calc(100% - 38px);
   pointer-events: none;
-  display: none;
+  display: block;
 }
 .print-flow-line .path-glow {
-  display: none;
   fill: none;
-  stroke: rgba(255,255,255,.7);
-  stroke-width: 4.2;
+  stroke: rgba(255,255,255,.38);
+  stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
   filter: url(#print-flow-blur);
 }
 .print-flow-line .path-aura {
-  display: none;
   fill: none;
-  stroke: rgba(255,255,255,.3);
-  stroke-width: 12;
+  stroke: rgba(255,255,255,.16);
+  stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
   filter: url(#print-flow-blur);
 }
 .print-flow-line .path-core {
   fill: none;
-  stroke: rgba(255,255,255,.9);
-  stroke-width: 2;
+  stroke: rgba(255,255,255,.86);
+  stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+.print-flow-line .path-beam {
+  fill: none;
+  stroke: rgba(255,255,255,.98);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 56 444;
+  filter: url(#print-flow-beam);
+  animation: print-flow-beam 2.4s linear infinite;
+}
+@keyframes print-flow-beam {
+  from { stroke-dashoffset: 56; }
+  to { stroke-dashoffset: -444; }
 }
 .print-flow-line .path-arrow {
   display: none;
@@ -652,6 +710,12 @@ a { text-decoration: none; color: inherit; }
   display: none;
   fill: rgba(255,255,255,.95);
   filter: url(#print-dot-blur);
+}
+@media (prefers-reduced-motion: reduce) {
+  .print-flow-line .path-beam {
+    animation: none;
+    opacity: .52;
+  }
 }
 .print-flow-hero {
   position: relative;
@@ -1307,6 +1371,104 @@ a { text-decoration: none; color: inherit; }
         <p class="ads-module-desc" data-en="Led data product design for Shopee Ads commercialization strategies, covering Auto Rebate / ROI Protection, Target ROI, rapid ramp-up, oCPM billing upgrades, AI Diagnosis, live-streaming ads monetization, and Ads voucher incentives — establishing metric definitions, monitoring systems, and cross-team alignment mechanisms around ROI/ROAS, budget efficiency, attribution &amp; billing, rebate validation, and strategy adoption.">负责 Shopee Ads 多类商业化策略的数据产品设计，覆盖 自动赔付 / ROI Protection、Target ROI、极速起量、oCPM 计费升级、AI Diagnosis 广告诊断、直播广告商业化和 Ads 发券激励策略，围绕 ROI/ROAS、预算效率、归因计费、赔付校验和策略采纳建立数据口径、监控指标与跨团队对齐机制。</p>
       </div>
     </div>
+
+    <!-- AI 增强型日常数据产品工作流：主卡 + 四张竖卡 + 能力栈 -->
+    <div class="ads-hero-card sr">
+      <div class="ads-hero-badge">AI-Augmented Workflow</div>
+      <div class="ads-hero-title" data-en="AI-Augmented Daily Data Product Workflow">AI 参与的日常数据产品工作流</div>
+      <p class="ads-hero-desc" data-en="I embed AI into the full loop of ads data product work — problem definition, evidence retrieval, data validation, product delivery, and knowledge consolidation. AI handles retrieval and execution across knowledge, data, code, internal systems, and communication threads; I own business judgment, metric boundaries, risk control, and final delivery.">把 AI 嵌入广告数据产品从问题定义、证据检索、数据验证、产品交付到知识沉淀的完整链路：AI 承担跨知识、数据、代码、内部系统与沟通信息的检索和执行；我负责业务判断、口径边界、风险控制与最终交付。</p>
+      <div class="ads-flow" aria-label="AI 增强型工作流主链路">
+        <span class="ads-flow-node" data-en="Business Question Input">业务问题输入</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node hl" data-en="AI Task Routing">AI 任务路由</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node" data-en="Evidence &amp; Execution Engine">证据与执行引擎</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node" data-en="Human Judgment &amp; Delivery">人工判断交付</span>
+        <span class="ads-flow-arrow">&#8594;</span>
+        <span class="ads-flow-node" data-en="Consolidation &amp; Iteration">沉淀与迭代</span>
+      </div>
+    </div>
+
+    <div class="ads-wf-modules sr">
+      <div class="ads-module">
+        <div class="ads-module-en">01 · Data Product Core</div>
+        <div class="ads-module-title" data-en="Core Ads Data Product Workflow">广告数据产品核心工作流</div>
+        <p class="ads-wf-summary" data-en="From business questions to trustworthy data conclusions.">从业务问题到可信数据结论。</p>
+        <ul class="ads-wf-list">
+          <li data-en="Metric &amp; mechanism Q&amp;A: ROI, GMV, budget, bidding, billing, volume-efficiency trade-offs">指标与机制问答：ROI、GMV、预算、竞价、计费、量效兑换</li>
+          <li data-en="Table schema &amp; lineage tracing: data map, ETL, tracking, raw logs">表字段与血缘追溯：数据地图、ETL、tracking、raw log</li>
+          <li data-en="Internal data-infra SQL: run small regional slices first, then refine metric definitions">内部 data infra 套件 SQL：先跑小切片，再修正口径</li>
+          <li data-en="Anomaly diagnosis: multi-dimensional root-causing across budget, conversion, click, impression, and revenue">异常诊断：预算、转化、点击、曝光、收入等多维拆因</li>
+          <li data-en="Cross-platform reconciliation: seller side, ads console, diagnosis tables, performance reports, traffic, finance, attribution">跨平台对账：商家端、广告后台、诊断表、效果报表、流量、财务、归因</li>
+          <li data-en="Tracking &amp; attribution validation: item model, keywords, cart, no-click / no-impression paths">Tracking 与归因验证：商品模型、关键词、购物车、无点击 / 无曝光链路</li>
+          <li data-en="Experiment &amp; test design: scoping, overlap checks, UAT SQL, historical impact assessment">实验与测试方案：实验范围、重合检查、UAT SQL、历史影响评估</li>
+        </ul>
+        <div class="ads-wf-chips">
+          <span class="ads-wf-chip" data-en="Stable &amp; reusable">稳定复用</span>
+          <span class="ads-wf-chip" data-en="Proven across runs">多次跑通</span>
+        </div>
+      </div>
+      <div class="ads-module">
+        <div class="ads-module-en">02 · Product Delivery</div>
+        <div class="ads-module-title" data-en="Product Delivery &amp; Internal Ops Workflow">产品交付与内部操作工作流</div>
+        <p class="ads-wf-summary" data-en="From draft assistance to closed-loop system operations.">从草稿辅助升级到系统闭环。</p>
+        <ul class="ads-wf-list">
+          <li data-en="Tracking DRD copilot: parse PRDs, reuse enums, locate front-end entry points, generate validation checklists">Tracking DRD Copilot：解析 PRD、复用 enum、查前端入口、生成验证清单</li>
+          <li data-en="Data requirement &amp; design docs: metric dictionary, acceptance criteria, risk dependencies, test plans">数据需求与设计文档：指标字典、验收口径、风险依赖、测试方案</li>
+          <li data-en="Data requests: read reference tickets, organize property mapping, handle reviews, return ticket IDs">数据 request：读取参考单、组织 property mapping、处理 review、返回单号</li>
+          <li data-en="Task platform: reference existing tickets, fill in DE / PM, create tasks and return IDs">任务管理平台：参考既有 ticket、补齐 DE / PM、创建任务并回传 ID</li>
+          <li data-en="Git &amp; KB publishing: Markdown curation, path locating, validation, branch and release boundaries">Git 与知识库发布：Markdown 整理、路径定位、校验、分支与发布边界</li>
+        </ul>
+        <div class="ads-wf-chips">
+          <span class="ads-wf-chip" data-en="Skill-ified">已 Skill 化</span>
+          <span class="ads-wf-chip" data-en="Closed-loop operations">可闭环操作</span>
+        </div>
+      </div>
+      <div class="ads-module">
+        <div class="ads-module-en">03 · Agent Builder</div>
+        <div class="ads-module-title" data-en="AI Builder, Agents &amp; Knowledge Systems">AI Builder、Agent 与知识系统</div>
+        <p class="ads-wf-summary" data-en="Turning experience into invocable capabilities.">把经验变成可调用能力。</p>
+        <ul class="ads-wf-list">
+          <li data-en="Ads knowledge system: handbook, metrics, tables, ETL, tracking, project experience">广告知识系统：handbook、指标、表、ETL、tracking、项目经验沉淀</li>
+          <li data-en="Skill creation &amp; maintenance: distill triggers and validators from SOPs, corrections, and screen recordings">Skill 创建与维护：从 SOP、纠错、录屏中提炼触发条件与验证器</li>
+          <li data-en="Skill routing design: triggers, fallbacks, no-trigger conditions, evidence contracts">Skill 路由设计：定义 trigger、fallback、禁止触发条件与 evidence contract</li>
+          <li data-en="NL2SQL / metric queries: retrieval, offline indexing, lineage, SQL validation with evidence output">NL2SQL / 指标查询：研究检索、离线索引、lineage、SQL 校验与证据输出</li>
+          <li data-en="Agent quality evaluation: traces, execution status, token cost, fallbacks, loop convergence">Agent 质量评估：看 trace、执行状态、token 成本、fallback 与循环收敛</li>
+          <li data-en="Eval sets &amp; feedback loop: Not-Helpful analysis, knowledge gaps, FAQs, fine-grained evaluation">Eval Set 与反馈闭环：分析 Not Helpful、知识缺口、FAQ 与细粒度评测</li>
+          <li data-en="Workflow-recording to Skill: lineage tracing, DevTools, and internal system operations as reusable capabilities">工作流录制转 Skill：把血缘追溯、DevTools、内部系统操作沉淀为可复用能力</li>
+        </ul>
+        <div class="ads-wf-chips">
+          <span class="ads-wf-chip" data-en="Strong differentiation">差异化强</span>
+          <span class="ads-wf-chip" data-en="Continuously evolving">持续建设</span>
+        </div>
+      </div>
+      <div class="ads-module">
+        <div class="ads-module-en">04 · Work OS</div>
+        <div class="ads-module-title" data-en="Personal Work Operating System">个人工作运营系统</div>
+        <p class="ads-wf-summary" data-en="Routing daily collaboration info into the output pipeline automatically.">让日常协作信息自动进入产出链路。</p>
+        <ul class="ads-wf-list">
+          <li data-en="Daily internal IM tracking: local read-only extraction, thread aggregation, coverage checks">内部 IM 每日追踪：本地只读抽取、thread 聚合、coverage 校验</li>
+          <li data-en="Daily notes to weekly reports / OKRs: organized by workstream, generating bilingual reports and briefing material">日报到周报 / OKR：按 workstream 归类，生成中英日报、周报与汇报素材</li>
+          <li data-en="Automation &amp; reminders: morning briefing, timezone correction, run-status checks">自动化与提醒：morning briefing、时区修正、运行状态检查</li>
+          <li data-en="Historical memory &amp; retrieval: recover past decisions, contacts, and coverage boundaries across tasks">历史记忆与检索：跨 task 恢复历史决策、联系人和年份覆盖边界</li>
+          <li data-en="Cross-task work review: summarize recurring patterns, identify bottlenecks, curate portfolio cases">跨 task 工作盘点：总结高频模式、识别效率瓶颈、筛选作品集案例</li>
+        </ul>
+        <div class="ads-wf-chips">
+          <span class="ads-wf-chip" data-en="Highest automation">自动化程度最高</span>
+          <span class="ads-wf-chip" data-en="Clear privacy boundaries">隐私边界清晰</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ads-wf-stack sr" aria-label="可复用能力栈">
+      <span class="ads-wf-stack-label" data-en="Reusable Capability Stack">可复用能力栈</span>
+      <span class="ads-flow-node" data-en="Data Layer">数据层 Data Layer</span>
+      <span class="ads-flow-node" data-en="Knowledge Layer">知识层 Knowledge Layer</span>
+      <span class="ads-flow-node" data-en="Tool Layer">工具层 Tool Layer</span>
+      <span class="ads-flow-node" data-en="Evaluation Layer">评估层 Evaluation Layer</span>
+      <span class="ads-flow-node" data-en="Workflow Layer">工作流层 Workflow Layer</span>
+    </div>
   </div>
 </section>
 
@@ -1826,14 +1988,22 @@ a { text-decoration: none; color: inherit; }
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <filter id="print-flow-beam" x="-30%" y="-60%" width="160%" height="220%">
+            <feGaussianBlur stdDeviation="2.8" result="beam-blur" />
+            <feMerge>
+              <feMergeNode in="beam-blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
           <marker id="print-flow-arrow" markerWidth="18" markerHeight="18" refX="12" refY="5" orient="auto" markerUnits="strokeWidth">
             <path d="M0,0 L12,5 L0,10" fill="none" stroke="rgba(255,255,255,.96)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
           </marker>
         </defs>
-        <path class="path-aura" d="M210 146 H1014 Q1080 146 1080 212 V314 Q1080 354 1040 354 H250 Q210 354 210 394 V492 Q210 532 250 532 H1092" />
-        <path class="path-glow" d="M210 146 H1014 Q1080 146 1080 212 V314 Q1080 354 1040 354 H250 Q210 354 210 394 V492 Q210 532 250 532 H1092" />
-        <path class="path-core" marker-end="url(#print-flow-arrow)" d="M210 146 H1014 Q1080 146 1080 212 V314 Q1080 354 1040 354 H250 Q210 354 210 394 V492 Q210 532 250 532 H1092" />
-        <path class="path-arrow" marker-end="url(#print-flow-arrow)" d="M690 354 H540" />
+        <path class="path-aura" d="M210 146 H1014 Q1080 146 1080 212 V289 Q1080 329 1040 329 H250 Q210 329 210 369 V492 Q210 532 250 532 H1092" />
+        <path class="path-glow" d="M210 146 H1014 Q1080 146 1080 212 V289 Q1080 329 1040 329 H250 Q210 329 210 369 V492 Q210 532 250 532 H1092" />
+        <path class="path-core" marker-end="url(#print-flow-arrow)" d="M210 146 H1014 Q1080 146 1080 212 V289 Q1080 329 1040 329 H250 Q210 329 210 369 V492 Q210 532 250 532 H1092" />
+        <path class="path-beam" pathLength="1000" d="M210 146 H1014 Q1080 146 1080 212 V289 Q1080 329 1040 329 H250 Q210 329 210 369 V492 Q210 532 250 532 H1092" />
+        <path class="path-arrow" marker-end="url(#print-flow-arrow)" d="M690 329 H540" />
         <path class="path-arrow" marker-end="url(#print-flow-arrow)" d="M640 532 H790" />
         <circle cx="452" cy="146" r="4" />
         <circle cx="680" cy="146" r="4" />
@@ -1937,6 +2107,13 @@ a { text-decoration: none; color: inherit; }
         <div class="gallery-img mini-finish"><img src="print3d_images/seaside/6.jpg" alt="海边 3D 打印流程 6" loading="lazy"></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- 今日毛选：完整可交互作品 -->
+<section class="sec sec-maoxuan" id="p-maoxuan" aria-label="今日毛选 可交互作品">
+  <div class="wrap">
+    <iframe class="maoxuan-frame" src="maoxuan/index.html?home=1" title="今日毛选" loading="lazy" scrolling="no"></iframe>
   </div>
 </section>
 </div><!-- end tab-infinity -->
@@ -2379,6 +2556,36 @@ a { text-decoration: none; color: inherit; }
       }
     });
   });
+
+  // 今日毛选 iframe 随内容自动增高，避免内部竖向滚动条并完整展示所有交互状态
+  var maoxuanFrame=document.querySelector('.maoxuan-frame');
+  if(maoxuanFrame){
+    var maoxuanResizeObserver;
+    function resizeMaoxuanFrame(){
+      try{
+        var doc=maoxuanFrame.contentDocument;
+        if(!doc) return;
+        doc.documentElement.style.overflow='hidden';
+        doc.body.style.overflow='hidden';
+        var height=Math.max(
+          doc.documentElement.scrollHeight,
+          doc.body.scrollHeight,
+          window.innerWidth<=800 ? 760 : 900
+        );
+        maoxuanFrame.style.height=Math.ceil(height)+'px';
+      }catch(e){}
+    }
+    maoxuanFrame.addEventListener('load',function(){
+      resizeMaoxuanFrame();
+      try{
+        if(maoxuanResizeObserver) maoxuanResizeObserver.disconnect();
+        maoxuanResizeObserver=new ResizeObserver(resizeMaoxuanFrame);
+        maoxuanResizeObserver.observe(maoxuanFrame.contentDocument.documentElement);
+        maoxuanResizeObserver.observe(maoxuanFrame.contentDocument.body);
+      }catch(e){}
+    });
+    window.addEventListener('resize',resizeMaoxuanFrame);
+  }
 
   function cls(){
     lb.classList.remove('on');
