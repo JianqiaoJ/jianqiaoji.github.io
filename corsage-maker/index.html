@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4d9e2" />
+    <title>丝带胸花工坊</title>
+    <link rel="preload" href="./satin-weave.jpg" as="image" />
+    <link rel="preload" href="./satin-weave-horizontal.jpg" as="image" />
+    <link rel="preload" href="./assets/badges/badge-grad.png" as="image" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-minitool" />
+  </head>
+  <body>
+    <a class="skip-link" href="#preview-stage">跳到胸花预览</a>
+    <main class="game" aria-label="丝带胸花定制编辑器">
+      <header class="topbar">
+        <button class="round-btn" id="back-button" type="button" aria-label="返回">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="title-lockup">
+          <p><span aria-hidden="true">✿</span> LITTLE RIBBON ROOM <span aria-hidden="true">★</span></p>
+          <h1>丝带胸花工坊</h1>
+          <em>一针一线，做一朵小小的喜欢</em>
+        </div>
+        <nav class="quick-actions" aria-label="快捷操作">
+          <!-- Lucide icons; license in assets/icons/LICENSE.txt. -->
+          <button id="undo-button" type="button" aria-label="撤销">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+            <span class="action-tooltip" aria-hidden="true">撤销</span>
+          </button>
+          <button id="redo-button" type="button" aria-label="重做">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"/></svg>
+            <span class="action-tooltip" aria-hidden="true">重做</span>
+          </button>
+          <button id="clear-button" type="button" aria-label="重置搭配">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            <span class="action-tooltip" aria-hidden="true">重置搭配</span>
+          </button>
+          <button id="random-button" type="button" aria-label="灵感搭配">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg>
+            <span class="action-tooltip" aria-hidden="true">灵感搭配</span>
+          </button>
+          <button id="sound-button" type="button" aria-label="关闭音效" aria-pressed="true">
+            <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6M19.364 18.364a9 9 0 0 0 0-12.728"/></svg>
+            <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.7.7 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.7.7 0 0 0 11 19.298z"/><path d="m16.5 14.5 5-5m-5 0 5 5"/></svg>
+            <span class="action-tooltip" aria-hidden="true">关闭音效</span>
+          </button>
+        </nav>
+      </header>
+
+      <nav class="quest-steps" aria-label="制作进度">
+        <button class="current" type="button" data-jump="materials" data-level="LEVEL 1"><b>1</b><span>挑材料</span><small>缎带 · 蕾丝 · 闪钻</small></button>
+        <i aria-hidden="true">›</i>
+        <button type="button" data-jump="shape" data-level="LEVEL 2"><b>2</b><span>叠花型</span><small>窝法 · 层数 · 徽章</small></button>
+        <i aria-hidden="true">›</i>
+        <button type="button" data-jump="personalize" data-level="LEVEL 3"><b>3</b><span>贴文字</span><small>文字 · 闪钻 · 完成</small></button>
+      </nav>
+
+      <section class="workbench">
+        <aside class="panel material-panel" id="materials-panel" aria-label="材料选择，点击或拖到制作台">
+          <div class="panel-heading">
+            <span>STEP 01</span>
+            <h2 id="materials-step-title" tabindex="-1">挑选漂亮材料</h2>
+          </div>
+        </aside>
+
+        <section class="preview-stage" id="preview-stage" aria-label="胸花预览" tabindex="-1">
+          <div class="candy-rail left" aria-hidden="true"><i>♥</i></div>
+          <div class="candy-rail right" aria-hidden="true"><i>♥</i></div>
+          <div class="stage-marquee" aria-hidden="true"><span>MAKE YOUR CORSAGE!</span></div>
+          <div class="stage-ticket" aria-label="当前关卡" aria-live="polite"><span>STAGE</span><strong id="stage-number">1</strong><small>/ 3</small></div>
+          <div class="sparkle-field" aria-hidden="true"></div>
+          <div class="fx-layer" id="fx-layer" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="fx-note" id="fx-note" aria-hidden="true"></div>
+          <div class="stage-status" aria-live="polite">
+            <span class="live-dot"></span>
+            <b>轻戳胸花，软软弹一下</b>
+            <small id="selection-summary">第一层樱花粉 · 第二层薄荷蓝 · 圆环窝法 · 2层</small>
+          </div>
+          <div class="zoom-tools" aria-label="预览工具">
+            <button data-zoom="1" type="button" aria-label="放大预览">＋<span>放大</span></button>
+            <button data-zoom="-1" type="button" aria-label="缩小预览">－<span>缩小</span></button>
+            <button data-zoom="0" type="button" aria-label="复位预览">⟳<span>复位</span></button>
+          </div>
+          <div class="corsage" id="corsage" role="group" tabindex="0" aria-label="轻戳当前胸花，让它弹一下"></div>
+          <div class="play-tools" aria-label="手作小工具">
+            <button id="fluff-button" type="button" aria-label="蓬松一下胸花">♧<span>蓬松一下</span></button>
+            <button id="glitter-button" type="button" aria-label="添加星光装饰" aria-pressed="false">✧<span>撒点星星</span></button>
+          </div>
+          <div class="helper" aria-hidden="true">
+            <svg viewBox="0 0 64 80"><path d="M 17 43 C 7 19 10 0 18 3 C 25 6 24 25 27 36 L 36 36 C 36 12 41 0 47 5 C 54 10 48 32 45 43" fill="#fffaf0" stroke="#bf9b9e" stroke-width="1.5"/><path d="M 17 11 Q 14 22 22 37 M 44 13 Q 47 23 40 37" stroke="#efbdc9" stroke-width="4" stroke-linecap="round"/><ellipse cx="32" cy="54" rx="26" ry="23" fill="#fffaf0" stroke="#bf9b9e" stroke-width="1.5"/><ellipse cx="18" cy="58" rx="6" ry="4" fill="#f0bdc9"/><ellipse cx="46" cy="58" rx="6" ry="4" fill="#f0bdc9"/><circle cx="23" cy="50" r="2" fill="#79585a"/><circle cx="41" cy="50" r="2" fill="#79585a"/><path d="M 29 55 Q 32 52 35 55 L 32 58 Z M 27 60 Q 32 65 37 60" stroke="#b88187" stroke-width="1.5"/><path d="M 23 74 L 32 70 L 41 74 L 38 79 L 32 75 L 26 79 Z" fill="#d894af"/></svg>
+            <p id="helper-copy">点一点材料，也可以拖过来哦</p>
+          </div>
+          <div class="material-caption">
+            <span id="material-icon" aria-hidden="true">🎀</span>
+            <div><small>当前主材</small><strong id="material-name">第一层樱花粉 · 第二层薄荷蓝缎带</strong></div>
+            <em id="layer-count">2层</em>
+          </div>
+          <button class="next-step-button" id="next-step-button" type="button" aria-label="进入下一步：叠花型">
+            <small id="next-step-hint">材料选好了吗？</small>
+            <span id="next-step-label">下一步</span>
+            <b aria-hidden="true">➜</b>
+          </button>
+        </section>
+
+        <aside class="panel settings-panel" id="shape-panel" aria-label="定制设置">
+          <div class="panel-heading">
+            <span id="settings-step-kicker">STEP 02</span>
+            <h2 id="settings-step-title" tabindex="-1">叠花型 · 别胸针</h2>
+          </div>
+          <section class="box" data-section="shape">
+            <h2>窝法 <small>选择胸花轮廓</small></h2>
+            <div class="fold-grid" data-key="fold" role="group" aria-label="胸花窝法">
+              <button data-value="round" type="button"><i class="fold-thumb round" aria-hidden="true"></i><span>圆环</span></button>
+              <button data-value="fan" type="button"><i class="fold-thumb fan" aria-hidden="true"></i><span>扇形</span></button>
+              <button data-value="star" type="button"><i class="fold-thumb star" aria-hidden="true"></i><span>星芒</span></button>
+              <button data-value="bow" type="button"><i class="fold-thumb bow" aria-hidden="true"></i><span>蝴蝶</span></button>
+            </div>
+          </section>
+          <section class="box" data-section="shape">
+            <h2>层数</h2>
+            <div class="segmented" data-key="layers" role="group" aria-label="胸花层数">
+              <button data-value="3" type="button">1层</button>
+              <button data-value="5" type="button">2层</button>
+              <button data-value="7" type="button">3层</button>
+              <button data-value="9" type="button">4层</button>
+            </div>
+          </section>
+
+          <section class="box tail-panel" id="tail-panel" aria-label="绶带设置"></section>
+
+          <section class="box" data-section="shape">
+            <h2 id="badge-heading">中心胸针 <small>8枚小宝物</small></h2>
+            <div class="badge-grid" data-key="badge" role="group" aria-labelledby="badge-heading"></div>
+          </section>
+
+          <section class="box form-box" id="personalize-panel" data-section="personalize">
+            <h2>绶带闪钻字</h2>
+            <label>
+              <span>文字</span>
+              <input id="name-input" maxlength="16" value="JQ" autocomplete="off" aria-describedby="name-hint" />
+            </label>
+            <p class="field-hint" id="name-hint">最多 8 个字，支持中文、字母和数字；可留空</p>
+          </section>
+        </aside>
+      </section>
+
+      <footer class="bottombar">
+        <div class="main-actions">
+          <button id="finish-button" class="green" type="button"><b aria-hidden="true">✓</b><span>完成定制</span></button>
+        </div>
+      </footer>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <dialog class="game-dialog finish-dialog" id="finish-dialog" aria-labelledby="finish-title">
+        <button class="dialog-close" type="button" data-close aria-label="关闭">×</button>
+        <p class="dialog-kicker">MISSION COMPLETE!</p>
+        <div class="finish-preview" id="finish-preview" aria-hidden="true"></div>
+        <h2 id="finish-title">今天的小美好，做好啦！</h2>
+        <p id="finish-summary"></p>
+        <div class="design-code"><small>作品编号</small><strong id="design-code">COR-000000</strong></div>
+        <div class="dialog-actions">
+          <button class="export-action" type="button" id="export-button">下载作品图片 PNG</button>
+          <button class="secondary-action" type="button" data-close>再玩一会儿</button>
+          <button class="primary-action" type="button" id="confirm-save-button">保存设计单</button>
+        </div>
+      </dialog>
+    </main>
+    <script src="./runtime-compat.js?v=20260918-minitool"></script>
+    <script src="./browser-platform.js?v=20260918-minitool"></script>
+    <script src="./satin-data.js?v=20260909-satin-4"></script>
+    <script src="./tail-design.js?v=20260917-tail-options"></script>
+    <script src="./gem-placement.js?v=20260917-tail-options"></script>
+    <script src="./crystal-lettering.js?v=20260917-vertical-text"></script>
+    <script src="./corsage-art.js?v=20260917-tail-options"></script>
+    <script src="./app.js?v=20260918-minitool"></script>
+  </body>
+</html>

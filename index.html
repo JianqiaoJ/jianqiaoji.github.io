@@ -607,7 +607,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* 今日毛选：内嵌可交互作品 */
-.sec-maoxuan { background: var(--bg); padding: 0 0 88px; }
+.sec-maoxuan { background: var(--bg); padding: 0; }
 .maoxuan-frame {
   display: block; width: 100%; height: 900px; overflow: hidden;
   border: 1px solid var(--border); border-radius: 10px;
@@ -615,6 +615,29 @@ a { text-decoration: none; color: inherit; }
 }
 @media (max-width: 800px) {
   .maoxuan-frame { height: 760px; border-radius: 8px; }
+}
+
+/* 丝带胸花工坊：完整可试玩的手作定制器 */
+.sec-corsage {
+  background: linear-gradient(180deg, #fff7fb 0%, #fff1f7 48%, var(--bg) 100%);
+  padding: 88px 0 100px;
+}
+.sec-corsage .sec-label {
+  color: #c13c78; border: 1px solid rgba(193,60,120,.4); background: rgba(193,60,120,.07);
+}
+.sec-corsage .sec-title { color: #8d2859; }
+.sec-corsage .sec-title-en { color: #b65d88; }
+.corsage-intro {
+  max-width: 780px; margin: 24px 0 32px; color: var(--ink-2); font-size: .92rem; line-height: 1.85;
+}
+.corsage-frame {
+  display: block; width: 100%; height: 980px; overflow: hidden;
+  border: 1px solid rgba(193,60,120,.2); border-radius: 12px;
+  background: #fff4f8; box-shadow: 0 20px 60px rgba(143,40,89,.12);
+}
+@media (max-width: 800px) {
+  .sec-corsage { padding: 64px 0 72px; }
+  .corsage-frame { height: 1280px; border-radius: 8px; }
 }
 
 /* AI 参与的 3D 打印工作流 */
@@ -2116,6 +2139,23 @@ a { text-decoration: none; color: inherit; }
     <iframe class="maoxuan-frame" src="maoxuan/index.html?home=1" title="今日毛选" loading="lazy" scrolling="no"></iframe>
   </div>
 </section>
+
+<!-- 丝带胸花工坊：完整可交互作品 -->
+<section class="sec sec-corsage" id="p-corsage" aria-label="丝带胸花工坊 可交互作品">
+  <div class="wrap">
+    <div class="sec-label sr">Playable Creative Tool · 2026</div>
+    <h2 class="sec-title sr sr-d1" data-en="Ribbon Corsage Studio · A Playable Customization Tool">丝带胸花工坊 · 可玩的定制工具</h2>
+    <p class="sec-title-en sr sr-d1">Ribbon Corsage Studio</p>
+    <div class="sec-meta sr sr-d2">
+      <span data-en="<strong>Type</strong> Interactive creative tool"><strong>类型</strong> 可交互创意工具</span>
+      <span data-en="<strong>Interaction</strong> Materials · folding · badge · lettering"><strong>交互</strong> 选材 · 窝法 · 胸针 · 贴字</span>
+      <span data-en="<strong>Output</strong> PNG work card + design sheet"><strong>输出</strong> PNG 作品卡 + 设计单</span>
+    </div>
+    <p class="corsage-intro sr sr-d2" data-en="Turn the tactile logic of handmade ribbon corsages into a playful digital workshop: layer two satin ribbons, choose lace, pearls and gems, shape the folds, then place a realistic center brooch and customize the sash. Every choice updates the finished corsage immediately, with a shareable work card at the end.">把手作胸花的触感逻辑变成一个可以玩的数字工坊：两层缎带独立选色，再搭配蕾丝、珍珠与钻饰；选择窝法、放入实物感胸针，并把文字贴到绶带上。每一次选择都会即时更新成品，最后可导出作品卡与设计单。</p>
+    <iframe class="corsage-frame" src="corsage-maker/index.html?portfolio=1" title="丝带胸花工坊" loading="lazy" scrolling="no"></iframe>
+  </div>
+</section>
+
 </div><!-- end tab-infinity -->
 
 <!-- FOOTER -->
@@ -2585,6 +2625,36 @@ a { text-decoration: none; color: inherit; }
       }catch(e){}
     });
     window.addEventListener('resize',resizeMaoxuanFrame);
+  }
+
+  // 丝带胸花工坊 iframe 随内容自动增高，桌面和窄屏均保留完整制作台
+  var corsageFrame=document.querySelector('.corsage-frame');
+  if(corsageFrame){
+    var corsageResizeObserver;
+    function resizeCorsageFrame(){
+      try{
+        var doc=corsageFrame.contentDocument;
+        if(!doc) return;
+        doc.documentElement.style.overflow='hidden';
+        doc.body.style.overflow='hidden';
+        var height=Math.max(
+          doc.documentElement.scrollHeight,
+          doc.body.scrollHeight,
+          window.innerWidth<=800 ? 1280 : 980
+        );
+        corsageFrame.style.height=Math.ceil(height)+'px';
+      }catch(e){}
+    }
+    corsageFrame.addEventListener('load',function(){
+      resizeCorsageFrame();
+      try{
+        if(corsageResizeObserver) corsageResizeObserver.disconnect();
+        corsageResizeObserver=new ResizeObserver(resizeCorsageFrame);
+        corsageResizeObserver.observe(corsageFrame.contentDocument.documentElement);
+        corsageResizeObserver.observe(corsageFrame.contentDocument.body);
+      }catch(e){}
+    });
+    window.addEventListener('resize',resizeCorsageFrame);
   }
 
   function cls(){
